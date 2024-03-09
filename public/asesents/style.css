@@ -1,0 +1,109 @@
+body{
+    background-image: linear-gradient(rgba(69, 76, 92, 0.75),rgba(68, 82, 117, 0.872)),
+    url(confeccion.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: grid;
+    font-family: sans-serif;
+    margin: 0;;
+    text-align: center;
+}
+
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    background-color: aqua;
+    padding: 10px;
+    border-style: outset;
+    border-color: black;
+    }
+a{
+    text-decoration: none;
+    color: black;
+    margin-left: 40px;
+    font-weight: 700;
+}
+
+main{
+   display: flex;
+   place-content: center;
+   padding: 20px;
+   margin: 50px;
+}
+.video{
+    display: flex;
+    justify-content: center;
+}
+form{
+    display: grid;
+    justify-content: center;
+}
+
+.video{
+    margin-right: 50%;
+}
+.nav-button{
+    justify-content: space-between;
+    margin-right: 5px;
+    text-align: center;
+    padding: 10px 20px;
+    color: black;
+    background-color: aqua;
+    text-decoration: none;
+    border-radius: 10px;
+}
+
+.nav-button:hover{
+    transform: scale(1.2);
+}
+footer{
+    background-color: aqua;
+    display: flex;
+    border-style: outset;
+    border-color: black;
+}
+.redes{
+    margin-left: -5%;
+
+}
+.dr{
+    margin-right: 75%;
+}
+form{
+    display: flex;
+}
+
+.chat{
+    display: grid;
+    background-color: rgba(255, 255, 255, 0.2);
+    position: absolute;
+    margin-left: 70%;
+    margin-top: 3%;
+    width: 350px;
+   height: 300px;
+   border-radius: 10px;
+   border-color: black;
+   padding: 10px;
+   
+
+}
+.btn{
+    background-color: rgb(5, 161, 5);
+    border-radius: 10px;
+    width: 70px;
+    height: 30px;
+    padding: 10px;
+    text-align: center;
+}
+
+#nombre, #telefono, #correo, #direccion, #ciudad{
+    background: rgba(249, 249, 250, 0.1);
+    border-radius: 10px;
+   
+    
+}
+::placeholder{
+    color: black;
+}

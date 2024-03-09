@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\http\Controllers\Empleadoscontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,28 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('nosotros', function () {
+    return view('nosotros');
+});
+
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('home', EmpleadosController::class);
+
+
+Route::get('contacto', function () {
+    return view('contacto');
+});
+
+Route::get('nosotros', function () {
+    return view('nosotros');
+});
+
+Route::get('catalogo', function () {
+    return view('catalogo');
+});
+

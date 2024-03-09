@@ -1,0 +1,67 @@
+.login{
+    
+    display: grid;
+    background-color: rgba(255, 255, 255, 0.2);
+    position: absolute;
+    margin-left: 38%;
+    margin-top: 3%;
+   width: 300px;
+   height: 430px;
+   border-radius: 10px;
+   border-color: black;
+   place-content: center;
+   border-style: outset;
+   font-weight: 400;
+   font-family: 'Oleo Script', cursive;
+}
+.brand_logo_container {
+    position: absolute;
+    height: 170px;
+    width: 170px;
+    top: -75px;
+    border-radius: 50%;
+    
+    padding: 10px;
+    text-align: center;
+}
+.brand_logo {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    border: 15px solid rgb(11, 11, 11);
+}
+
+::placeholder{
+color: black;
+}
+.olvido{
+font-size: 10px;
+font-family: 'Oleo Script', cursive;
+}
+header{
+font-size: 20px;
+border-style: outset;
+border-color: black;
+
+}
+
+body{
+background-image: linear-gradient(rgba(69, 76, 92, 0.75),rgba(68, 82, 117, 0.872)),
+url(confeccion.jpg);
+background-repeat: no-repeat;
+background-size: cover;
+display: grid;
+font-family: 'Oleo Script', cursive;
+margin: 0;;
+text-align: center;
+
+
+}
+h2{
+font-size: 60px;
+color: darkblue;
+font-family: 'Oleo Script', cursive;
+;
+}
+
+
