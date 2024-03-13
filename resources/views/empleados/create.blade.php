@@ -89,9 +89,9 @@
             <div class="mb-3">
                 <label for="" class="form-label">correo</label>
                 <input
-                    type="text"
+                    type="email"
                     class="form-control"
-                    name="correo"
+                    name="email"
                     id=""
                     aria-describedby="helpId"
                     placeholder="correo"
