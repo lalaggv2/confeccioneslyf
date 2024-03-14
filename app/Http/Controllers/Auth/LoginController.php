@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Hash;
 
 class logincontroller extends Controller
 {
+
+    public function showLoginForm()
+    {
+        return
+        view('auth.login');
+    }
     
     public function register(Request $request)
     {
@@ -52,15 +58,21 @@ class logincontroller extends Controller
         $credentials = request(['email', 'password']);
 
         if (!auth('api')->attempt($credentials)) {
-            return response()->json([
+            return 
+            
+            response()->json([
                 "status" => false,
                 "message" => "Invalid email or password"
             ]);
         }
-         return response()->json([
+         return  redirect()->intended('/home');
+         response()->json([
             "status" => true,
             "data" => auth()->user(),
+           
+            
         ]);
+        
     }
     public function me()
     {
@@ -81,7 +93,8 @@ class logincontroller extends Controller
     {
         try {
             auth()->logout();
-            return response()->json([
+            return  redirect()->intended('/login');
+            response()->json([
                 'status' => true,
                 'message' => 'Successful logout'
             ]);
