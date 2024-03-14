@@ -42,3 +42,7 @@ Route::get('catalogo', function () {
     return view('catalogo');
 });
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
