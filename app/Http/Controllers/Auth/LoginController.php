@@ -70,7 +70,7 @@ class logincontroller extends Controller
             ]);
         }
          return  
-         redirect()->intended('/home');
+         
          response()->json([
             "status" => true,
             "data" => auth()->user(),
