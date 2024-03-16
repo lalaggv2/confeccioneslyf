@@ -63,9 +63,11 @@ class logincontroller extends Controller
             response()->json([
                 "status" => false,
                 "message" => "Invalid email or password"
+                
             ]);
         }
-         return  redirect()->intended('/home');
+         return  
+         redirect()->intended('/home');
          response()->json([
             "status" => true,
             "data" => auth()->user(),

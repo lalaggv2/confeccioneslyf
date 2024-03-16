@@ -1,8 +1,14 @@
 <?php
 
+
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\EmpleadosController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\hash;
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +23,10 @@ use Illuminate\Support\Facades\Route;
 Route::post("acess", [LoginController::class, "login"])->name("acess");
 Route::post("new-user", [LoginController::class, "register"])->name("new-user");
 Route::get("me", [LoginController::class, "me"])->name("me");
+
+/*
+ruras api para el crud
+|
+*/
+
+Route::post("estore", [EmpleadosController::class, "store"])->name("store");
