@@ -58,6 +58,9 @@ class logincontroller extends Controller
         $credentials = request(['email', 'password']);
 
         if (!auth('api')->attempt($credentials)) {
+           
+        
+           
             return 
             
             response()->json([
@@ -71,6 +74,7 @@ class logincontroller extends Controller
          response()->json([
             "status" => true,
             "data" => auth()->user(),
+            
            
             
         ]);
