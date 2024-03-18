@@ -1,67 +1,54 @@
-.login{
-    
-    display: grid;
-    background-color: rgba(255, 255, 255, 0.2);
-    position: absolute;
-    margin-left: 38%;
-    margin-top: 3%;
-   width: 300px;
-   height: 430px;
-   border-radius: 10px;
-   border-color: black;
-   place-content: center;
-   border-style: outset;
-   font-weight: 400;
-   font-family: 'Oleo Script', cursive;
-}
-.brand_logo_container {
-    position: absolute;
-    height: 170px;
-    width: 170px;
-    top: -75px;
-    border-radius: 50%;
-    
-    padding: 10px;
-    text-align: center;
-}
-.brand_logo {
-    height: 150px;
-    width: 150px;
-    border-radius: 50%;
-    border: 15px solid rgb(11, 11, 11);
-}
+    body {
+        min-height: 100vh;
+        min-height: 100dvh;
+        background-image: url("../assets/images/bg.webp");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
 
-::placeholder{
-color: black;
-}
-.olvido{
-font-size: 10px;
-font-family: 'Oleo Script', cursive;
-}
-header{
-font-size: 20px;
-border-style: outset;
-border-color: black;
+    .auth {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
 
-}
+    .auth img {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 20px;
+    }
 
-body{
-background-image: linear-gradient(rgba(69, 76, 92, 0.75),rgba(68, 82, 117, 0.872)),
-url(confeccion.jpg);
-background-repeat: no-repeat;
-background-size: cover;
-display: grid;
-font-family: 'Oleo Script', cursive;
-margin: 0;;
-text-align: center;
+    .auth .content {
+        padding: 40px;
+        border: 1px solid #535252;
+        border-radius: 10px;
+    }
 
+    .auth .recover-password {
+        display: flex;
+        justify-content: end;
+        margin-top: 20px;
+    }
 
-}
-h2{
-font-size: 60px;
-color: darkblue;
-font-family: 'Oleo Script', cursive;
-;
-}
+    .auth .recover-password > a {
+        text-decoration: none;
+        color: #000000;
+    }
 
+    .auth .recover-password > a:hover {
+        text-decoration: underline;
+    }
 
+    .auth .button-access {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .smk-error-msg {
+    color: #a94442 !important;
+    }
