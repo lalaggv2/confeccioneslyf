@@ -1,109 +1,275 @@
-body{
-    background-image: linear-gradient(rgba(69, 76, 92, 0.75),rgba(68, 82, 117, 0.872)),
-    url(confeccion.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: grid;
-    font-family: sans-serif;
-    margin: 0;;
+
+
+
+.titulo2, .titulo3{
+    color: #080808;
+    font-size: 30px;
     text-align: center;
+    margin-bottom: 60px;
 }
 
 header{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 70px;
-    background-color: aqua;
-    padding: 10px;
-    border-style: outset;
-    border-color: black;
-    }
-a{
-    text-decoration: none;
-    color: black;
-    margin-left: 40px;
-    font-weight: 700;
+    width: 100%;
+    height: 450px;
+    background: #bc4e9c;
+    background: -webkit-linear-gradient(to right, #f80759, #bc4e9c);
+    background: linear-gradient(to right, hsla(209, 44%, 34%, 0.452),hsla(223, 40%, 25%, 0.373)), url("../assets/images/images.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+   
+   
+  
 }
 
 main{
-   display: flex;
-   place-content: center;
-   padding: 20px;
-   margin: 50px;
-}
-.video{
-    display: flex;
-    justify-content: center;
-}
-form{
-    display: grid;
-    justify-content: center;
+ 
 }
 
-.video{
-    margin-right: 50%;
-}
-.nav-button{
-    justify-content: space-between;
-    margin-right: 5px;
+.titulo1{
+  color: #fff;
+  font-size: 30px;
     text-align: center;
-    padding: 10px 20px;
-    color: black;
-    background-color: aqua;
+    margin-bottom: 60px;
+}
+
+
+
+.sobre-nosotros{
+  width: 100%;
+  height: 600px;
+  background: #bc4e9c;
+  background: -webkit-linear-gradient(to right, #f80759, #bc4e9c);
+  background: linear-gradient(to right, hsla(209, 44%, 34%, 0.452),hsla(223, 40%, 25%, 0.373)), url("../assets/images/images1.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  
+}
+
+nav{
+    text-align: right;
+    padding: 30px 50px 0 0;
+
+}
+
+nav > a{
+    color: aliceblue;
+    font-weight: 300;
     text-decoration: none;
-    border-radius: 10px;
+    margin-right: 10px;
+    font-size: 20px;
+}
+nav > a:hover{
+    text-decoration: underline;
+
 }
 
-.nav-button:hover{
-    transform: scale(1.2);
-}
-footer{
-    background-color: aqua;
+header .textos-header{
     display: flex;
-    border-style: outset;
-    border-color: black;
-}
-.redes{
-    margin-left: -5%;
-
-}
-.dr{
-    margin-right: 75%;
-}
-form{
-    display: flex;
-}
-
-.chat{
-    display: grid;
-    background-color: rgba(255, 255, 255, 0.2);
-    position: absolute;
-    margin-left: 70%;
-    margin-top: 3%;
-    width: 350px;
-   height: 300px;
-   border-radius: 10px;
-   border-color: black;
-   padding: 10px;
-   
-
-}
-.btn{
-    background-color: rgb(5, 161, 5);
-    border-radius: 10px;
-    width: 70px;
-    height: 30px;
-    padding: 10px;
+    height: 430px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
     text-align: center;
 }
+.textos-header{
+    font-size: 50px;
+    color: #fff;
+}
 
-#nombre, #telefono, #correo, #direccion, #ciudad{
-    background: rgba(249, 249, 250, 0.1);
-    border-radius: 10px;
-   
+
+
+
+
+
+.row1{
+    display: flex;
+    
     
 }
-::placeholder{
-    color: black;
+
+.contenedor-sobre-nosotros{
+    display: grid;
+    justify-content: space-evenly;
+    
 }
+
+
+
+
+.somos {
+  
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+.p-1{
+  font-size: 20px;
+  text-align: center;
+}
+
+h4{
+  font-size: 30px;
+}
+p{
+  font-size: 15px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+h5{
+  text-align: center;
+  font-size: 15px;
+  margin: 40px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.contenido {
+  flex: 1;
+  padding-left: 20px; /* Espacio entre el texto y el video */
+}
+
+.video {
+  flex: 1;
+  max-width: 600px; /* Ajusta el tamaño del video según sea necesario */
+  border-radius: 10px;
+}
+
+/*globales */ 
+*::after,
+*::before
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'open sans';
+}
+
+.icon-cart{
+    width: 40px;
+    height: 40px;
+}
+
+img{
+    max-width: 100px;
+}
+
+/* header */
+
+/* main */
+
+.container-items{
+    display: flex;
+   text-align: center;
+   transition: .5s ease;
+   margin: 20px;
+   gap: 30px;
+   grid-auto-columns: 3;
+}
+.container-items1{
+    display: flex;
+   text-align: center;
+   transition: .5s ease;
+   margin: 20px;
+   gap: 20px;
+   grid-auto-columns: 3;
+   }
+  
+   .item{
+    border-radius: 10px;
+   }
+   .item:hover{
+    box-shadow: 0 10px 20px;
+   }
+
+.item img{ 
+    width: 100%;
+    height: 300px;
+    object-fit:cover ;
+    border-radius: 10px;
+    
+   }
+.item :hover img{
+    transform: scale(1.2);
+    }
+/* header */
+#contatti{
+  
+  letter-spacing: 2px;
+  }
+#contatti a{
+  color: #080808;
+  text-decoration: none;
+  
+}
+
+
+
+
+
+@media (min-width: 576px) {
+
+   #contatti{padding-bottom: 800px;}
+
+   #contatti .maps iframe{
+     width: 100%;
+     height: 450px;
+   }
+ }
+
+@media (min-width: 768px) {
+
+  #contatti{padding-bottom: 350px;}
+
+  #contatti .maps iframe{
+    width: 100%;
+    height: 850px;
+  }
+}
+
+@media (min-width: 992px) {
+  #contatti{padding-bottom: 200px;}
+
+   #contatti .maps iframe{
+     width: 150%;
+     height: 400px;
+     margin-left: 20px;
+   }
+}
+
+
+#author a{
+  color: #fff;
+  text-decoration: none;
+
+    
+}
+
+.row2{
+  margin-left: 500px;
+}
+
+h6{
+  margin-left: 500px;
+  font-size: 30px;
+
+}
+i{
+  margin-left: 350px;
+}
+ input{
+  width: 300px;
+  height: 40px;
+ }
+
+
+ .form-control{
+
+  width: 300px;
+  height: 40px;
+ }
+
+
+
+    
+
+
