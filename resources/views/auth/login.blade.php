@@ -50,7 +50,7 @@
                             </div>
                         </div>
                         <div class="button-access">
-                            <button type="button" onclick="app.handleLogin()" value="ingresar"
+                            <button type="sumit" onclick="app.handleLogin()" value="ingresar"
                                     class="btn btn-primary w-50">INGRESAR
                             </button>
                         </div>
