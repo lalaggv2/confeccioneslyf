@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `empleados`
+-- Estructura de tabla para la tabla `index.blade`
 --
 
 CREATE TABLE `empleados` (
@@ -38,7 +38,7 @@ CREATE TABLE `empleados` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `empleados`
+-- Volcado de datos para la tabla `index.blade`
 --
 
 INSERT INTO `empleados` (`id`, `nombre`, `direccion`, `telefono`, `cargo`, `salario`, `correo`) VALUES
@@ -156,7 +156,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 --
 
 --
--- Indices de la tabla `empleados`
+-- Indices de la tabla `index.blade`
 --
 ALTER TABLE `empleados`
   ADD PRIMARY KEY (`id`);

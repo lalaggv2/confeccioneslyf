@@ -2,7 +2,7 @@
 
 
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\EmpleadosController;
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\hash;
@@ -14,6 +14,6 @@ Route::prefix('v1')->group(function () {
     Route::post("register", [LoginController::class, "register"])->name("register");
     Route::group(['middleware' => 'auth'], function () {
         Route::get("me", [LoginController::class, "me"])->name("me");
-       
+
     });
 });

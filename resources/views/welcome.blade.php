@@ -1,10 +1,16 @@
 <!DOCTYPE html>
+@guest @else
+    @php
+        header('Location: /home');
+        exit;
+    @endphp
+@endguest
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    
+
+
 
     <title>Confecciones L&F</title>
     <link rel="stylesheet" href="{{ asset('asesents/style.css')}}">
@@ -12,32 +18,32 @@
 <body>
     <header>
         <nav>
-            
-            
+
+
             <a href="">Quienes somos</a>
             <a href="nosotros">Trabaje con nosotros</a>
             <a href="">Contactenos</a>
             <a href="">Catalogo</a>
             <a href="login">login</a>
         </nav>
-         
+
         <section class="textos-header">
             <h1> Confecciones L&F</h1>
-            
-           
+
+
         </section>
-       
+
     </header>
     <main>
-        
+
         <section class="portafolio">
             <div class="contenedor">
                 <h2 class="titulo2">Portafolio</h2>
             </div>
         </header>
         <br>
-    
-       
+
+
         <div class="container-items">
             <div class="item">
                 <figure>
@@ -45,7 +51,7 @@
                 </figure>
                 <div class="info-product">
                     <h2>pantalones  rectoss</h2>
-                   
+
                 </div>
             </div>
             <div class="item">
@@ -54,7 +60,7 @@
                 </figure>
                 <div class="info-product">
                     <h2>pantalones capri</h2>
-                    
+
                 </div>
             </div>
             <div class="item">
@@ -63,7 +69,7 @@
                 </figure>
                 <div class="info-product">
                     <h2>pantalones skinny</h2>
-                   
+
                 </div>
             </div>
             <div class="item">
@@ -72,7 +78,7 @@
                 </figure>
                 <div class="info-product">
                     <h2>pantalones bootcut</h2>
-                   
+
                 </div>
             </div>
             <div class="item">
@@ -81,7 +87,7 @@
                 </figure>
                 <div class="info-product">
                     <h2>pantalones acampanado</h2>
-                    
+
                 </div>
             </div>
         </div>
@@ -92,7 +98,7 @@
                 </figure>
                 <div class="info-product">
                     <h2>pantalones boyfriend</h2>
-                    
+
                 </div>
             </div>
             <div class="item">
@@ -101,7 +107,7 @@
                 </figure>
                 <div class="info-product">
                     <h2>pantalones cargo</h2>
-                    
+
                 </div>
             </div>
             <div class="item">
@@ -110,7 +116,7 @@
                 </figure>
                 <div class="info-product">
                     <h2>pantalones palazzo</h2>
-                    
+
                 </div>
             </div>
             <div class="item">
@@ -119,7 +125,7 @@
                 </figure>
                 <div class="info-product">
                     <h2>pantalones harem</h2>
-                    
+
                 </div>
             </div>
             <div class="item">
@@ -128,22 +134,22 @@
                 </figure>
                 <div class="info-product">
                     <h2>pantalones shorts</h2>
-                    
+
                 </div>
             </div>
-    
+
         </div>
                 .
             </div>
         </section>
         <section class="contenedor sobre-nosotros">
-           
+
             <h2 class="titulo1">Quienes somos</h2>
-         
+
              <h5>En Confecciones L&F, nos dedicamos a la fabricación y diseño de pantalones de alta calidad para hombres, mujeres y niños. Fundada en [Año de Fundación], nos enorgullece ofrecer prendas que combinan estilo, comodidad y durabilidad.</h5>
-              
+
             <div class="somos">
-             
+
               <h4>Nuestros Valores
                  <p>Calidad: Nos comprometemos a utilizar materiales de primera calidad y procesos de fabricación meticulosos para garantizar la excelencia en cada prenda que sale de nuestra fábrica.</p>
                  <p>Innovación: Nos mantenemos al tanto de las últimas tendencias y tecnologías en la industria para ofrecer diseños vanguardistas que satisfagan las demandas cambiantes de nuestros clientes.</p>
@@ -158,23 +164,23 @@
 
          </div>
 
-        
+
      </section>
-         
+
 
 
         <section class="Contacto">
             <h2 class="titulo3">Contactenos</h2>
             <div class="row" id="contatti">
                 <div class="container mt-5" >
-                
+
                     <div class="row1" style="height:550px;">
                         <div class="maps" >
                             <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11880.492291371422!2d12.4922309!3d41.8902102!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x28f1c82e908503c4!2sColosseo!5e0!3m2!1sit!2sit!4v1524815927977" frameborder="0" style="border:0" allowfullscreen></iframe>
                          </div>
-                      
+
                       <div class="formulario">
-                       
+
                         <form action="https://formsubmit.co/confeccioneslyf2@gmail.com" method="POST">
                           <div class="row2">
                             <div class="col-lg-6">
@@ -202,7 +208,7 @@
                                 <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="escriba su mensaje" rows="3" required></textarea>
                               </div>
                             </div>
-                            
+
                             <div class="col-12">
                               <button class="btn" type="submit">ENVIAR</button>
                             </div>
@@ -210,7 +216,7 @@
                         </form>
                         <div class="text-white">
                         <h6 class="text-uppercase mt-4 font-weight-bold">Donde estamos </h6>
-                
+
                         <i class="fas fa-phone mt-3"></i> <a href="tel:+">(+57) 123456</a><br>
                         <i class="fas fa-phone mt-3"></i> <a href="tel:+">(+39) 123456</a><br>
                         <i class="fa fa-envelope mt-3"></i> <a href="">confeccionesl&f.com</a><br>
@@ -222,16 +228,16 @@
                         </div>
                         </div>
                       </div>
-                
+
                     </div>
                 </div>
                 </div>
-                
+
         </section>
 
     </div>
-        
-        
+
+
 
     </main>
 </body>

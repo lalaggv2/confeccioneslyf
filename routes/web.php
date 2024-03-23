@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\EmpleadosController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\EmployeeController;
 
 
 Route::get('/', function () {
@@ -13,8 +14,8 @@ Route::post("access", [LoginController::class, "login"])->name("access.web");
 Route::post("logout", [LoginController::class, "logout"])->name("logout");
 
 Route::middleware(['web', 'auth'])->group(function () {
-    Route::get('/home', [EmpleadosController::class, 'index'])->name('home');
-    Route::resource('home', EmpleadosController::class);
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/employees', [EmployeeController::class, 'index'])->name('employees');
 });
 
 

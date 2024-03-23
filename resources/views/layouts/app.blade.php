@@ -1,4 +1,5 @@
 <!doctype html>
+@routes
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -7,74 +8,164 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel') }} | @yield('title')</title>
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="robots" content="index, follow">
 
-    <!-- Scripts -->
-   
+    <link rel="stylesheet" id="css-main" href="{{asset('assets/admin/css/codebase.min.css')}}">
+    @yield('css')
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
+<div id="page-container" class="sidebar-o enable-page-overlay side-scroll page-header-modern main-content-boxed">
+    <nav id="sidebar">
+        <div class="sidebar-content">
+            <div class="content-header justify-content-lg-center">
+                <div>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-sm btn-alt-danger d-lg-none" data-toggle="layout"
+                            data-action="sidebar_close">
+                        <i class="fa fa-fw fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="js-sidebar-scroll">
+                <div class="content-side content-side-user px-0 py-0">
+                    <div class="smini-visible-block animated fadeIn px-3">
+                        <img class="img-avatar img-avatar32" src="assets/media/avatars/avatar15.jpg" alt="">
+                    </div>
+                    <div class="smini-hidden text-center mx-auto">
+                        <a class="img-link" href="javascript:void(0)">
+                            <img class="img-avatar" src="assets/media/avatars/avatar15.jpg" alt="">
+                        </a>
+                        <ul class="list-inline mt-3 mb-0">
+                            <li class="list-inline-item">
+                                <a class="link-fx text-dual fs-sm fw-semibold text-uppercase"
+                                   href="be_pages_generic_profile.html">{{ Auth::user()->name }}</a>
                             </li>
-                        @endguest
+                            <li class="list-inline-item">
+                                <a class="link-fx text-dual" data-toggle="layout" data-action="dark_mode_toggle"
+                                   href="javascript:void(0)">
+                                    <i class="fa fa-moon"></i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="link-fx text-dual" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    <i class="fa fa-sign-out-alt"></i>
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="content-side content-side-full">
+                    <ul class="nav-main">
+                        <li class="nav-main-item">
+                            <a class="nav-main-link active" href="{{route('home')}}">
+                                <i class="nav-main-link-icon fa fa-house-user"></i>
+                                <span class="nav-main-link-name">Inicio</span>
+                            </a>
+                        </li>
+                        <li class="nav-main-item">
+                            <a class="nav-main-link" href="{{route('employees')}}">
+                                <i class="nav-main-link-icon fa fa-users"></i>
+                                <span class="nav-main-link-name">Empleados</span>
+                            </a>
+                        </li>
+                        <li class="nav-main-item">
+                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                                <i class="nav-main-link-icon fa fa-grip-vertical"></i>
+                                <span class="nav-main-link-name">Inventario</span>
+                            </a>
+                            <ul class="nav-main-submenu">
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="#">
+                                        <span class="nav-main-link-name">Materia prima</span>
+                                    </a>
+                                </li>
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="#">
+                                        <span class="nav-main-link-name">Producto terminado</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
-        </nav>
-
-        <main class="py-4">
-            
-        </main>
-    </div>
+        </div>
+    </nav>
+    <header id="page-header">
+        <div class="content-header">
+            <div class="space-x-1">
+                <button type="button" class="btn btn-sm btn-alt-secondary" data-toggle="layout"
+                        data-action="sidebar_toggle">
+                    <i class="fa fa-fw fa-bars"></i>
+                </button>
+            </div>
+            <div class="space-x-1">
+                <div class="dropdown d-inline-block">
+                    <button type="button" class="btn btn-sm btn-alt-secondary" id="page-header-user-dropdown"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user d-sm-none"></i>
+                        <span
+                            class="d-none d-sm-inline-block fw-semibold text-capitalize">{{ Auth::user()->name }}</span>
+                        <i class="fa fa-angle-down opacity-50 ms-1"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-md dropdown-menu-end p-0"
+                         aria-labelledby="page-header-user-dropdown">
+                        <div class="px-2 py-3 bg-body-light rounded-top">
+                            <h5 class="h6 text-center mb-0 text-capitalize">
+                                {{ Auth::user()->name }}
+                            </h5>
+                        </div>
+                        <div class="p-2">
+                            <a class="dropdown-item d-flex align-items-center justify-content-between space-x-1"
+                               href="#">
+                                <span>Perfíll</span>
+                                <i class="fa fa-fw fa-user opacity-25"></i>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item d-flex align-items-center justify-content-between space-x-1"
+                               href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                <span>Salir</span>
+                                <i class="fa fa-fw fa-sign-out-alt opacity-25"></i>
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="page-header-loader" class="overlay-header bg-primary">
+            <div class="content-header">
+                <div class="w-100 text-center">
+                    <i class="far fa-sun fa-spin text-white"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main id="main-container">
+        <div class="content">
+            <div class="row">
+                <div class="col-12">
+                    @yield('content')
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<script src="{{asset('assets/admin/js/codebase.app.min.js')}}"></script>
+<script src="{{asset('assets/admin/js/pages/be_pages_dashboard.min.js')}}"></script>
+<script src="{{ asset('assets/js/jquery-3.7.1.min.js')}}"></script>
+@yield('js')
 </body>
 </html>
