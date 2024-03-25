@@ -15,7 +15,11 @@ Route::post("logout", [LoginController::class, "logout"])->name("logout");
 
 Route::middleware(['web', 'auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::get('/employees', [EmployeeController::class, 'index'])->name('employees');
+    Route::prefix('employees')->group(function () {
+        Route::get('/', [EmployeeController::class, 'index'])->name('employees');
+        Route::get('/{employee}', [EmployeeController::class, 'show'])->name('employees.show');
+        Route::post('/store', [EmployeeController::class, 'store'])->name('employees.store');
+    });
 });
 
 
