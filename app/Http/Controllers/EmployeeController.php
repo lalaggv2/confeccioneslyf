@@ -45,8 +45,6 @@ class EmployeeController extends Controller
                     'id' => $model->id,
                     'name' => '<div><label class="text-capitalize">' . $user->name . '</label><br><label class="small">' . $user->email . '</label></div>',
                     'document' => $model->document_type . ', ' . $model->document,
-                    'address' => $model->address,
-                    'start_date' => $model->start_date,
                     'phone' => $model->phone,
                     'eps' => $model->eps,
                     'position' => $model->position,

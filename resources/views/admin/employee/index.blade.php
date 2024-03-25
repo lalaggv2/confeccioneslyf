@@ -16,7 +16,6 @@
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Documento</th>
-                    <th>Dirección</th>
                     <th>Teléfono</th>
                     <th>EPS</th>
                     <th>Cargo</th>
@@ -82,12 +81,11 @@
                     {data: 'id'},
                     {data: 'name', orderable: false},
                     {data: 'document', orderable: false},
-                    {data: 'address', orderable: false},
                     {data: 'phone', orderable: false},
                     {data: 'eps', orderable: false},
                     {data: 'position', orderable: false},
                     {data: 'salary', orderable: false},
-                    {data: 'status', orderable: false},
+                    {data: 'status', orderable: false, class: 'text-center'},
                     {data: 'btns', orderable: false}
                 ],
                 bLengthChange: false,
