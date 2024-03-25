@@ -24,7 +24,7 @@
             <a href="nosotros">Trabaje con nosotros</a>
             <a href="">Contactenos</a>
             <a href="">Catalogo</a>
-            <a href="login">login</a>
+            <a href="login">Login</a>
         </nav>
 
         <section class="textos-header">
@@ -50,7 +50,7 @@
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8u2hZfn1Bjjp2oWbObdGSjmkpTTWmcaVygQ&usqp=CAU" alt="producto">
                 </figure>
                 <div class="info-product">
-                    <h2>pantalones  rectoss</h2>
+                    <h2>pantalones  rectos</h2>
 
                 </div>
             </div>

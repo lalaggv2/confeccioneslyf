@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html >
 <head>
-    <TITle>Confecciones l&f</TITle>
+    <TITle>Confecciones L&F SAS</TITle>
     <link rel="stylesheet" href="tvirtual.css"/>
    
 </head>
@@ -41,7 +41,7 @@
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8u2hZfn1Bjjp2oWbObdGSjmkpTTWmcaVygQ&usqp=CAU" alt="producto">
             </figure>
             <div class="info-product">
-                <h2>pantalones  rectoss</h2>
+                <h2>pantalones  rectos</h2>
                 <p class="price">$xxx</p>
                 <button>añadir a carrito</button>
             </div>
