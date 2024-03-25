@@ -21,7 +21,7 @@
                     <th>Cargo</th>
                     <th>Salario</th>
                     <th>Estado</th>
-                    <th>Acciones</th>
+                    <th class="text-center">Acciones</th>
                     </thead>
                 </table>
             </div>
