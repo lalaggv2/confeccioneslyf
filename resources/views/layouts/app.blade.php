@@ -15,6 +15,7 @@
     <meta name="robots" content="index, follow">
 
     <link rel="stylesheet" id="css-main" href="{{asset('assets/admin/css/codebase.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/admin.css')}}">
     @yield('css')
 </head>
 <body>
@@ -164,8 +165,8 @@
     </main>
 </div>
 <script src="{{asset('assets/admin/js/codebase.app.min.js')}}"></script>
-<script src="{{asset('assets/admin/js/pages/be_pages_dashboard.min.js')}}"></script>
 <script src="{{ asset('assets/js/jquery-3.7.1.min.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 @yield('js')
 </body>
 </html>

@@ -13,7 +13,7 @@
 
 
     <title>Confecciones L&F</title>
-    <link rel="stylesheet" href="{{ asset('asesents/style.css')}}">
+    <link rel="stylesheet" href="{{ asset('asset/style.css')}}">
 </head>
 <body>
     <header>
