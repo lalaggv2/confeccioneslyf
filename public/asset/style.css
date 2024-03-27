@@ -1,4 +1,5 @@
 
+ 
 
 
 .titulo2, .titulo3{
@@ -16,14 +17,9 @@ header{
     background: linear-gradient(to right, hsla(209, 44%, 34%, 0.452),hsla(223, 40%, 25%, 0.373)), url("../assets/images/images.jpg");
     background-size: cover;
     background-attachment: fixed;
-   
-   
-  
 }
 
-main{
- 
-}
+
 
 .titulo1{
   color: #fff;
@@ -192,16 +188,14 @@ img{
     transform: scale(1.2);
     }
 /* header */
-#contatti{
-  
-  letter-spacing: 2px;
-  }
+
 #contatti a{
   color: #080808;
   text-decoration: none;
-  
 }
-
+.text-white{
+  text-align: center;
+}
 
 
 
@@ -212,7 +206,7 @@ img{
 
    #contatti .maps iframe{
      width: 100%;
-     height: 450px;
+     height: 250px;
    }
  }
 
@@ -231,11 +225,18 @@ img{
 
    #contatti .maps iframe{
      width: 150%;
-     height: 400px;
-     margin-left: 20px;
+     height: 350px;
+     margin-left: 100px;
    }
 }
 
+.text-white{
+  margin-left: 80px;
+}
+
+i{
+  
+}
 
 #author a{
   color: #fff;
@@ -268,7 +269,72 @@ i{
   height: 40px;
  }
 
+/* Tu CSS original aquí */
 
+/* Media queries para hacer el sitio responsive */
+@media (max-width: 768px) {
+  /* Estilos para pantallas pequeñas (tablet y móvil) */
+  header {
+      height: 300px; /* Ejemplo de ajuste de altura del encabezado para dispositivos móviles */
+  }
+
+  .container-items,
+  .container-items1 {
+      display: flex;
+      flex-wrap: wrap; /* Cambiar a un diseño de flexbox envolvente */
+      justify-content: center;
+      gap: 10px;
+  }
+
+  .item {
+      flex: 0 1 calc(50% - 10px); /* Mostrar dos elementos por fila con espacio entre ellos */
+      max-width: calc(50% - 10px); /* Ajustar el ancho máximo para evitar que los elementos se superpongan */
+  }
+
+  .form-control {
+      width: 100%; /* Ajustar el ancho del formulario al contenedor padre */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  /* Estilos para pantallas medianas (tabletas en orientación horizontal, etc.) */
+  header {
+      height: 400px; /* Ejemplo de ajuste de altura del encabezado para tabletas en orientación horizontal */
+  }
+
+  .container-items,
+  .container-items1 {
+      display: flex;
+      flex-wrap: wrap; /* Cambiar a un diseño de flexbox envolvente */
+      justify-content: center;
+      gap: 20px;
+  }
+
+  .item {
+      flex: 0 1 calc(33.33% - 20px); /* Mostrar tres elementos por fila con espacio entre ellos */
+      max-width: calc(33.33% - 20px); /* Ajustar el ancho máximo para evitar que los elementos se superpongan */
+  }
+}
+
+@media (min-width: 992px) {
+  /* Estilos para pantallas grandes (escritorio, etc.) */
+  header {
+      height: 500px; /* Ejemplo de ajuste de altura del encabezado para dispositivos de escritorio */
+  }
+
+  .container-items,
+  .container-items1 {
+      display: flex;
+      flex-wrap: wrap; /* Cambiar a un diseño de flexbox envolvente */
+      justify-content: center;
+      gap: 30px;
+  }
+
+  .item {
+      flex: 0 1 calc(25% - 30px); /* Mostrar cuatro elementos por fila con espacio entre ellos */
+      max-width: calc(25% - 30px); /* Ajustar el ancho máximo para evitar que los elementos se superpongan */
+  }
+}
 
     
 

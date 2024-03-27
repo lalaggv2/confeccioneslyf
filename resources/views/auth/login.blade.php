@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/packages/toast/jquery.toast.min.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/packages/smoke/css/smoke.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('asesents/login.css')}}">
+    <link rel="stylesheet" href="{{ asset('asset/login.css')}}">
 </head>
 <body>
 <div class="container">

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EmployeeController;
-
+use App\Models\Raw_material;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,8 +19,16 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::get('/', [EmployeeController::class, 'index'])->name('employees');
         Route::get('/{employee}', [EmployeeController::class, 'show'])->name('employees.show');
         Route::post('/store', [EmployeeController::class, 'store'])->name('employees.store');
-    });
+    
 });
+});
+
+        Route::prefix('raw_material')->group(function () {
+            Route::get('/', [Raw_materialController::class, 'index'])->name('raw_material');
+            Route::get('/{raw_material}', [Raw_materialController::class, 'show'])->name('employees.show');
+            Route::post('/store', [EmployeeController::class, 'store'])->name('employees.store');
+        });
+    
 
 
 Route::get('nosotros', function () {
