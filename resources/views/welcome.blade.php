@@ -50,7 +50,7 @@
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8u2hZfn1Bjjp2oWbObdGSjmkpTTWmcaVygQ&usqp=CAU" alt="producto">
                 </figure>
                 <div class="info-product">
-                    <h2>pantalones  rectos</h2>
+                    <h2>Pantalones  Rectos</h2>
 
                 </div>
             </div>
@@ -59,7 +59,7 @@
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcdSqLtwIyzH07QPoZEMUSDp6QdkF9xF3tqQ&usqp=CAU" alt="producto">
                 </figure>
                 <div class="info-product">
-                    <h2>pantalones capri</h2>
+                    <h2>Pantalones Capri</h2>
 
                 </div>
             </div>
@@ -68,7 +68,7 @@
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQscwYsqDECByjhi6i-gwvNpjXrCgmZRJa8KQ&usqp=CAU" alt="producto">
                 </figure>
                 <div class="info-product">
-                    <h2>pantalones skinny</h2>
+                    <h2>Pantalones Skinny</h2>
 
                 </div>
             </div>
@@ -77,7 +77,7 @@
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQAJSG3GFeM1TSKOZdtObFGW9K9bcoaXzQ0A&usqp=CAU" alt=" alt="producto>
                 </figure>
                 <div class="info-product">
-                    <h2>pantalones bootcut</h2>
+                    <h2>Pantalones bootcut</h2>
 
                 </div>
             </div>
@@ -86,7 +86,7 @@
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3YGBzGfuk48VhFuOeJvsv79NSQlv_PgjwhQ&usqp=CAU" alt="producto">
                 </figure>
                 <div class="info-product">
-                    <h2>pantalones acampanado</h2>
+                    <h2>Pantalones Acampanado</h2>
 
                 </div>
             </div>
@@ -97,7 +97,7 @@
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpS9216fDBqlp3u8DG6-tCQv_tsGBay-89XTJUYjdaRf0aPhOyJKqkEwD1ZY7GZuz8VBw&usqp=CAU" alt="producto">
                 </figure>
                 <div class="info-product">
-                    <h2>pantalones boyfriend</h2>
+                    <h2>Pantalones Boyfriend</h2>
 
                 </div>
             </div>
@@ -106,7 +106,7 @@
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVvy0k7lXGMVuzrFLxxwnx-uFkFs3crqgPjFY7F73OQJyHy-LHMi6LwNjW_ALZ8RWQw_k&usqp=CAU" alt="producto">
                 </figure>
                 <div class="info-product">
-                    <h2>pantalones cargo</h2>
+                    <h2>Pantalones Cargo</h2>
 
                 </div>
             </div>
@@ -115,7 +115,7 @@
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsepWJ3OuhdQDoAm_CAlTN_1G0ZEobNFVUOg&usqp=CAU" alt="producto">
                 </figure>
                 <div class="info-product">
-                    <h2>pantalones palazzo</h2>
+                    <h2>Pantalones Palazzo</h2>
 
                 </div>
             </div>
@@ -124,7 +124,7 @@
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDmGTi9sRWYqlzIGZ9BzY5DGXdSCC4You1kg&usqp=CAU" alt="producto">
                 </figure>
                 <div class="info-product">
-                    <h2>pantalones harem</h2>
+                    <h2>Pantalones Harem</h2>
 
                 </div>
             </div>
@@ -133,7 +133,7 @@
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyjaxMznbHjqox_QNrdFNFZ-xOUspTCf31Ew&usqp=CAU" alt="producto">
                 </figure>
                 <div class="info-product">
-                    <h2>pantalones shorts</h2>
+                    <h2>Pantalones Shorts</h2>
 
                 </div>
             </div>
@@ -146,7 +146,7 @@
 
             <h2 class="titulo1">Quienes somos</h2>
 
-             <h5>En Confecciones L&F, nos dedicamos a la fabricación y diseño de pantalones de alta calidad para hombres, mujeres y niños. Fundada en [Año de Fundación], nos enorgullece ofrecer prendas que combinan estilo, comodidad y durabilidad.</h5>
+             <h5>En Confecciones L&F, nos dedicamos a la fabricación y diseño de Pantalones de alta calidad para hombres, mujeres y niños. Fundada en 2007, nos enorgullece ofrecer prendas que combinan estilo, comodidad y durabilidad.</h5>
 
             <div class="somos">
 
@@ -222,8 +222,9 @@
                         <i class="fas fa-phone mt-3"></i> <a href="tel:+">(+57) 123456</a><br>
                         <i class="fas fa-phone mt-3"></i> <a href="tel:+">(+39) 123456</a><br>
                         <i class="fa fa-envelope mt-3"></i> <a href="">confeccionesl&f.com</a><br>
-                        <i class="fas fa-globe mt-3"></i> colombia antioquia<br>
-                        <i class="fas fa-globe mt-3"></i> colombia,antioquia<br>
+                        <i class="fa fa-envelope mt-3"></i> <a href="">confeccionesl&f@gmail.com</a><br>
+                        <i class="fas fa-globe mt-3"></i> Colombia Antioquia<br>
+                        <i class="fas fa-globe mt-3"></i> Colombia,Antioquia<br>
                         <div class="my-4">
                         <a href=""><i class="fab fa-facebook fa-3x pr-4"></i></a>
                         <a href=""><i class="fab fa-linkedin fa-3x"></i></a>
