@@ -1,17 +1,17 @@
 @extends('layouts.app')
 @section('title' )
-    EMPLEADOS
+    PROVEDORES
 @endsection
 @section('css')
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css"/>
 @endsection
 @section('content')
     <div class="card p-3 position-relative">
-        <h2 class="content-heading"><i class="fa fa-users me-2"></i>EMPLEADOS</h2>
-        <button type="button" class="btn btn-secondary w-25 btn-add" data-target="#create"><i class="fa fa-plus"></i> Agregar empleado</button>
+        <h2 class="content-heading"><i class="fa fa-users me-2"></i>PROVEDORES</h2>
+        <button type="button" class="btn btn-secondary w-25 btn-add" data-target="#create"><i class="fa fa-plus"></i> Agregar provedor</button>
         <div class="card-body">
             <div class="table-responsive">
-                <table id="tableEmployees" class="table table-bordered table-hover table-striped table-sm">
+                <table id="tableSuppliers" class="table table-bordered table-hover table-striped table-sm">
                     <thead>
                     <th>ID</th>
                     <th>Nombre</th>
@@ -27,7 +27,7 @@
             </div>
         </div>
     </div>
-    <div class="modal" id="showEmployee" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
+    <div class="modal" id="showSupplier" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="block block-rounded shadow-none mb-0">
@@ -76,8 +76,8 @@
     <script>
         $(document).ready(function () {
             let dataTabla = null;
-            dataTabla = $('#tableEmployees').DataTable({
-                ajax: route('employees'),
+            dataTabla = $('#tableSuppliers').DataTable({
+                ajax: route('suppliers'),
                 filter: true,
                 columns: [
                     {data: 'id'},
@@ -121,48 +121,48 @@
         });
         const app = {
             btnShow: async function (id) {
-                const {data} = await axios.get(route('employees.show', id));
-                const employee = data.data;
+                const {data} = await axios.get(route('suppliers.show', id));
+                const supplier= data.data;
                 if (data.status) {
-                    $('#showEmployee .block-title').text(employee.name);
-                    for (let key in employee) {
-                        if (employee.hasOwnProperty(key)) {
+                    $('#showSuppliers .block-title').text(supplier.name);
+                    for (let key in supplier) {
+                        if (supplier.hasOwnProperty(key)) {
                             if (key === 'salary') {
                                 $(`#${key}`).text(new Intl.NumberFormat('es-CO', {
                                     style: 'currency',
                                     currency: 'COP',
                                     minimumFractionDigits: 0,
                                     maximumFractionDigits: 0
-                                }).format(parseFloat(employee[key])));
+                                }).format(parseFloat(supplier[key])));
                             } else {
                                 if (key === 'status') {
-                                    if (employee[key] === true) {
+                                    if (supplier[key] === true) {
                                         $(`#${key}`).addClass('badge bg-success pt-1').text('Activo');
                                     } else {
                                         $(`#${key}`).addClass('badge bg-danger pt-1').text('Inactivo');
                                     }
                                 } else if (key === 'start_date') {
-                                    const date = new Date(employee[key]).toLocaleDateString();
+                                    const date = new Date(supplier[key]).toLocaleDateString();
                                     $(`#${key}`).text(date.replace(/\//g, '-'));
                                 } else if (key === 'contacts') {
-                                    if (employee[key].length > 0) {
+                                    if (supplier[key].length > 0) {
                                         $('#contentContacts').removeClass('d-none');
                                         $('#contacts').html('');
                                         let table = '<table class="table table-hover table-sm">';
                                         table += '<thead class="text-capitalize"><tr><th>Nombre</th><th>Teléfono</th><th>Parentesco</th></tr></thead>';
-                                        for (let i = 0; i < employee[key].length; i++) {
-                                            table += `<tr><td>${employee[key][i].name}</td><td>${employee[key][i].phone}</td><td>${employee[key][i].relationship}</td></tr>`;
+                                        for (let i = 0; i < supplier[key].length; i++) {
+                                            table += `<tr><td>${supplier[key][i].name}</td><td>${supplier[key][i].phone}</td><td>${supplier[key][i].relationship}</td></tr>`;
                                         }
                                         table += '</table>';
                                         $('#contacts').append(table);
                                     }
                                 } else {
-                                    $(`#${key}`).text(employee[key]);
+                                    $(`#${key}`).text(supplier[key]);
                                 }
                             }
                         }
                     }
-                    $('#showEmployee').modal('show');
+                    $('#showSuppliers').modal('show');
                 }
             },
             btnEdit: function (id) {
