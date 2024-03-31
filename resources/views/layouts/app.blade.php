@@ -79,6 +79,12 @@
                             </a>
                         </li>
                         <li class="nav-main-item">
+                            <a class="nav-main-link" href="{{route('employees')}}">
+                                <i class="nav-main-link-icon fa fa-users"></i>
+                                <span class="nav-main-link-name">Provedores</span>
+                            </a>
+                        </li>
+                        <li class="nav-main-item">
                             <a class="nav-main-link" href="{{route('customers')}}">
                                 <i class="nav-main-link-icon fa fa-users"></i>
                                 <span class="nav-main-link-name">Clientes</span>
@@ -105,17 +111,17 @@
                         <li class="nav-main-item">
                             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                                 <i class="nav-main-link-icon fa fa-grip-vertical"></i>
-                                <span class="nav-main-link-name">Certificados</span>
+                                <span class="nav-main-link-name">Ordenes</span>
                             </a>
                             <ul class="nav-main-submenu">
                                 <li class="nav-main-item">
                                     <a class="nav-main-link" href="#">
-                                        <span class="nav-main-link-name">Desprendible de pago</span>
+                                        <span class="nav-main-link-name">Ordenes de salida</span>
                                     </a>
                                 </li>
                                 <li class="nav-main-item">
                                     <a class="nav-main-link" href="#">
-                                        <span class="nav-main-link-name">Certificado laboral</span>
+                                        <span class="nav-main-link-name"></span>
                                     </a>
                                 </li>
                             </ul>
