@@ -90,24 +90,13 @@
                                 <span class="nav-main-link-name">Clientes</span>
                             </a>
                         </li>
-                        <li class="nav-main-item">
-                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                         <li class="nav-main-item">
+                            <a class="nav-main-link" href="{{route('customers')}}">
                                 <i class="nav-main-link-icon fa fa-grip-vertical"></i>
                                 <span class="nav-main-link-name">Inventario</span>
                             </a>
-                            <ul class="nav-main-submenu">
-                                <li class="nav-main-item">
-                                    <a class="nav-main-link" href="#">
-                                        <span class="nav-main-link-name">Materia prima</span>
-                                    </a>
-                                </li>
-                                <li class="nav-main-item">
-                                    <a class="nav-main-link" href="#">
-                                        <span class="nav-main-link-name">Producto terminado</span>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
+                        
                         <li class="nav-main-item">
                             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
                                 <i class="nav-main-link-icon fa fa-grip-vertical"></i>

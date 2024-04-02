@@ -22,8 +22,7 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::post('/store', [EmployeeController::class, 'store'])->name('employees.store');
     });
 });
-    Route::middleware(['web', 'auth'])->group(function () {
-        Route::get('/home', [HomeController::class, 'index'])->name('home');
+   
     Route::prefix('suppliers')->group(function () {
         Route::get('/', [SupplierController::class, 'index'])->name('suppliers');
         Route::get('/{supplier}', [SupplierController::class, 'show'])->name('suppliers.show');
@@ -35,12 +34,9 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::get('/{customer}', [CustomerController::class, 'show'])->name('customers.show');
         Route::post('/store', [CustomerController::class, 'store'])->name('customers.store');
     });
-});
-Route::prefix('raw_material')->group(function () {
-    Route::get('/', [Raw_materialController::class, 'index'])->name('raw_material');
-    Route::get('/{raw_material}', [Raw_materialController::class, 'show'])->name('employees.show');
-    Route::post('/store', [EmployeeController::class, 'store'])->name('employees.store');
-});
+
+
+
 
 
 Route::get('nosotros', function () {

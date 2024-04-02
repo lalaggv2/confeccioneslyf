@@ -16,11 +16,11 @@
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Documento</th>
+                    <th>Direccion</th>
+
                     <th>Teléfono</th>
-                    <th>EPS</th>
-                    <th>Cargo</th>
-                    <th>Salario</th>
-                    <th>Estado</th>
+                    <th>Correo</th>
+                    
                     <th class="text-center">Acciones</th>
                     </thead>
                 </table>
@@ -47,13 +47,7 @@
                             <li class="list-group-item"><b>Teléfono:</b> <label id="phone"></label></li>
                             <li class="list-group-item"><b>Dirección:</b> <label id="address"></label></li>
                             <li class="list-group-item"><b>Correo:</b> <label id="email"></label></li>
-                            <li class="list-group-item"><b>Genero:</b> <label id="gender"></label></li>
-                            <li class="list-group-item"><b>RH:</b> <span class="badge text-bg-info pt-2" id="rh"></span></li>
-                            <li class="list-group-item"><b>EPS:</b> <label id="eps"></label></li>
-                            <li class="list-group-item"><b>Cargo:</b> <span class="badge text-bg-primary pt-2"
-                                                                     id="position"></span></li>
-                            <li class="list-group-item"><b>Salario:</b> <label id="salary"></label></li>
-                            <li class="list-group-item"><b>Fecha de ingreso a la empresa:</b> <label id="start_date"></label>
+                            
                             </li>
                             <li class="list-group-item d-none" id="contentContacts">
                                 <h5 class="mb-0">CONTACTOS</h5>
@@ -84,11 +78,7 @@
                     {data: 'name', orderable: false},
                     {data: 'document', orderable: false},
                     {data: 'phone', orderable: false},
-                    {data: 'eps', orderable: false},
-                    {data: 'position', orderable: false},
-                    {data: 'salary', orderable: false},
-                    {data: 'status', orderable: false, class: 'text-center'},
-                    {data: 'btns', orderable: false}
+                   
                 ],
                 bLengthChange: false,
                 info: false,
@@ -124,7 +114,7 @@
                 const {data} = await axios.get(route('suppliers.show', id));
                 const supplier= data.data;
                 if (data.status) {
-                    $('#showSuppliers .block-title').text(supplier.name);
+                    $('#showSupplier .block-title').text(supplier.name);
                     for (let key in supplier) {
                         if (supplier.hasOwnProperty(key)) {
                             if (key === 'salary') {
@@ -162,7 +152,7 @@
                             }
                         }
                     }
-                    $('#showSuppliers').modal('show');
+                    $('#showSupplier').modal('show');
                 }
             },
             btnEdit: function (id) {
