@@ -9,59 +9,42 @@
     <div class="card p-3 position-relative">
         <h2 class="content-heading"><i class="fa fa-users me-2"></i>CLIENTES</h2>
         <button type="button" class="btn btn-secondary w-25 btn-add" data-target="#create"><i class="fa fa-plus"></i> Agregar clientes</button>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table id="tableCustomers" class="table table-bordered table-hover table-striped table-sm">
-                    <thead>
-                    <th>Tipo de documento</th>
-                    <th>Documento</th>
-                    <th>nombre</th>
-                    <th>Direccion</th>
-                    <th>Telefono</th>
-                    
-                    <th class="text-center">Acciones</th>
-                    </thead>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="modal" id="showCustomer" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="block block-rounded shadow-none mb-0">
-                    <div class="block-header block-header-default">
-                        <h3 class="block-title text-uppercase"></h3>
-                        <div class="block-options">
-                            <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
-                                <i class="fa fa-times"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="block-content fs-sm mb-4">
-                        <ul class="list-group">
-                            
-                            <li class="list-group-item"><b>Tipo documento:</b> <label id="document_type"></label></li>
-                            <li class="list-group-item"><b>Documento:</b> <label id="document"></label></li>
-                            <li class="list-group-item"><b>Nombre:</b> <label class="text-capitalize" id="name"></label></li>
-                            <li class="list-group-item"><b>Dirección:</b> <label id="address"></label></li>
-                            
-                            
-                            <li class="list-group-item"><b>Fecha de ingreso a la empresa:</b> <label id="start_date"></label>
-                            </li>
-                            <li class="list-group-item d-none" id="contentContacts">
-                                <h5 class="mb-0">CONTACTOS</h5>
-                                <div id="contacts">
+        
+        <div
+            class="table-responsive"
+        >
+            <table
+             id="tableEmployees" class="table table-bordered table-hover table-striped table-sm">
+            
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Tipo de documento</th>
+                        <th scope="col">Documento</th>
+                        <th scope="col">Nomnre</th>
+                        <th scope="col">Direccion</th>
+                        <th scope="col">Telefono</th>
+                        <th class="text-center">Acciones</th>
 
-                                </div>
-                            </li>
-                            <li class="list-group-item">Estado: <label id="status"></label></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($customers as $customer)
+                        
+                  
+                    <tr class="">
+                        <td scope="row">{{$customer->id}}</td>
+                        <td>{{$customers->type_document}}</td>
+                        <td>{{$customers->document}}</td>
+                        <td>{{$customers->name}}</td>
+                        <td>{{$customers->address}}</td>
+                        <td>{{$customers->phone}}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
-    </div>
-
+        
     
 @endsection
 @section('js')
@@ -69,7 +52,7 @@
     <script>
         $(document).ready(function () {
             let dataTabla = null;
-            dataTabla = $('#tableCustomer').DataTable({
+            dataTabla = $('#tableCustomers').DataTable({
                 ajax: route('customer'),
                 filter: true,
                 columns: [

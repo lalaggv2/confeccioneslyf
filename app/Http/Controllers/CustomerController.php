@@ -9,146 +9,62 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
+
 {
-    public function model()
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
     {
-        return app()->make(Customer::class);
+        $customers=Customer::all();
+        return view('admin.customers.index',compact('customers'));
     }
 
-    public function userModel()
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
-        return app()->make(User::class);
-    }
-    public function contactModel()
-    {
-        return app()->make(Contact::class);
-    }
-
-    public function index(Request $request)
-    {
-        if ($request->ajax()) {
-            $page = $request->input('start') / $request->input('length') + 1;
-            $perPage = $request->input('length', 100);
-
-            $modelQuery = $this->model()->query();
-            $modelQuery->orderBy('id', 'desc');
-
-            $totalRecords = $modelQuery->count();
-            $results = $modelQuery
-                ->skip(($page - 1) * $perPage)
-                ->take($perPage)
-                ->get();
-            $data = [];
-            foreach ($results as $model) {
-                $user = $model->user;
-                $data[] = [
-                    
-                    
-                    'type_document' => $model->document_type,
-                    'document' => $model->document,
-                    'name' => '<div><label class="text-capitalize">' . $user->name . '</label><br><label class="small">' . $user->email . '</label></div>',
-                    'addres' => $model->address,
-                    'phone' => $model->phone,
-                    
-                  
-                ];
-            }
-            $response = [
-                'draw' => $request->input('draw'),
-                'recordsTotal' => $totalRecords,
-                'recordsFiltered' => $totalRecords,
-                'data' => $data,
-            ];
-            return response()->json($response);
-        }
-        return view('admin.customers.index');
+        //
     }
 
-    public function show(Customer $customer)
-    {
-        try {
-            $customer['name'] =  $customer->user->name;
-            $customer['email'] =  $customer->user->email;
-            $customer['user_id'] =  $customer->user->id;
-            $customer['contacts'] =  $customer->contacts;
-            $customer['status'] = (bool) $customer->status;
-            unset( $customer['user']);
-            return response()->json([
-                'status' => true,
-                'data' =>  $customer,
-            ], 200);
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Hubo un error al intentar obtener el empleado',
-                'error' => $e->getMessage()
-            ], 500);
-        }
-    }
-
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        $request->validate([
-            'document_type' => 'required',
-            'document' => 'required',
-            'name' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
-            
-        ]);
-        DB::beginTransaction();
-        try {
-            $user = $this->userModel()->create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => bcrypt($request->document),
-            ]);
-            $customer = $this->model()->create([
-                
-                'document_type' => $request->document_type,
-                'document' => $request->document,
-                'address' => $request->address,
-                'phone' => $request->phone,
-
-                
-            ]);
-            if ($request->contacts) {
-                foreach ($request->contacts as $contact) {
-                    $this->contactModel()->create([
-                        ' customer_id' =>  $customer->id,
-                        'name' => $contact['name'],
-                        
-                        
-                    ]);
-                }
-            }
-            $data  =  $customer->load('user', 'contacts');
-            DB::commit();
-            return response()->json([
-                'status' => true,
-                'message' => 'Empleado guardado correctamente',
-                'data' => $data
-            ], 200);
-
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return response()->json([
-                'status' => false,
-                'message' => 'Hubo un error al intentar guardar el empleado',
-                'error' => $e->getMessage()
-            ], 500);
-        }
+        //
     }
 
-
-    public function update(Request $request, $id)
+    /**
+     * Display the specified resource.
+     */
+    public function show(Customer $customer)
     {
+        //
     }
 
-    public function destroy($id)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Customer $customer)
     {
-        $empleados =  customer::find($id);
-        $empleados->delete();
-        return redirect()->back();
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Customer $customer)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Customer $customer)
+    {
+        //
     }
 }

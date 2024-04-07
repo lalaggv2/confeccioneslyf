@@ -17,7 +17,6 @@
                     <th>Nombre</th>
                     <th>Documento</th>
                     <th>Direccion</th>
-
                     <th>Teléfono</th>
                     <th>Correo</th>
                     
@@ -71,7 +70,7 @@
         $(document).ready(function () {
             let dataTabla = null;
             dataTabla = $('#tableSuppliers').DataTable({
-                ajax: route('suppliers'),
+                ajax: route('supplier'),
                 filter: true,
                 columns: [
                     {data: 'id'},

@@ -2,10 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CustomerController;
+use App\Models\Customer;
+use App\Models\Supplier;
 
 Route::get('/', function () {
     return view('welcome');
@@ -13,6 +16,10 @@ Route::get('/', function () {
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post("access", [LoginController::class, "login"])->name("access.web");
 Route::post("logout", [LoginController::class, "logout"])->name("logout");
+
+Route::get('/register', [RegisterController::class, 'validateWith'])->name('register');
+Route::post("new_user", [RegisterController::class, "register"])->name("access.web");
+Route::post("logout", [RegisterController::class, "logout"])->name("logout");
 
 Route::middleware(['web', 'auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -36,7 +43,7 @@ Route::middleware(['web', 'auth'])->group(function () {
     });
 
 
-
+Route::resource('costumers', CustomerController::class);
 
 
 Route::get('nosotros', function () {

@@ -147,8 +147,8 @@ public function update(Request $request, $id)
 
 public function destroy($id)
 {
-    $provedores = Supplier::find($id);
-    $provedores->delete();
+    $suppliers = Supplier::find($id);
+    $suppliers->delete();
     return redirect()->back();
 }
 }
