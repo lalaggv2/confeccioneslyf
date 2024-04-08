@@ -79,17 +79,13 @@
                             </a>
                         </li>
                         <li class="nav-main-item">
-                            <a class="nav-main-link" href="{{route('suppliers')}}">
-                                <i class="nav-main-link-icon fa fa-users"></i>
-                                <span class="nav-main-link-name">Provedores</span>
-                            </a>
-                        </li>
-                        <li class="nav-main-item">
                             <a class="nav-main-link" href="{{route('customers')}}">
                                 <i class="nav-main-link-icon fa fa-users"></i>
                                 <span class="nav-main-link-name">Clientes</span>
                             </a>
                         </li>
+                       
+                       
                          
                         
                         </li>
@@ -105,7 +101,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-main-item">
-                                    <a class="nav-main-link" href="#">
+                                    <a class="nav-main-link" href="{{route('product_details')}}">
                                         <span class="nav-main-link-name">Poducto</span>
                                     </a>
                                 </li>

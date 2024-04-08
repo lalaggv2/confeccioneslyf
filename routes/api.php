@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\hash;
 
 Route::post("access", [LoginController::class, "login"])->name("access");
+Route::post("new-user", [LoginController::class, "register"])->name("new-user");
 
 
 Route::prefix('v1')->group(function () {

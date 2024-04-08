@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title' )
+@section('title')
     CLIENTES
 @endsection
 @section('css')
@@ -8,44 +8,50 @@
 @section('content')
     <div class="card p-3 position-relative">
         <h2 class="content-heading"><i class="fa fa-users me-2"></i>CLIENTES</h2>
-        <button type="button" class="btn btn-secondary w-25 btn-add" data-target="#create"><i class="fa fa-plus"></i> Agregar clientes</button>
-        
-        <div
-            class="table-responsive"
-        >
-            <table
-             id="tableEmployees" class="table table-bordered table-hover table-striped table-sm">
-            
-                <thead>
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Tipo de documento</th>
-                        <th scope="col">Documento</th>
-                        <th scope="col">Nomnre</th>
-                        <th scope="col">Direccion</th>
-                        <th scope="col">Telefono</th>
-                        <th class="text-center">Acciones</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($customers as $customer)
-                        
-                  
-                    <tr class="">
-                        <td scope="row">{{$customer->id}}</td>
-                        <td>{{$customers->type_document}}</td>
-                        <td>{{$customers->document}}</td>
-                        <td>{{$customers->name}}</td>
-                        <td>{{$customers->address}}</td>
-                        <td>{{$customers->phone}}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+        <button type="button" class="btn btn-secondary w-25 btn-add" data-target="#create"><i class="fa fa-plus"></i> Agregar cliente</button>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="tableCustomers" class="table table-bordered table-hover table-striped table-sm">
+                    <thead>
+                        <th>ID</th>
+                        <th>TIPO DE DOCUMENTO</th>
+                        <th>DOCUMENTO</th>
+                        <th>NOMBRE</th>
+                        <th>TELEFONO</th>
+                        <th>DIRECCION</th>
+                        <th class="text-center">ACCIONES</th>
+                    </thead>
+                </table>
+            </div>
         </div>
-        
-    
+    </div>
+    <div class="modal" id="showCustomer" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="block block-rounded shadow-none mb-0">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title text-uppercase"></h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-content fs-sm mb-4">
+                        <ul class="list-group">
+                            
+                            <li class="list-group-item"><b>Tipo documento:</b> <label id="document_type"></label></li>
+                            <li class="list-group-item"><b>Documento:</b> <label id="document"></label></li>
+                            <li class="list-group-item"><b>Nombre:</b> <label class="text-capitalize" id="name"></label></li>
+                            <li class="list-group-item"><b>Teléfono:</b> <label id="phone"></label></li>
+                            <li class="list-group-item"><b>Dirección:</b> <label id="address"></label></li>
+                            <li class="list-group-item">Estado: <label id="status"></label></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('js')
     <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
@@ -53,16 +59,15 @@
         $(document).ready(function () {
             let dataTabla = null;
             dataTabla = $('#tableCustomers').DataTable({
-                ajax: route('customer'),
+                ajax: route('customers'),
                 filter: true,
                 columns: [
-                    {data: 'tipe_document'},
-                    
+                    {data: 'id'},
+                    {data: 'document_type', orderable: false},
                     {data: 'document', orderable: false},
                     {data: 'name', orderable: false},
-                    {data: 'eps', orderable: false},
                     {data: 'phone', orderable: false},
-
+                    {data: 'address', orderable: false},
                     {data: 'btns', orderable: false}
                 ],
                 bLengthChange: false,
@@ -79,7 +84,7 @@
                     infoPostFix: "",
                     thousands: ",",
                     lengthMenu: "Mostrar _MENU_ Entradas",
-                    loadingRecords: "Cargando lista de empleados...",
+                    loadingRecords: "Cargando lista de clientes...",
                     processing: "Procesando...",
                     search: "Buscar:",
                     zeroRecords: "Sin resultados encontrados",
@@ -102,49 +107,17 @@
                     $('#showCustomer .block-title').text(customer.name);
                     for (let key in customer) {
                         if (customer.hasOwnProperty(key)) {
-                            if (key === 'salary') {
-                                $(`#${key}`).text(new Intl.NumberFormat('es-CO', {
-                                    style: 'currency',
-                                    currency: 'COP',
-                                    minimumFractionDigits: 0,
-                                    maximumFractionDigits: 0
-                                }).format(parseFloat(customer[key])));
-                            } else {
-                                if (key === 'status') {
-                                    if (customer[key] === true) {
-                                        $(`#${key}`).addClass('badge bg-success pt-1').text('Activo');
-                                    } else {
-                                        $(`#${key}`).addClass('badge bg-danger pt-1').text('Inactivo');
-                                    }
-                                } else if (key === 'start_date') {
-                                    const date = new Date(customer[key]).toLocaleDateString();
-                                    $(`#${key}`).text(date.replace(/\//g, '-'));
-                                } else if (key === 'contacts') {
-                                    if (customer[key].length > 0) {
-                                        $('#contentContacts').removeClass('d-none');
-                                        $('#contacts').html('');
-                                        let table = '<table class="table table-hover table-sm">';
-                                        table += '<thead class="text-capitalize"><tr><th>Nombre</th><th>Teléfono</th><th>Parentesco</th></tr></thead>';
-                                        for (let i = 0; i < customer[key].length; i++) {
-                                            table += `<tr><td>${customer[key][i].name}</td><td>${customer[key][i].phone}</td><td>${customer[key][i].relationship}</td></tr>`;
-                                        }
-                                        table += '</table>';
-                                        $('#contacts').append(table);
-                                    }
-                                } else {
-                                    $(`#${key}`).text(customer[key]);
-                                }
-                            }
+                            $(`#${key}`).text(customer[key]);
                         }
                     }
                     $('#showCustomer').modal('show');
                 }
             },
             btnEdit: function (id) {
-                alert('Editar empleado con id: ' + id);
+                alert('Editar cliente con id: ' + id);
             },
             btnDelete: function (id) {
-                alert('Eliminar empleado con id: ' + id);
+                alert('Eliminar cliente con id: ' + id);
             }
         };
     </script>

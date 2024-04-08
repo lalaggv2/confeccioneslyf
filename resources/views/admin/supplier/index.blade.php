@@ -1,26 +1,27 @@
 @extends('layouts.app')
-@section('title' )
-    PROVEDORES
+
+@section('title')
+    PROVEEDORES
 @endsection
+
 @section('css')
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css"/>
 @endsection
+
 @section('content')
     <div class="card p-3 position-relative">
-        <h2 class="content-heading"><i class="fa fa-users me-2"></i>PROVEDORES</h2>
-        <button type="button" class="btn btn-secondary w-25 btn-add" data-target="#create"><i class="fa fa-plus"></i> Agregar provedor</button>
+        <h2 class="content-heading"><i class="fa fa-users me-2"></i>PROVEEDORES</h2>
+        <button type="button" class="btn btn-secondary w-25 btn-add" data-target="#create"><i class="fa fa-plus"></i> Agregar proveedor</button>
         <div class="card-body">
             <div class="table-responsive">
                 <table id="tableSuppliers" class="table table-bordered table-hover table-striped table-sm">
                     <thead>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Documento</th>
-                    <th>Direccion</th>
-                    <th>Teléfono</th>
-                    <th>Correo</th>
-                    
-                    <th class="text-center">Acciones</th>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Documento</th>
+                        <th>Teléfono</th>
+                        <th>Dirección</th>
+                        <th class="text-center">Acciones</th>
                     </thead>
                 </table>
             </div>
@@ -45,15 +46,6 @@
                             <li class="list-group-item"><b>Documento:</b> <label id="document"></label></li>
                             <li class="list-group-item"><b>Teléfono:</b> <label id="phone"></label></li>
                             <li class="list-group-item"><b>Dirección:</b> <label id="address"></label></li>
-                            <li class="list-group-item"><b>Correo:</b> <label id="email"></label></li>
-                            
-                            </li>
-                            <li class="list-group-item d-none" id="contentContacts">
-                                <h5 class="mb-0">CONTACTOS</h5>
-                                <div id="contacts">
-
-                                </div>
-                            </li>
                             <li class="list-group-item">Estado: <label id="status"></label></li>
                         </ul>
                     </div>
@@ -61,23 +53,23 @@
             </div>
         </div>
     </div>
-
-    
 @endsection
+
 @section('js')
     <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
     <script>
         $(document).ready(function () {
             let dataTabla = null;
             dataTabla = $('#tableSuppliers').DataTable({
-                ajax: route('supplier'),
+                ajax: route('suppliers'),
                 filter: true,
                 columns: [
                     {data: 'id'},
                     {data: 'name', orderable: false},
                     {data: 'document', orderable: false},
                     {data: 'phone', orderable: false},
-                   
+                    {data: 'address', orderable: false},
+                    {data: 'btns', orderable: false}
                 ],
                 bLengthChange: false,
                 info: false,
@@ -93,7 +85,7 @@
                     infoPostFix: "",
                     thousands: ",",
                     lengthMenu: "Mostrar _MENU_ Entradas",
-                    loadingRecords: "Cargando lista de empleados...",
+                    loadingRecords: "Cargando lista de proveedores...",
                     processing: "Procesando...",
                     search: "Buscar:",
                     zeroRecords: "Sin resultados encontrados",
@@ -108,57 +100,26 @@
             });
             dataTabla.columns([0]).visible(false);
         });
+
         const app = {
             btnShow: async function (id) {
                 const {data} = await axios.get(route('suppliers.show', id));
-                const supplier= data.data;
+                const supplier = data.data;
                 if (data.status) {
                     $('#showSupplier .block-title').text(supplier.name);
                     for (let key in supplier) {
                         if (supplier.hasOwnProperty(key)) {
-                            if (key === 'salary') {
-                                $(`#${key}`).text(new Intl.NumberFormat('es-CO', {
-                                    style: 'currency',
-                                    currency: 'COP',
-                                    minimumFractionDigits: 0,
-                                    maximumFractionDigits: 0
-                                }).format(parseFloat(supplier[key])));
-                            } else {
-                                if (key === 'status') {
-                                    if (supplier[key] === true) {
-                                        $(`#${key}`).addClass('badge bg-success pt-1').text('Activo');
-                                    } else {
-                                        $(`#${key}`).addClass('badge bg-danger pt-1').text('Inactivo');
-                                    }
-                                } else if (key === 'start_date') {
-                                    const date = new Date(supplier[key]).toLocaleDateString();
-                                    $(`#${key}`).text(date.replace(/\//g, '-'));
-                                } else if (key === 'contacts') {
-                                    if (supplier[key].length > 0) {
-                                        $('#contentContacts').removeClass('d-none');
-                                        $('#contacts').html('');
-                                        let table = '<table class="table table-hover table-sm">';
-                                        table += '<thead class="text-capitalize"><tr><th>Nombre</th><th>Teléfono</th><th>Parentesco</th></tr></thead>';
-                                        for (let i = 0; i < supplier[key].length; i++) {
-                                            table += `<tr><td>${supplier[key][i].name}</td><td>${supplier[key][i].phone}</td><td>${supplier[key][i].relationship}</td></tr>`;
-                                        }
-                                        table += '</table>';
-                                        $('#contacts').append(table);
-                                    }
-                                } else {
-                                    $(`#${key}`).text(supplier[key]);
-                                }
-                            }
+                            $(`#${key}`).text(supplier[key]);
                         }
                     }
                     $('#showSupplier').modal('show');
                 }
             },
             btnEdit: function (id) {
-                alert('Editar empleado con id: ' + id);
+                alert('Editar proveedor con id: ' + id);
             },
             btnDelete: function (id) {
-                alert('Eliminar empleado con id: ' + id);
+                alert('Eliminar proveedor con id: ' + id);
             }
         };
     </script>

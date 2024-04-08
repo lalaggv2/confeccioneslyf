@@ -4,67 +4,109 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use App\Models\Customer;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
-
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        $customers=Customer::all();
-        return view('admin.customers.index',compact('customers'));
+        if ($request->ajax()) {
+            $page = $request->input('start') / $request->input('length') + 1;
+            $perPage = $request->input('length', 100);
+
+            $modelQuery = Customer::query();
+            $modelQuery->orderBy('id', 'desc');
+
+            $totalRecords = $modelQuery->count();
+            $results = $modelQuery
+                ->skip(($page - 1) * $perPage)
+                ->take($perPage)
+                ->get();
+            $data = [];
+            foreach ($results as $model) {
+                $data[] = [
+                    'id' => $model->id,
+                    'document_type' => $model->document_type,
+                    'document' => $model->document,
+                    'name' => $model->name,
+                    'address' => $model->address,
+                    'phone' => $model->phone,
+                    'btns' => view('helpers.buttons', ['obj' => 'app', 'id' => $model->id, 'show' => 1, 'edit' => 1, 'delete' => 1])->render(),
+                ];
+            }
+            $response = [
+                'draw' => $request->input('draw'),
+                'recordsTotal' => $totalRecords,
+                'recordsFiltered' => $totalRecords,
+                'data' => $data,
+            ];
+            return response()->json($response);
+        }
+        return view('admin\customers\index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(Customer $customer)
     {
-        //
+        try {
+            return response()->json([
+                'status' => true,
+                'data' => $customer,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Hubo un error al intentar obtener el cliente',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Customer $customer)
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+            'type_document' => 'required',
+            'document' => 'required',
+            'name' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+        ]);
+        DB::beginTransaction();
+        try {
+            $customer = Customer::create([
+                'type_document' => $request->type_document,
+                'document' => $request->document,
+                'name' => $request->name,
+                'address' => $request->address,
+                'phone' => $request->phone,
+            ]);
+
+            $data = $customer->load('contacts');
+            DB::commit();
+            return response()->json([
+                'status' => true,
+                'message' => 'Cliente guardado correctamente',
+                'data' => $data
+            ], 200);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'status' => false,
+                'message' => 'Hubo un error al intentar guardar el cliente',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Customer $customer)
+    public function update(Request $request, $id)
     {
-        //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Customer $customer)
+    public function destroy($id)
     {
-        //
+        $customer = Customer::find($id);
+        $customer->delete();
+        return redirect()->back();
     }
 }
