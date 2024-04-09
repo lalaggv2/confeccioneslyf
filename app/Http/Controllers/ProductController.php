@@ -15,26 +15,26 @@ class ProductController extends Controller
             $page = $request->input('start') / $request->input('length') + 1;
             $perPage = $request->input('length', 100);
 
-            $query = Product::query();
-            $query->orderBy('id', 'desc');
+            $modelQuery = Product::query();
+            $modelQuery->orderBy('id', 'desc');
 
-            $totalRecords = $query->count();
-            $results = $query
+            $totalRecords =  $modelQuery->count();
+            $results =  $modelQuery
                 ->skip(($page - 1) * $perPage)
                 ->take($perPage)
                 ->get();
             $data = [];
-            foreach ($results as $product) {
+            foreach ($results as $model) {
                 $data[] = [
-                    'id' => $product->id,
-                    'name' => $product->name,
-                    'description' => $product->description,
-                    'stock' => $product->stock,
-                    'type' => $product->type,
-                    'created_at' => $product->created_at->format('Y-m-d H:i:s'),
-                    'updated_at' => $product->updated_at->format('Y-m-d H:i:s'),
-                    // Puedes agregar más campos aquí según sea necesario
-                    'btns' => view('helpers.buttons', ['obj' => 'product', 'id' => $product->id, 'show' => 1, 'edit' => 1, 'delete' => 1])->render(),
+                    'id' => $model ->id,
+                    'name' => $model->name,
+                    'description' => $model->description,
+                    'stock' => $model->stock,
+                    'type' => $model->type,
+                    'created_at' => $model->created_at->format('Y-m-d H:i:s'),
+                    'updated_at' => $model->updated_at->format('Y-m-d H:i:s'),
+                    
+                    'btns' => view('helpers.buttons', ['obj' => 'app', 'id' => $model->id, 'show' => 1, 'edit' => 1, 'delete' => 1])->render(),
                 ];
             }
             $response = [

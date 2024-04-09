@@ -25,7 +25,7 @@ class ProductDetailController extends Controller
             $page = $request->input('start') / $request->input('length') + 1;
             $perPage = $request->input('length', 100);
 
-            $modelQuery = $this->model()->query();
+            $modelQuery = Productdetail::query();
             $modelQuery->orderBy('id', 'desc');
 
             $totalRecords = $modelQuery->count();

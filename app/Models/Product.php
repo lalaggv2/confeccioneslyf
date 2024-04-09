@@ -11,6 +11,8 @@
             'description',
             'stock',
             'type',
+            'created_at',
+            'updated_at',
         ];
     }
     
