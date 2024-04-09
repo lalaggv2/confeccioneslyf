@@ -7,7 +7,7 @@ use App\Models\ProductDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ProducsDetailsController extends Controller
+class ProductDetailController extends Controller
 {
     public function model()
     {
@@ -132,12 +132,60 @@ class ProducsDetailsController extends Controller
 
     public function update(Request $request, $id)
     {
+        $productDetail = ProductDetail::findOrFail($id);
+        $request->validate([
+            'product_id' => 'required',
+            'sku' => 'required',
+            'barcode' => 'required',
+            'size' => 'required',
+            'color' => 'required',
+            'material' => 'required',
+            'location' => 'required',
+            'price' => 'required',
+            'stock' => 'required',
+            'date_manufactured' => 'required',
+            'notes' => 'required',
+        ]);
+
+        DB::beginTransaction();
+        try {
+            $productDetail->update([
+                'product_id' => $request->product_id,
+                'sku' => $request->sku,
+                'barcode' => $request->barcode,
+                'size' => $request->size,
+                'color' => $request->color,
+                'material' => $request->material,
+                'location' => $request->location,
+                'price' => $request->price,
+                'stock' => $request->stock,
+                'date_manufactured' => $request->date_manufactured,
+                'notes' => $request->notes
+            ]);
+            $data = $productDetail->load('product');
+            DB::commit();
+            return response()->json([
+                'status' => true,
+                'message' => 'Detalles del producto actualizados correctamente',
+                'data' => $data
+            ], 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'status' => false,
+                'message' => 'Hubo un error al intentar actualizar los detalles del producto',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     public function destroy($id)
     {
-        $productDetail = ProductDetail::find($id);
+        $productDetail = ProductDetail::findOrFail($id);
         $productDetail->delete();
-        return redirect()->back();
+        return response()->json([
+            'status' => true,
+            'message' => 'Detalles del producto eliminados correctamente'
+        ], 200);
     }
 }
