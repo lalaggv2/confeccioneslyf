@@ -124,15 +124,15 @@
         const app = {
             btnShow: async function (id) {
                 const {data} = await axios.get(route('productdetails.show', id));
-                const productDetail = data.data;
+                const productdetail = data.data;
                 if (data.status) {
-                    $('#showProductDetail .block-title').text(productDetail.product_name);
-                    for (let key in productDetail) {
-                        if (productDetail.hasOwnProperty(key)) {
-                            $(`#${key}`).text(productDetail[key]);
+                    $('#showProductdetail.block-title').text(productdetail.name);
+                    for (let key in product) {
+                        if (productdetail.hasOwnProperty(key)) {
+                            $(`#${key}`).text(productdetail[key]);
                         }
                     }
-                    $('#showProductDetail').modal('show');
+                    $('#showProductdetail').modal('show');
                 }
             },
             btnEdit: function (id) {

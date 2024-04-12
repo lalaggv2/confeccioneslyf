@@ -6,11 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $fillable = [
+        'id',
         'name',
         'description',
         'stock',
         'type',
-        // Agrega aquí otros campos necesarios
+        'created_at', 
+        'updated_at'
     ];
 
     // Relación con el modelo ProductDetail

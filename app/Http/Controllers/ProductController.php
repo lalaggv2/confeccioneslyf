@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use App\Models\ProductDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -24,16 +23,17 @@ class ProductController extends Controller
                 ->take($perPage)
                 ->get();
             $data = [];
-            foreach ($results as $model) {
+            foreach ($results as $product) {
                 $data[] = [
-                    'id' => $model->id,
-                    'name' => $model->name,
-                    'description' => $model->description,
-                    'stock' => $model->stock,
-                    'type' => $model->type,
-                    'created_at' => $model->created_at->format('Y-m-d H:i:s'),
-                    'updated_at' => $model->updated_at->format('Y-m-d H:i:s'),
-                    'btns' => view('helpers.buttons', ['obj' => 'products', 'id' => $model->id, 'show' => 1, 'edit' => 1, 'delete' => 1])->render(),
+                    'id' => $product->id,
+                    'name' => $product->name,
+                    'description' => $product->description,
+                    'stock'=> $product->stock,
+                    'type' => $product->type,
+                    'created_at' => $product->created_at->format('Y-m-d H:i:s'),
+                    'updated_at' => $product->updated_at->format('Y-m-d H:i:s'),
+                    'btns' => view('helpers.buttons', ['obj' => 'app', 'id' => $product->id, 'show' => 1, 'edit' => 1, 'delete' => 1])->render(),
+                   
                 ];
             }
             $response = [
@@ -44,23 +44,15 @@ class ProductController extends Controller
             ];
             return response()->json($response);
         }
-        return view('admin\products\index');
+        return view('admin.products.index');
     }
 
     public function show(Product $product)
     {
-        try {
-            return response()->json([
-                'status' => true,
-                'data' => $product,
-            ], 200);
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Hubo un error al intentar obtener los detalles del producto',
-                'error' => $e->getMessage()
-            ], 500);
-        }
+        return response()->json([
+            'status' => true,
+            'data' => $product,
+        ], 200);
     }
 
     public function store(Request $request)
@@ -68,25 +60,19 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'stock' => 'required',
             'type' => 'required',
-            // Agrega aquí otras validaciones necesarias
         ]);
+
         DB::beginTransaction();
         try {
-            $product = Product::create([
-                'name' => $request->name,
-                'description' => $request->description,
-                'stock' => $request->stock,
-                'type' => $request->type,
-                // Agrega aquí otros campos necesarios
-            ]);
+            $product = Product::create($request->all());
             DB::commit();
             return response()->json([
                 'status' => true,
                 'message' => 'Producto guardado correctamente',
                 'data' => $product
             ], 200);
+
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json([
@@ -99,15 +85,47 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'type' => 'required',
+        ]);
+
+        DB::beginTransaction();
+        try {
+            $product = Product::findOrFail($id);
+            $product->update($request->all());
+            DB::commit();
+            return response()->json([
+                'status' => true,
+                'message' => 'Producto actualizado correctamente',
+                'data' => $product
+            ], 200);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'status' => false,
+                'message' => 'Hubo un error al intentar actualizar el producto',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     public function destroy($id)
     {
-        {
-            $product = Product::find($id);
+        $product = Product::find($id);
+        if ($product) {
             $product->delete();
-            return redirect()->back();
+            return response()->json([
+                'status' => true,
+                'message' => 'Producto eliminado correctamente',
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'El producto no fue encontrado',
+            ], 404);
         }
     }
 }

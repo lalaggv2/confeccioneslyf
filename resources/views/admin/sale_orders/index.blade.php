@@ -17,7 +17,9 @@
                 <table id="tableSaleOrders" class="table table-bordered table-hover table-striped table-sm">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                         
+                            
+                            <th>Cliente</th>
                             <th>Código</th>
                             <th>Cantidad</th>
                             <th>Total</th>

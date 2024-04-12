@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class DetailOrderController extends Controller
 {
+    
     public function model()
     {
         return app()->make(DetailOrder::class);
@@ -19,7 +20,7 @@ class DetailOrderController extends Controller
             $page = $request->input('start') / $request->input('length') + 1;
             $perPage = $request->input('length', 100);
 
-            $modelQuery = DetailOrder::query();
+            $modelQuery = $this->model()->query();
             $modelQuery->orderBy('id', 'desc');
 
             $totalRecords = $modelQuery->count();
@@ -37,7 +38,7 @@ class DetailOrderController extends Controller
                     'quantity' => $model->quantity,
                     'price' => $model->price,
                     'total' => $model->total,
-                    // Agrega aquí otros campos si es necesario
+                    'btns' => view('helpers.buttons', ['obj' => 'app', 'id' => $model->id, 'show' => 1, 'edit' => 1, 'delete' => 1])->render(),
                 ];
             }
             $response = [
@@ -48,7 +49,7 @@ class DetailOrderController extends Controller
             ];
             return response()->json($response);
         }
-        return view('admin\detail_order\index');
+        return view('admin.detail_order.index');
     }
 
     public function show(DetailOrder $detailOrder)
@@ -61,7 +62,7 @@ class DetailOrderController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => false,
-                'message' => 'Hubo un error al intentar obtener los detalles de la orden',
+                'message' => 'Hubo un error al intentar obtener el detalle de la orden',
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -73,10 +74,9 @@ class DetailOrderController extends Controller
             'orderable_id' => 'required',
             'orderable_type' => 'required',
             'product_id' => 'required',
-            'quantity' => 'required',
-            'price' => 'required',
-            'total' => 'required',
-            // Agrega aquí otras validaciones necesarias
+            'quantity' => 'required|integer',
+            'price' => 'required|numeric',
+            'total' => 'required|numeric',
         ]);
         DB::beginTransaction();
         try {
@@ -87,12 +87,12 @@ class DetailOrderController extends Controller
                 'quantity' => $request->quantity,
                 'price' => $request->price,
                 'total' => $request->total,
-                // Agrega aquí otros campos necesarios
             ]);
+
             DB::commit();
             return response()->json([
                 'status' => true,
-                'message' => 'Detalles de la orden guardados correctamente',
+                'message' => 'Detalle de orden guardado correctamente',
                 'data' => $detailOrder
             ], 200);
 
@@ -100,7 +100,7 @@ class DetailOrderController extends Controller
             DB::rollBack();
             return response()->json([
                 'status' => false,
-                'message' => 'Hubo un error al intentar guardar los detalles de la orden',
+                'message' => 'Hubo un error al intentar guardar el detalle de la orden',
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -109,37 +109,31 @@ class DetailOrderController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'orderable_id' => 'required',
-            'orderable_type' => 'required',
-            'product_id' => 'required',
-            'quantity' => 'required',
-            'price' => 'required',
-            'total' => 'required',
-            // Agrega aquí otras validaciones necesarias
+            'quantity' => 'required|integer',
+            'price' => 'required|numeric',
+            'total' => 'required|numeric',
         ]);
         DB::beginTransaction();
         try {
-            $detailOrder = DetailOrder::findOrFail($id);
+            $detailOrder = $this->model()->findOrFail($id);
             $detailOrder->update([
-                'orderable_id' => $request->orderable_id,
-                'orderable_type' => $request->orderable_type,
-                'product_id' => $request->product_id,
                 'quantity' => $request->quantity,
                 'price' => $request->price,
                 'total' => $request->total,
-                // Agrega aquí otros campos necesarios
             ]);
+
             DB::commit();
             return response()->json([
                 'status' => true,
-                'message' => 'Detalles de la orden actualizados correctamente',
+                'message' => 'Detalle de orden actualizado correctamente',
                 'data' => $detailOrder
             ], 200);
+
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json([
                 'status' => false,
-                'message' => 'Hubo un error al intentar actualizar los detalles de la orden',
+                'message' => 'Hubo un error al intentar actualizar el detalle de la orden',
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -147,11 +141,25 @@ class DetailOrderController extends Controller
 
     public function destroy($id)
     {
-        $detailOrder = DetailOrder::findOrFail($id);
-        $detailOrder->delete();
-        return response()->json([
-            'status' => true,
-            'message' => 'Detalles de la orden eliminados correctamente'
-        ], 200);
+        DB::beginTransaction();
+        try {
+            $detailOrder = $this->model()->findOrFail($id);
+            $detailOrder->delete();
+
+            DB::commit();
+            return response()->json([
+                'status' => true,
+                'message' => 'Detalle de orden eliminado correctamente'
+            ], 200);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'status' => false,
+                'message' => 'Hubo un error al intentar eliminar el detalle de la orden',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }
+

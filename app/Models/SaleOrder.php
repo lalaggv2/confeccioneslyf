@@ -10,8 +10,11 @@ class SaleOrder extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'sale_orders';
-
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'customer_id',
         'code',
@@ -19,11 +22,22 @@ class SaleOrder extends Model
         'total',
         'payment_method',
         'reference',
-        'status'
+        'status',
     ];
 
-    protected $dates = ['deleted_at'];
-    
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'quantity' => 'integer',
+        'total' => 'decimal:2',
+    ];
+
+    /**
+     * Get the customer that owns the sale order.
+     */
     public function customer()
     {
         return $this->belongsTo(Customer::class);

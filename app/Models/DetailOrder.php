@@ -2,10 +2,17 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class DetailOrder extends Model
 {
+    use HasFactory;
+
+   
+
+    
+
     protected $fillable = [
         'orderable_id',
         'orderable_type',
@@ -13,10 +20,9 @@ class DetailOrder extends Model
         'quantity',
         'price',
         'total',
-        // Agrega aquí otros campos necesarios
     ];
 
-    // Relación polimórfica con el modelo Orderable
+    // Relación polimórfica con el modelo relacionado
     public function orderable()
     {
         return $this->morphTo();

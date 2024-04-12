@@ -111,16 +111,16 @@
                 const {data} = await axios.get(route('products.show', id));
                 const product = data.data;
                 if (data.status) {
-                    $('#showProduct .block-title').text(product.name);
-                    $('#name').text(product.name);
-                    $('#description').text(product.description);
-                    $('#stock').text(product.stock);
-                    $('#type').text(product.type);
-                    $('#created_at').text(product.created_at);
-                    $('#updated_at').text(product.updated_at);
-                    $('#showProduct').modal('show');
+                    $('#showProduct.block-title').text(product.name);
+                    for (let key in product) {
+                        if (product.hasOwnProperty(key)) {
+                            $(`#${key}`).text(product[key]);
+                        }
+                    }
+                    $('#showProduct ').modal('show');
                 }
-            },
+            }, 
+        
             btnEdit: function (id) {
                 alert('Editar producto con id: ' + id);
             },

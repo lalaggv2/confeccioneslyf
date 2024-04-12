@@ -10,7 +10,6 @@ class PurchaseOrder extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'purchase_orders';
     protected $fillable = [
         'supplier_id',
         'code',
@@ -18,10 +17,8 @@ class PurchaseOrder extends Model
         'total',
         'payment_method',
         'reference',
-        'status'
+        'status',
     ];
-
-    protected $dates = ['deleted_at'];
 
     public function supplier()
     {

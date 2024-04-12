@@ -65,21 +65,13 @@ class ProductDetailController extends Controller
     }
 
     public function show(ProductDetail $productDetail)
-    {
-        try {
-            $productDetail['product_name'] = $productDetail->product->name;
-            unset($productDetail['product']);
+    
+        {
             return response()->json([
                 'status' => true,
                 'data' => $productDetail,
             ], 200);
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Hubo un error al intentar obtener los detalles del producto',
-                'error' => $e->getMessage()
-            ], 500);
-        }
+        
     }
 
     public function store(Request $request)

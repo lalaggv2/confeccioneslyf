@@ -97,6 +97,8 @@ Route::middleware(['web', 'auth'])->group(function () {
 
     Route::get('/products', [ProductController::class, 'index'])->name('products');
 
+    Route::get('/purchase_orders', [PurchaseOrderController::class, 'index'])->name('purchase_orders');
+
     
     Route::get('/sale_orders', [SaleOrderController::class, 'index'])->name('sale_orders');
 

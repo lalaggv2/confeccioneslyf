@@ -17,8 +17,9 @@
                 <table id="tableSuppliers" class="table table-bordered table-hover table-striped table-sm">
                     <thead>
                         <th>ID</th>
-                        <th>Nombre</th>
+                        <th>Tipo de documento</th>
                         <th>Documento</th>
+                        <th>Nombre</th>
                         <th>Teléfono</th>
                         <th>Dirección</th>
                         <th class="text-center">Acciones</th>
@@ -41,12 +42,13 @@
                     </div>
                     <div class="block-content fs-sm mb-4">
                         <ul class="list-group">
-                            <li class="list-group-item"><b>Nombre:</b> <label class="text-capitalize" id="name"></label></li>
+                          
                             <li class="list-group-item"><b>Tipo documento:</b> <label id="document_type"></label></li>
                             <li class="list-group-item"><b>Documento:</b> <label id="document"></label></li>
+                            <li class="list-group-item"><b>Nombre:</b> <label class="text-capitalize" id="name"></label></li>
                             <li class="list-group-item"><b>Teléfono:</b> <label id="phone"></label></li>
                             <li class="list-group-item"><b>Dirección:</b> <label id="address"></label></li>
-                            <li class="list-group-item">Estado: <label id="status"></label></li>
+                           
                         </ul>
                     </div>
                 </div>
@@ -65,8 +67,10 @@
                 filter: true,
                 columns: [
                     {data: 'id'},
-                    {data: 'name', orderable: false},
+                    
+                    {data: 'document_type', orderable: false},
                     {data: 'document', orderable: false},
+                    {data: 'name', orderable: false},
                     {data: 'phone', orderable: false},
                     {data: 'address', orderable: false},
                     {data: 'btns', orderable: false}

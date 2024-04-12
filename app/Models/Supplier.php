@@ -11,6 +11,7 @@ class Supplier extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'id',
         'document_type',
         'document',
         'name',
