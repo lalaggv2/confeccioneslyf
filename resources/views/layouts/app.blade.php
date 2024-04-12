@@ -84,6 +84,7 @@
                                 <span class="nav-main-link-name">Clientes</span>
                             </a>
                         </li>
+                        
                         <li class="nav-main-item">
                             <a class="nav-main-link" href="{{route('suppliers')}}">
                                 <i class="nav-main-link-icon fa fa-users"></i>
@@ -120,13 +121,18 @@
                             </a>
                             <ul class="nav-main-submenu">
                                 <li class="nav-main-item">
-                                    <a class="nav-main-link" href="#">
-                                        <span class="nav-main-link-name">Ordenes de salida</span>
+                                    <a class="nav-main-link" href="{{route('detail_orders')}}">
+                                        <span class="nav-main-link-name">Detalles de ordenes</span>
                                     </a>
                                 </li>
                                 <li class="nav-main-item">
-                                    <a class="nav-main-link" href="#">
-                                        <span class="nav-main-link-name">EBTRADA</span>
+                                    <a class="nav-main-link" href="{{route('sale_orders')}}">
+                                        <span class="nav-main-link-name">Ordenes de ventas</span>
+                                    </a>
+                                </li>
+                                <li class="nav-main-item">
+                                    <a class="nav-main-link" href="{{route('purchase_orders')}}">
+                                        <span class="nav-main-link-name">Ordenes de Compra</span>
                                     </a>
                                 </li>
                             </ul>

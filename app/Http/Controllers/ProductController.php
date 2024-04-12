@@ -18,23 +18,22 @@ class ProductController extends Controller
             $modelQuery = Product::query();
             $modelQuery->orderBy('id', 'desc');
 
-            $totalRecords =  $modelQuery->count();
-            $results =  $modelQuery
+            $totalRecords = $modelQuery->count();
+            $results = $modelQuery
                 ->skip(($page - 1) * $perPage)
                 ->take($perPage)
                 ->get();
             $data = [];
             foreach ($results as $model) {
                 $data[] = [
-                    'id' => $model ->id,
+                    'id' => $model->id,
                     'name' => $model->name,
                     'description' => $model->description,
                     'stock' => $model->stock,
                     'type' => $model->type,
                     'created_at' => $model->created_at->format('Y-m-d H:i:s'),
                     'updated_at' => $model->updated_at->format('Y-m-d H:i:s'),
-                    
-                    'btns' => view('helpers.buttons', ['obj' => 'app', 'id' => $model->id, 'show' => 1, 'edit' => 1, 'delete' => 1])->render(),
+                    'btns' => view('helpers.buttons', ['obj' => 'products', 'id' => $model->id, 'show' => 1, 'edit' => 1, 'delete' => 1])->render(),
                 ];
             }
             $response = [
@@ -69,23 +68,30 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'stock' => 'required|integer',
-            'type' => 'required|in:producto_terminado,materia_prima',
+            'stock' => 'required',
+            'type' => 'required',
+            // Agrega aquí otras validaciones necesarias
         ]);
         DB::beginTransaction();
         try {
-            $product = Product::create($request->all());
+            $product = Product::create([
+                'name' => $request->name,
+                'description' => $request->description,
+                'stock' => $request->stock,
+                'type' => $request->type,
+                // Agrega aquí otros campos necesarios
+            ]);
             DB::commit();
             return response()->json([
                 'status' => true,
-                'message' => 'Producto creado correctamente',
+                'message' => 'Producto guardado correctamente',
                 'data' => $product
             ], 200);
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json([
                 'status' => false,
-                'message' => 'Hubo un error al intentar crear el producto',
+                'message' => 'Hubo un error al intentar guardar el producto',
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -93,39 +99,15 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        $product = Product::findOrFail($id);
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'stock' => 'required|integer',
-            'type' => 'required|in:producto_terminado,materia_prima',
-        ]);
-        DB::beginTransaction();
-        try {
-            $product->update($request->all());
-            DB::commit();
-            return response()->json([
-                'status' => true,
-                'message' => 'Producto actualizado correctamente',
-                'data' => $product
-            ], 200);
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return response()->json([
-                'status' => false,
-                'message' => 'Hubo un error al intentar actualizar el producto',
-                'error' => $e->getMessage()
-            ], 500);
-        }
+        
     }
 
     public function destroy($id)
     {
-        $product = Product::findOrFail($id);
-        $product->delete();
-        return response()->json([
-            'status' => true,
-            'message' => 'Producto eliminado correctamente'
-        ], 200);
+        {
+            $product = Product::find($id);
+            $product->delete();
+            return redirect()->back();
+        }
     }
 }

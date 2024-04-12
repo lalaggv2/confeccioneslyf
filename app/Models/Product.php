@@ -1,20 +1,21 @@
 <?php
+namespace App\Models;
 
-    namespace App\Models;
-    
-    use Illuminate\Database\Eloquent\Model;
-    
-    class product extends Model
+use Illuminate\Database\Eloquent\Model;
+
+class Product extends Model
+{
+    protected $fillable = [
+        'name',
+        'description',
+        'stock',
+        'type',
+        // Agrega aquí otros campos necesarios
+    ];
+
+    // Relación con el modelo ProductDetail
+    public function productDetails()
     {
-        protected $fillable = [
-            'name',
-            'description',
-            'stock',
-            'type',
-            'created_at',
-            'updated_at',
-        ];
+        return $this->hasMany(ProductDetail::class);
     }
-    
-     
- 
+}

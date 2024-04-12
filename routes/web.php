@@ -9,10 +9,18 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductDetailController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\DetailOrderController;
+use App\Http\Controllers\SaleOrderController;
+use App\Http\Controllers\PurchaseOrderController;
 
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+
+Route::get('nosotros', function () {
+    return view('nosotros');
 });
 // Ruta para mostrar el formulario de registro
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
@@ -61,6 +69,24 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::post('/store', [CustomerController::class, 'store'])->name('suppliers.store');
     });
 
+    Route::prefix('detail_orders')->group(function () {
+        Route::get('/', [DetailOrderController::class, 'index'])->name('detail_orders');
+        Route::get('/{detail_order}', [DetailOrderController::class, 'show'])->name('detail_orders.show');
+        Route::post('/store', [DetailOrderController::class, 'store'])->name('detail_orders.store');
+    });
+
+    Route::prefix('sale_orders')->group(function () {
+        Route::get('/', [SaleOrderController::class, 'index'])->name('sale_orders');
+        Route::get('/{sale_order}', [SaleOrderController::class, 'show'])->name('sale_orders.show');
+        Route::post('/store', [SaleOrderController::class, 'store'])->name('sale_orders.store');
+    });
+
+    Route::prefix('purchase_orders')->group(function () {
+        Route::get('/', [PurchaseOrderController::class, 'index'])->name('purchase_orders');
+        Route::get('/{purchase_order}', [PurchaseOrderController::class, 'show'])->name('purchase_orders.show');
+        Route::post('/store', [PurchaseOrderController::class, 'store'])->name('purchase_orders.store');
+    });
+
 
 
     Route::get('/customers', [CustomerController::class, 'index'])->name('customers');
@@ -70,6 +96,9 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::get('/product_dalatails', [ProductDetailController::class, 'index'])->name('product_dalatails');
 
     Route::get('/products', [ProductController::class, 'index'])->name('products');
+
+    
+    Route::get('/sale_orders', [SaleOrderController::class, 'index'])->name('sale_orders');
 
 
     

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    PRODUCTOS
+    DETALLE DE ÓRDENES
 @endsection
 
 @section('css')
@@ -10,27 +10,27 @@
 
 @section('content')
     <div class="card p-3 position-relative">
-        <h2 class="content-heading"><i class="fa fa-box me-2"></i>PRODUCTOS</h2>
-        <button type="button" class="btn btn-secondary w-25 btn-add" data-target="#create"><i class="fa fa-plus"></i> Agregar producto</button>
+        <h2 class="content-heading"><i class="fa fa-list me-2"></i>DETALLE DE ÓRDENES</h2>
+        <button type="button" class="btn btn-secondary w-25 btn-add" data-target="#create"><i class="fa fa-plus"></i> Agregar detalle de orden</button>
         <div class="card-body">
             <div class="table-responsive">
-                <table id="tableProducts" class="table table-bordered table-hover table-striped table-sm">
+                <table id="tableDetailOrders" class="table table-bordered table-hover table-striped table-sm">
                     <thead>
-                        <th>Id</th>
-                        <th>Nombre</th>
-                        <th>Descripción</th>
-                        <th>Stock</th>
-                        <th>Tipo</th>
-                        <th>Fecha de Creación</th>
-                        <th>Fecha de Actualización</th>
-                        <th class="text-center">Acciones</th>
+                    <th>ID</th>
+                    <th>ID del objeto</th>
+                    <th>Tipo del objeto</th>
+                    <th>ID del producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Total</th>
+                    <th class="text-center">Acciones</th>
                     </thead>
                 </table>
             </div>
         </div>
     </div>
 
-    <div class="modal" id="showProduct" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
+    <div class="modal" id="showDetailOrder" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="block block-rounded shadow-none mb-0">
@@ -44,12 +44,12 @@
                     </div>
                     <div class="block-content fs-sm mb-4">
                         <ul class="list-group">
-                            <li class="list-group-item"><b>Nombre:</b> <label class="text-capitalize" id="name"></label></li>
-                            <li class="list-group-item"><b>Descripción:</b> <label id="description"></label></li>
-                            <li class="list-group-item"><b>Stock:</b> <label id="stock"></label></li>
-                            <li class="list-group-item"><b>Tipo:</b> <label id="type"></label></li>
-                            <li class="list-group-item"><b>Fecha de Creación:</b> <label id="created_at"></label></li>
-                            <li class="list-group-item"><b>Fecha de Actualización:</b> <label id="updated_at"></label></li>
+                            <li class="list-group-item"><b>ID del objeto:</b> <label id="orderable_id"></label></li>
+                            <li class="list-group-item"><b>Tipo del objeto:</b> <label id="orderable_type"></label></li>
+                            <li class="list-group-item"><b>ID del producto:</b> <label id="product_id"></label></li>
+                            <li class="list-group-item"><b>Cantidad:</b> <label id="quantity"></label></li>
+                            <li class="list-group-item"><b>Precio:</b> <label id="price"></label></li>
+                            <li class="list-group-item"><b>Total:</b> <label id="total"></label></li>
                         </ul>
                     </div>
                 </div>
@@ -63,17 +63,17 @@
     <script>
         $(document).ready(function () {
             let dataTabla = null;
-            dataTabla = $('#tableProducts').DataTable({
-                ajax: route('products'),
+            dataTabla = $('#tableDetailOrders').DataTable({
+                ajax: route('detail_orders'),
                 filter: true,
                 columns: [
                     {data: 'id'},
-                    {data: 'name', orderable: false},
-                    {data: 'description', orderable: false},
-                    {data: 'stock', orderable: false},
-                    {data: 'type', orderable: false},
-                    {data: 'created_at', orderable: false},
-                    {data: 'updated_at', orderable: false},
+                    {data: 'orderable_id'},
+                    {data: 'orderable_type'},
+                    {data: 'product_id'},
+                    {data: 'quantity'},
+                    {data: 'price'},
+                    {data: 'total'},
                     {data: 'btns', orderable: false}
                 ],
                 bLengthChange: false,
@@ -90,7 +90,7 @@
                     infoPostFix: "",
                     thousands: ",",
                     lengthMenu: "Mostrar _MENU_ Entradas",
-                    loadingRecords: "Cargando lista de productos...",
+                    loadingRecords: "Cargando lista de detalles de órdenes...",
                     processing: "Procesando...",
                     search: "Buscar:",
                     zeroRecords: "Sin resultados encontrados",
@@ -108,24 +108,23 @@
 
         const app = {
             btnShow: async function (id) {
-                const {data} = await axios.get(route('products.show', id));
-                const product = data.data;
+                const {data} = await axios.get(route('detail_orders.show', id));
+                const detailOrder = data.data;
                 if (data.status) {
-                    $('#showProduct .block-title').text(product.name);
-                    $('#name').text(product.name);
-                    $('#description').text(product.description);
-                    $('#stock').text(product.stock);
-                    $('#type').text(product.type);
-                    $('#created_at').text(product.created_at);
-                    $('#updated_at').text(product.updated_at);
-                    $('#showProduct').modal('show');
+                    $('#showDetailOrder .block-title').text('Detalle de orden #' + detailOrder.id);
+                    for (let key in detailOrder) {
+                        if (detailOrder.hasOwnProperty(key)) {
+                            $(`#${key}`).text(detailOrder[key]);
+                        }
+                    }
+                    $('#showDetailOrder').modal('show');
                 }
             },
             btnEdit: function (id) {
-                alert('Editar producto con id: ' + id);
+                alert('Editar detalle de orden con id: ' + id);
             },
             btnDelete: function (id) {
-                alert('Eliminar producto con id: ' + id);
+                alert('Eliminar detalle de orden con id: ' + id);
             }
         };
     </script>

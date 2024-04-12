@@ -2,29 +2,29 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class DetailOrder extends Model
 {
-    use HasFactory;
-
-    protected $table = 'detail_orders';
-    
     protected $fillable = [
         'orderable_id',
         'orderable_type',
         'product_id',
         'quantity',
         'price',
-        'total'
+        'total',
+        // Agrega aquí otros campos necesarios
     ];
+
+    // Relación polimórfica con el modelo Orderable
     public function orderable()
     {
         return $this->morphTo();
     }
-    public function products()
+
+    // Relación con el modelo Product
+    public function product()
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsTo(Product::class);
     }
 }

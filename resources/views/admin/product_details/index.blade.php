@@ -1,60 +1,74 @@
 @extends('layouts.app')
 
 @section('title')
-    EMPLEADOS
+    DETALLES DEL PRODUCTO
 @endsection
 
 @section('css')
-    <!-- Incluir estilos de Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Incluir estilos de DataTables -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css"/>
 @endsection
 
 @section('content')
     <div class="card p-3 position-relative">
-        <h2 class="content-heading"><i class="fa fa-users me-2"></i>PRODUCT DETAILS</h2>
-        <button type="button" class="btn btn-secondary w-25 btn-add" data-target="#create"><i class="fa fa-plus"></i> Add product details</button>
+        <h2 class="content-heading"><i class="fa fa-boxes me-2"></i>DETALLES DEL PRODUCTO</h2>
+        <button type="button" class="btn btn-secondary w-25 btn-add" data-target="#create"><i class="fa fa-plus"></i> Agregar detalles del producto</button>
         <div class="card-body">
             <div class="table-responsive">
                 <table id="tableProductDetails" class="table table-bordered table-hover table-striped table-sm">
                     <thead>
-                        <th>ID</th>
-                        <th>Product Name</th>
-                        <th>SKU</th>
-                        <th>Barcode</th>
-                        <th>Size</th>
-                        <th>Color</th>
-                        <th>Material</th>
-                        <th>Location</th>
-                        <th>Price</th>
-                        <th>Stock</th>
-                        <th>Date Manufactured</th>
-                        <th>Notes</th>
-                        <th class="text-center">Actions</th>
+                    <th>ID</th>
+                    <th>Producto</th>
+                    <th>SKU</th>
+                    <th>Código de barras</th>
+                    <th>Tamaño</th>
+                    <th>Color</th>
+                    <th>Material</th>
+                    <th>Ubicación</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Fecha de fabricación</th>
+                    <th>Notas</th>
+                    <th class="text-center">Acciones</th>
                     </thead>
                 </table>
             </div>
         </div>
     </div>
-
     <div class="modal" id="showProductDetail" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <!-- Contenido del modal -->
+                <div class="block block-rounded shadow-none mb-0">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title text-uppercase"></h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-content fs-sm mb-4">
+                        <ul class="list-group">
+                            <li class="list-group-item"><b>Producto:</b> <label class="text-capitalize" id="product_name"></label></li>
+                            <li class="list-group-item"><b>SKU:</b> <label id="sku"></label></li>
+                            <li class="list-group-item"><b>Código de barras:</b> <label id="barcode"></label></li>
+                            <li class="list-group-item"><b>Tamaño:</b> <label id="size"></label></li>
+                            <li class="list-group-item"><b>Color:</b> <label id="color"></label></li>
+                            <li class="list-group-item"><b>Material:</b> <label id="material"></label></li>
+                            <li class="list-group-item"><b>Ubicación:</b> <label id="location"></label></li>
+                            <li class="list-group-item"><b>Precio:</b> <label id="price"></label></li>
+                            <li class="list-group-item"><b>Stock:</b> <label id="stock"></label></li>
+                            <li class="list-group-item"><b>Fecha de fabricación:</b> <label id="date_manufactured"></label></li>
+                            <li class="list-group-item"><b>Notas:</b> <label id="notes"></label></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 @endsection
 
 @section('js')
-    <!-- Incluir jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <!-- Incluir DataTables -->
-    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
-    <!-- Incluir axios para hacer solicitudes HTTP -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
     <script>
         $(document).ready(function () {
             let dataTabla = null;
@@ -90,7 +104,7 @@
                     infoPostFix: "",
                     thousands: ",",
                     lengthMenu: "Mostrar _MENU_ Entradas",
-                    loadingRecords: "Cargando lista de detalles del producto...",
+                    loadingRecords: "Cargando detalles del producto...",
                     processing: "Procesando...",
                     search: "Buscar:",
                     zeroRecords: "Sin resultados encontrados",
@@ -105,37 +119,27 @@
             });
             dataTabla.columns([0]).visible(false);
         });
+
+        // Funciones de manejo de botones
         const app = {
             btnShow: async function (id) {
-                const {data} = await axios.get(route('product_details.show', id));
+                const {data} = await axios.get(route('productdetails.show', id));
                 const productDetail = data.data;
                 if (data.status) {
                     $('#showProductDetail .block-title').text(productDetail.product_name);
                     for (let key in productDetail) {
                         if (productDetail.hasOwnProperty(key)) {
-                            if (key === 'price') {
-                                $(`#${key}`).text(new Intl.NumberFormat('en-US', {
-                                    style: 'currency',
-                                    currency: 'USD',
-                                    minimumFractionDigits: 2,
-                                    maximumFractionDigits: 2
-                                }).format(parseFloat(productDetail[key])));
-                            } else if (key === 'date_manufactured') {
-                                const date = new Date(productDetail[key]).toLocaleDateString();
-                                $(`#${key}`).text(date.replace(/\//g, '-'));
-                            } else {
-                                $(`#${key}`).text(productDetail[key]);
-                            }
+                            $(`#${key}`).text(productDetail[key]);
                         }
                     }
                     $('#showProductDetail').modal('show');
                 }
             },
             btnEdit: function (id) {
-                alert('Edit product detail with ID: ' + id);
+                alert('Editar detalles del producto con ID: ' + id);
             },
             btnDelete: function (id) {
-                alert('Delete product detail with ID: ' + id);
+                alert('Eliminar detalles del producto con ID: ' + id);
             }
         };
     </script>
