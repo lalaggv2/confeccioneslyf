@@ -72,7 +72,7 @@
                 filter: true,
                 columns: [
                     {data: 'id'},
-                    {data: 'supplier_name', orderable: false},
+                    {data: 'supplier_id', orderable: false},
                     {data: 'code', orderable: false},
                     {data: 'quantity', orderable: false},
                     {data: 'total', orderable: false},

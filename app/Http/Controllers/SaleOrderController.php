@@ -32,6 +32,7 @@ class SaleOrderController extends Controller
                     'payment_method' => $model->payment_method,
                     'reference' => $model->reference,
                     'status' => $model->status,
+                    'btns' => view('helpers.buttons', ['obj' => 'app', 'id' => $model->id, 'show' => 1, 'edit' => 1, 'delete' => 1])->render(),
 
                 ];
             }
