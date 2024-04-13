@@ -32,9 +32,7 @@ class SaleOrderController extends Controller
                     'payment_method' => $model->payment_method,
                     'reference' => $model->reference,
                     'status' => $model->status,
-                    'created_at' => $model->created_at->format('Y-m-d H:i:s'),
-                    'updated_at' => $model->updated_at->format('Y-m-d H:i:s'),
-                    'btns' => view('helpers.buttons', ['obj' => 'sale_orders', 'id' => $model->id, 'show' => 1, 'edit' => 1, 'delete' => 1])->render(),
+
                 ];
             }
             $response = [
