@@ -56,8 +56,8 @@ class CustomerController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => 'Hubo un error al intentar obtener el cliente',
-                'error' => $e->getMessage()
-            ], 500);
+                 'error' => $e->getMessage()
+           ], 500);
         }
     }
 
@@ -102,10 +102,17 @@ class CustomerController extends Controller
     {
     }
 
+    
     public function destroy($id)
     {
         $customer = Customer::find($id);
-        $customer->delete();
-        return redirect()->back();
+    
+        // Verificar si el cliente se encontró correctamente
+        if ($customer) {
+            $customer->delete();
+            return redirect()->back()->with('success', 'Cliente eliminado correctamente');
+        } else {
+            return redirect()->back()->with('error', 'No se pudo encontrar el cliente');
+        }
     }
 }

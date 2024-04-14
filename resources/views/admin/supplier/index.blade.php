@@ -22,6 +22,8 @@
                         <th>Nombre</th>
                         <th>Teléfono</th>
                         <th>Dirección</th>
+                        <th>email</th>
+
                         <th class="text-center">Acciones</th>
                     </thead>
                 </table>
@@ -43,11 +45,12 @@
                     <div class="block-content fs-sm mb-4">
                         <ul class="list-group">
                           
+                        <li class="list-group-item"><b>Nombre:</b> <label class="text-capitalize" id="name"></label></li> 
                             <li class="list-group-item"><b>Tipo documento:</b> <label id="document_type"></label></li>
                             <li class="list-group-item"><b>Documento:</b> <label id="document"></label></li>
-                            <li class="list-group-item"><b>Nombre:</b> <label class="text-capitalize" id="name"></label></li>
                             <li class="list-group-item"><b>Teléfono:</b> <label id="phone"></label></li>
                             <li class="list-group-item"><b>Dirección:</b> <label id="address"></label></li>
+                            <li class="list-group-item"><b>Email:</b> <label id="email"></label></li>
                            
                         </ul>
                     </div>
@@ -73,6 +76,7 @@
                     {data: 'name', orderable: false},
                     {data: 'phone', orderable: false},
                     {data: 'address', orderable: false},
+                    {data: 'email', orderable: false},
                     {data: 'btns', orderable: false}
                 ],
                 bLengthChange: false,

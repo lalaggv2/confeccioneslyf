@@ -120,19 +120,18 @@
             dataTabla.columns([0]).visible(false);
         });
 
-        // Funciones de manejo de botones
         const app = {
             btnShow: async function (id) {
-                const {data} = await axios.get(route('productdetails.show', id));
-                const productdetail = data.data;
+                const {data} = await axios.get(route('productDetails.show', id));
+                const productDetail = data.data;
                 if (data.status) {
-                    $('#showProductdetail.block-title').text(productdetail.name);
-                    for (let key in product) {
-                        if (productdetail.hasOwnProperty(key)) {
-                            $(`#${key}`).text(productdetail[key]);
+                    $('#showProductDetail.block-title').text(productDetail.name);
+                    for (let key in productDetail) {
+                        if (productDetail.hasOwnProperty(key)) {
+                            $(`#${key}`).text(productDetail[key]);
                         }
                     }
-                    $('#showProductdetail').modal('show');
+                    $('#showProductDetail').modal('show');
                 }
             },
             btnEdit: function (id) {
