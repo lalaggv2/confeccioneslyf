@@ -56,6 +56,18 @@
             </div>
         </div>
     </div>
+    <div class="modal" id="destroyProduct" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="block block-rounded shadow-none mb-0">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title text-uppercase"></h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
 @endsection
 
 @section('js')
@@ -125,8 +137,21 @@
                 alert('Editar producto con id: ' + id);
             },
             btnDelete: function (id) {
-                alert('Eliminar producto con id: ' + id);
-            }
+                   if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
+                    $.ajax({
+            url: '/products/' + id,
+            type: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                alert('producto eliminado correctamente');
+                
+            },
+           
+        });
+    }
+}
         };
     </script>
 @endsection

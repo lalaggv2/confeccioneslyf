@@ -66,7 +66,8 @@ class EmployeeController extends Controller
 
     public function show(Employee $employee)
     {
-        try {
+    try {
+        if ($employee !== null && $employee->user !== null) {
             $employee['name'] = $employee->user->name;
             $employee['email'] = $employee->user->email;
             $employee['user_id'] = $employee->user->id;
@@ -77,14 +78,20 @@ class EmployeeController extends Controller
                 'status' => true,
                 'data' => $employee,
             ], 200);
-        } catch (\Exception $e) {
+        } else {
             return response()->json([
                 'status' => false,
-                'message' => 'Hubo un error al intentar obtener el empleado',
-                'error' => $e->getMessage()
-            ], 500);
+                'message' => 'No se pudo encontrar el empleado o el empleado no tiene un usuario asociado.',
+            ], 404);
         }
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => false,
+            'message' => 'Hubo un error al intentar obtener el empleado',
+            'error' => $e->getMessage()
+        ], 500);
     }
+}
 
     public function store(Request $request)
     {

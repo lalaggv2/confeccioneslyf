@@ -49,10 +49,18 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        return response()->json([
-            'status' => true,
-            'data' => $product,
-        ], 200);
+        try {
+            return response()->json([
+                'status' => true,
+                'data' => $product,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Hubo un error al intentar obtener el proveedor',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     public function store(Request $request)
@@ -128,4 +136,4 @@ class ProductController extends Controller
             ], 404);
         }
     }
-}
+};

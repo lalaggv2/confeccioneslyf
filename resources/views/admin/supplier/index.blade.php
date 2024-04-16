@@ -58,6 +58,19 @@
             </div>
         </div>
     </div>
+
+    <div class="modal" id="destroySupplier" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="block block-rounded shadow-none mb-0">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title text-uppercase"></h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
 @endsection
 
 @section('js')
@@ -123,12 +136,22 @@
                     $('#showSupplier').modal('show');
                 }
             },
-            btnEdit: function (id) {
-                alert('Editar proveedor con id: ' + id);
-            },
             btnDelete: function (id) {
-                alert('Eliminar proveedor con id: ' + id);
-            }
+                   if (confirm('¿Estás seguro de que deseas eliminar este cliente?')) {
+                    $.ajax({
+            url: '/suppliers/' + id,
+            type: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                alert('Cliente eliminado correctamente');
+                // Actualizar la tabla si es necesario
+            },
+           
+        });
+    }
+}
         };
     </script>
 @endsection

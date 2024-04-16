@@ -107,12 +107,19 @@ class CustomerController extends Controller
     {
         $customer = Customer::find($id);
     
-        // Verificar si el cliente se encontró correctamente
         if ($customer) {
             $customer->delete();
-            return redirect()->back()->with('success', 'Cliente eliminado correctamente');
+            return response()->json([
+                'status' => true,
+                'message' => 'Cliente eliminado correctamente.'
+            ], 200);
         } else {
-            return redirect()->back()->with('error', 'No se pudo encontrar el cliente');
+            return response()->json([
+                'status' => false,
+                'message' => 'No se encontró el cliente.'
+            ], 404);
+            
         }
+        
     }
-}
+};    

@@ -102,13 +102,26 @@ class SupplierController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Implementar lógica de actualización si es necesario
+        
     }
 
     public function destroy($id)
     {
         $supplier = Supplier::find($id);
-        $supplier->delete();
-        return redirect()->back();
+    
+        if ($supplier) {
+            $supplier->delete();
+            return response()->json([
+                'status' => true,
+                'message' => 'Cliente eliminado correctamente.'
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'No se encontró el cliente.'
+            ], 404);
+            
+        }
+        
     }
-}
+};    
