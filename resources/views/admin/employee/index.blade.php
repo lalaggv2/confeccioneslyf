@@ -165,12 +165,30 @@
                     $('#showEmployee').modal('show');
                 }
             },
-            btnEdit: function (id) {
-                alert('Editar empleado con id: ' + id);
-            },
+           
+    
             btnDelete: function (id) {
-                alert('Eliminar empleado con id: ' + id);
+    if (confirm('¿Estás seguro de que deseas eliminar este empleado?')) {
+        $.ajax({
+            url: '/employees/' + id,
+            type: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                // Mostrar la respuesta en la consola del navegador
+                console.log(response);
+                alert('Empleado eliminado correctamente');
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                // Mostrar el error en la consola del navegador
+                console.error('Error al eliminar el empleado:', errorThrown);
+                alert('Hubo un error al eliminar el empleado');
             }
+        });
+    }
+}
+
         };
     </script>
 @endsection

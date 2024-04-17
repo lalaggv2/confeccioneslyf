@@ -42,7 +42,7 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::prefix('employees')->group(function () {
         Route::get('/employees', [EmployeeController::class, 'index'])->name('employees');
-        Route::get('/employees/{id}', [EmployeeController::class, 'show'])->name('employees.show');
+        Route::get('/{employee}', [EmployeeController::class, 'show'])->name('employees.show');
         Route::post('/store', [EmployeeController::class, 'store'])->name('employees.store');
         Route::delete('/{id}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
     });
@@ -50,7 +50,7 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::get('/', [CustomerController::class, 'index'])->name('customers');
         Route::get('/{customer}', [CustomerController::class, 'show'])->name('customers.show');
         Route::post('/store', [CustomerController::class, 'store'])->name('customers.store');
-        Route::delete('/{id}', [CustomerController::class, 'destroy'])->name('customers.destroy');
+        Route::delete('/employees/{id}', [CustomerController::class, 'destroy'])->name('customers.destroy');
 
         
 

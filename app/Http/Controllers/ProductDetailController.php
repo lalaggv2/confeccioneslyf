@@ -66,12 +66,19 @@ class ProductDetailController extends Controller
 
     public function show(ProductDetail $productDetail)
     
-        {
+    {
+        try {
             return response()->json([
                 'status' => true,
                 'data' => $productDetail,
             ], 200);
-        
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Hubo un error al intentar obtener el proveedor',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     public function store(Request $request)

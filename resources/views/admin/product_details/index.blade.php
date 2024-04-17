@@ -34,7 +34,7 @@
             </div>
         </div>
     </div>
-    <div class="modal" id="showProductDetail" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
+    <div class="modal" id="showproduct-detail" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="block block-rounded shadow-none mb-0">
@@ -119,27 +119,36 @@
             });
             dataTabla.columns([0]).visible(false);
         });
-
         const app = {
             btnShow: async function (id) {
-                const {data} = await axios.get(route('productDetails.show', id));
+                const {data} = await axios.get(route('product_details.show', id));
                 const productDetail = data.data;
                 if (data.status) {
-                    $('#showProductDetail.block-title').text(productDetail.name);
+                    $('#showproduct_details .block-title').text(ProductDetail.name);
                     for (let key in productDetail) {
-                        if (productDetail.hasOwnProperty(key)) {
+                        if (supplier.hasOwnProperty(key)) {
                             $(`#${key}`).text(productDetail[key]);
                         }
                     }
-                    $('#showProductDetail').modal('show');
+                    $('#showproduct_details').modal('show');
                 }
             },
-            btnEdit: function (id) {
-                alert('Editar detalles del producto con ID: ' + id);
-            },
             btnDelete: function (id) {
-                alert('Eliminar detalles del producto con ID: ' + id);
-            }
+                   if (confirm('¿Estás seguro de que deseas eliminar este Provedor?')) {
+                    $.ajax({
+            url: '/product_details/' + id,
+            type: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                alert('Provedor eliminado correctamente');
+                // Actualizar la tabla si es necesario
+            },
+           
+        });
+    }
+}
         };
     </script>
 @endsection

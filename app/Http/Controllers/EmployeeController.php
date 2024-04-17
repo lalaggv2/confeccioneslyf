@@ -64,8 +64,9 @@ class EmployeeController extends Controller
         return view('admin.employee.index');
     }
 
+   
     public function show(Employee $employee)
-    {
+{
     try {
         if ($employee !== null && $employee->user !== null) {
             $employee['name'] = $employee->user->name;
@@ -167,8 +168,18 @@ class EmployeeController extends Controller
 
     public function destroy($id)
     {
-        $empleados = employee::find($id);
-        $empleados->delete();
-        return redirect()->back();
+        $employee = employee::find($id);
+        if ($employee) {
+            $employee->delete();
+            return response()->json([
+                'status' => true,
+                'message' => 'empleado eliminado correctamente',
+            ], 200);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'El empleado no fue encontrado',
+            ], 404);
+        }
     }
-}
+};
