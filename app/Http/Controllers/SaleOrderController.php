@@ -47,21 +47,23 @@ class SaleOrderController extends Controller
         return view('admin\sale_orders\index');
     }
 
+
     public function show(SaleOrder $saleOrder)
-    {
-        try {
-            return response()->json([
-                'status' => true,
-                'data' => $saleOrder,
-            ], 200);
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Hubo un error al intentar obtener los detalles de la orden de venta',
-                'error' => $e->getMessage()
-            ], 500);
-        }
+{
+    try {
+        $saleOrder->load('customer'); // Cargar la relación 'customer'
+        return response()->json([
+            'status' => true,
+            'data' => $saleOrder,
+        ], 200);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => false,
+            'message' => 'Hubo un error al intentar obtener los detalles de la orden de venta',
+            'error' => $e->getMessage()
+        ], 500);
     }
+}
 
     public function store(Request $request)
     {

@@ -54,6 +54,24 @@ class PurchaseOrderController extends Controller
         return view('admin.purchase_order.index');
     }
 
+    public function show(PurchaseOrder $purchaseOrder)
+    {
+        try {
+            return response()->json([
+                'status' => true,
+                'data' => $purchaseOrder,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Hubo un error al intentar obtener el detalle de la orden',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+    
+    
+    
     public function store(Request $request)
     {
         $request->validate([

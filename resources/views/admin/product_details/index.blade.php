@@ -34,7 +34,7 @@
             </div>
         </div>
     </div>
-    <div class="modal" id="showproduct-detail" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
+    <div class="modal" id="showproduct_details" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="block block-rounded shadow-none mb-0">
@@ -124,7 +124,7 @@
                 const {data} = await axios.get(route('product_details.show', id));
                 const productDetail = data.data;
                 if (data.status) {
-                    $('#showproduct_details .block-title').text(ProductDetail.name);
+                    $('#showproduct_details .block-title').text(productDetail.name);
                     for (let key in productDetail) {
                         if (supplier.hasOwnProperty(key)) {
                             $(`#${key}`).text(productDetail[key]);
@@ -134,7 +134,7 @@
                 }
             },
             btnDelete: function (id) {
-                   if (confirm('¿Estás seguro de que deseas eliminar este Provedor?')) {
+                   if (confirm('¿Estás seguro de que deseas eliminar este detalle de producto?')) {
                     $.ajax({
             url: '/product_details/' + id,
             type: 'DELETE',
@@ -142,8 +142,8 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(response) {
-                alert('Provedor eliminado correctamente');
-                // Actualizar la tabla si es necesario
+                alert('detalle del producto eliminado correctamente');
+               
             },
            
         });

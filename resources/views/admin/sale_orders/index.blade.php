@@ -37,7 +37,28 @@
     <div class="modal" id="showSaleOrder" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <!-- Modal content goes here -->
+                <div class="block block-rounded shadow-none mb-0">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title text-uppercase"></h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-content fs-sm mb-4">
+                        <ul class="list-group">
+                            <li class="list-group-item"><b>Cliente:</b> <label id="customers_id"></label></li>
+                            <li class="list-group-item"><b>Código:</b> <label id="code"></label></li>
+                            <li class="list-group-item"><b>Cantidad:</b> <label id="quantity"></label></li>
+                            <li class="list-group-item"><b>Total:</b> <label id="total"></label></li>
+                            <li class="list-group-item"><b>Método de pago:</b> <label id="payment_method"></label></li>
+                            <li class="list-group-item"><b>Referencia:</b> <label id="reference"></label></li>
+                            <li class="list-group-item"><b>Estado:</b> <label id="status"></label></li>
+                            
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -53,6 +74,7 @@
                 filter: true,
                 columns: [
                     {data: 'id'},
+                    {data: 'customer_id', orderable: false},
                     {data: 'code'},
                     {data: 'quantity'},
                     {data: 'total'},
@@ -90,5 +112,21 @@
             });
             dataTabla.columns([0]).visible(false);
         });
+        const app = {
+            btnShow: async function (id) {
+                const {data} = await axios.get(route('sale_orders.show', id));
+                const saleOrder = data.data;
+                if (data.status) {
+                    $('#showSaleOrder .block-title').text('Orden de venta #' + saleOrder.id);
+                    $('#showSaleOrder').modal('show');
+                }
+            },
+            btnEdit: function (id) {
+                alert('Editar orden de venta con id: ' + id);
+            },
+            btnDelete: function (id) {
+                alert('Eliminar orden de venta con id: ' + id);
+            }
+        };
     </script>
 @endsection

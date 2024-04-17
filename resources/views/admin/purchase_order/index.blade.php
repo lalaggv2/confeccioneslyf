@@ -45,15 +45,14 @@
                     </div>
                     <div class="block-content fs-sm mb-4">
                         <ul class="list-group">
-                            <li class="list-group-item"><b>Proveedor:</b> <label id="supplier_name"></label></li>
+                            <li class="list-group-item"><b>Proveedor:</b> <label id="customer_id"></label></li>
                             <li class="list-group-item"><b>Código:</b> <label id="code"></label></li>
                             <li class="list-group-item"><b>Cantidad:</b> <label id="quantity"></label></li>
                             <li class="list-group-item"><b>Total:</b> <label id="total"></label></li>
                             <li class="list-group-item"><b>Método de pago:</b> <label id="payment_method"></label></li>
                             <li class="list-group-item"><b>Referencia:</b> <label id="reference"></label></li>
                             <li class="list-group-item"><b>Estado:</b> <label id="status"></label></li>
-                            <li class="list-group-item"><b>Fecha de creación:</b> <label id="created_at"></label></li>
-                            <li class="list-group-item"><b>Última actualización:</b> <label id="updated_at"></label></li>
+                            
                         </ul>
                     </div>
                 </div>

@@ -66,7 +66,7 @@ Route::middleware(['web', 'auth'])->group(function () {
 
     Route::prefix('product_details')->group(function () {
         Route::get('/', [ProductDetailController::class, 'index'])->name('product_details');
-        Route::get('/{product_detail}', [ProductDetailController::class, 'show'])->name('product_details.show');
+        Route::get('/{product_details}', [ProductDetailController::class, 'show'])->name('product_details.show');
         Route::post('/store', [ProductDetailController::class, 'store'])->name('product_details.store');
     });
 
@@ -85,7 +85,7 @@ Route::middleware(['web', 'auth'])->group(function () {
 
     Route::prefix('sale_orders')->group(function () {
         Route::get('/', [SaleOrderController::class, 'index'])->name('sale_orders');
-        Route::get('/{sale_order}', [SaleOrderController::class, 'show'])->name('sale_orders.show');
+        Route::get('/{sale_orders}', [SaleOrderController::class, 'show'])->name('sale_orders.show');
         Route::post('/store', [SaleOrderController::class, 'store'])->name('sale_orders.store');
     });
 
@@ -111,5 +111,5 @@ Route::middleware(['web', 'auth'])->group(function () {
 
     
 
-    Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers');
+    
     
