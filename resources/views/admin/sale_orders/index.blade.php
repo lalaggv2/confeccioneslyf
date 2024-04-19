@@ -34,7 +34,7 @@
         </div>
     </div>
 
-    <div class="modal" id="showSaleOrder" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
+    <div class="modal" id="showsaleOrder" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="block block-rounded shadow-none mb-0">
@@ -54,7 +54,7 @@
                             <li class="list-group-item"><b>Total:</b> <label id="total"></label></li>
                             <li class="list-group-item"><b>Método de pago:</b> <label id="payment_method"></label></li>
                             <li class="list-group-item"><b>Referencia:</b> <label id="reference"></label></li>
-                            <li class="list-group-item"><b>Estado:</b> <label id="status"></label></li>
+                            
                             
                         </ul>
                     </div>
@@ -80,7 +80,7 @@
                     {data: 'total'},
                     {data: 'payment_method'},
                     {data: 'reference'},
-                    {data: 'status'},
+                
                     {data: 'btns', orderable: false}
                 ],
                 bLengthChange: false,
@@ -117,16 +117,43 @@
                 const {data} = await axios.get(route('sale_orders.show', id));
                 const saleOrder = data.data;
                 if (data.status) {
-                    $('#showSaleOrder .block-title').text('Orden de venta #' + saleOrder.id);
-                    $('#showSaleOrder').modal('show');
+                    $('#showsaleorder .block-title').text('Orden de compra #' + saleOrder.id);
+                    $('#customer_name').text(saleOrder.customer_name);
+                    $('#code').text(saleOrder.code);
+                    $('#quantity').text(saleOrder.quantity);
+                    $('#total').text(new Intl.NumberFormat('es-CO', {
+                        style: 'currency',
+                        currency: 'COP',
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0
+                    }).format(parseFloat(saleOrder.total)));
+                    $('#payment_method').text(saleOrder.payment_method);
+                    $('#reference').text(saleOrder.reference);
+                    
+                    $('#created_at').text(new Date(saleOrder.created_at).toLocaleString());
+                    $('#updated_at').text(new Date(saleOrder.updated_at).toLocaleString());
+                    $('#showsaleOrder').modal('show');
                 }
             },
             btnEdit: function (id) {
-                alert('Editar orden de venta con id: ' + id);
+                alert('Editar orden de compra con id: ' + id);
             },
             btnDelete: function (id) {
-                alert('Eliminar orden de venta con id: ' + id);
-            }
+                   if (confirm('¿Estás seguro de que deseas eliminar esta venta?')) {
+                    $.ajax({
+            url: '/sale_orders/' + id,
+            type: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                alert('venta eliminada correctamente');
+                
+            },
+           
+        });
+    }
+}
         };
     </script>
 @endsection

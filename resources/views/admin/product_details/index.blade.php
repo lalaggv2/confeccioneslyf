@@ -34,7 +34,7 @@
             </div>
         </div>
     </div>
-    <div class="modal" id="showproduct_details" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
+    <div class="modal" id="showProduct_details" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="block block-rounded shadow-none mb-0">
@@ -126,7 +126,7 @@
                 if (data.status) {
                     $('#showproduct_details .block-title').text(productDetail.name);
                     for (let key in productDetail) {
-                        if (supplier.hasOwnProperty(key)) {
+                        if (productDetail.hasOwnProperty(key)) {
                             $(`#${key}`).text(productDetail[key]);
                         }
                     }

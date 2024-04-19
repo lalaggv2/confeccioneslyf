@@ -68,6 +68,7 @@ class SaleOrderController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'id' => 'required',
             'customer_id' => 'required',
             'code' => 'required',
             'quantity' => 'required',
@@ -80,6 +81,7 @@ class SaleOrderController extends Controller
         DB::beginTransaction();
         try {
             $saleOrder = SaleOrder::create([
+                'id' => $request->id,
                 'customer_id' => $request->customer_id,
                 'code' => $request->code,
                 'quantity' => $request->quantity,
@@ -109,11 +111,24 @@ class SaleOrderController extends Controller
 
     public function destroy($id)
     {
-        $saleOrder = SaleOrder::findOrFail($id);
-        $saleOrder->delete();
-        return response()->json([
-            'status' => true,
-            'message' => 'Orden de venta eliminada correctamente'
-        ], 200);
+        DB::beginTransaction();
+        try {
+            $saleOrder = SaleOrder::findOrFail($id);
+            $saleOrder->delete();
+
+            DB::commit();
+            return response()->json([
+                'status' => true,
+                'message' => 'Orden de compra eliminada correctamente'
+            ], 200);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'status' => false,
+                'message' => 'Hubo un error al intentar eliminar la orden de compra',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }

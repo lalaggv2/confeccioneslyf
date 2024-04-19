@@ -71,6 +71,7 @@ class DetailOrderController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'id' => 'required',
             'orderable_id' => 'required',
             'orderable_type' => 'required',
             'product_id' => 'required',
@@ -81,6 +82,7 @@ class DetailOrderController extends Controller
         DB::beginTransaction();
         try {
             $detailOrder = $this->model()->create([
+                'id' => $request->id,
                 'orderable_id' => $request->orderable_id,
                 'orderable_type' => $request->orderable_type,
                 'product_id' => $request->product_id,
@@ -143,7 +145,7 @@ class DetailOrderController extends Controller
     {
         DB::beginTransaction();
         try {
-            $detailOrder = $this->model()->findOrFail($id);
+            $detailOrder = DetailOrder::findOrFail($id);
             $detailOrder->delete();
 
             DB::commit();

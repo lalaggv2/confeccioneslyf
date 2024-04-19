@@ -137,8 +137,21 @@
                 alert('Editar orden de compra con id: ' + id);
             },
             btnDelete: function (id) {
-                alert('Eliminar orden de compra con id: ' + id);
-            }
+                   if (confirm('¿Estás seguro de que deseas eliminar esta compra?')) {
+                    $.ajax({
+            url: '/purchase_orders/' + id,
+            type: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                alert('compra eliminada correctamente');
+                
+            },
+           
+        });
+    }
+}
         };
     </script>
 @endsection

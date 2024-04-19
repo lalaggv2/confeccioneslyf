@@ -9,15 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class ProductDetailController extends Controller
 {
-    public function model()
-    {
-        return app()->make(ProductDetail::class);
-    }
-
-    public function productModel()
-    {
-        return app()->make(Product::class);
-    }
+   
 
     public function index(Request $request)
     {
@@ -35,11 +27,10 @@ class ProductDetailController extends Controller
                 ->get();
             $data = [];
             foreach ($results as $model) {
-                $product = $model->product;
                 $data[] = [
                     'id' => $model->id,
-                    'product_id' => $product->id,
-                    'product_name' => $product->name,
+                    'product_id' => $model->id,
+                    'product_name' => $model->name,
                     'sku' => $model->sku,
                     'barcode' => $model->barcode,
                     'size' => $model->size,

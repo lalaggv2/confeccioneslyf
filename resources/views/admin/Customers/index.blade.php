@@ -55,9 +55,7 @@
         </div>
     </div>
     
-
-</div>
-<div class="modal" id="destroyCustomer" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
+    <div class="modal" id="destroyCustomer" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="block block-rounded shadow-none mb-0">
@@ -69,15 +67,21 @@
                             </button>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('js')
     <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
     <script>
+        const customersRoute = "{{ route('customers') }}";
+
         $(document).ready(function () {
             let dataTabla = null;
             dataTabla = $('#tableCustomers').DataTable({
-                ajax: route('customers'),
+                ajax: customersRoute,
                 filter: true,
                 columns: [
                     {data: 'id'},
@@ -136,21 +140,20 @@
                 alert('Editar cliente con id: ' + id);
             },
             btnDelete: function (id) {
-                   if (confirm('¿Estás seguro de que deseas eliminar este cliente?')) {
+                if (confirm('¿Estás seguro de que deseas eliminar este cliente?')) {
                     $.ajax({
-            url: '/customers/' + id,
-            type: 'DELETE',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function(response) {
-                alert('Cliente eliminado correctamente');
-                // Actualizar la tabla si es necesario
-            },
-           
-        });
-    }
-}
+                        url: '/customers/' + id,
+                        type: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            alert('Cliente eliminado correctamente');
+                            // Actualizar la tabla si es necesario
+                        },
+                    });
+                }
+            }
         };
     </script>
 @endsection

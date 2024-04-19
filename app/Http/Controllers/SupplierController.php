@@ -113,7 +113,7 @@ class SupplierController extends Controller
             $supplier->delete();
             return response()->json([
                 'status' => true,
-                'message' => 'Cliente eliminado correctamente.'
+                'message' => 'provedor eliminado correctamente.'
             ], 200);
         } else {
             return response()->json([

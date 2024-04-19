@@ -124,8 +124,8 @@
 
         const app = {
             btnShow: async function (id) {
-                const {data} = await axios.get(route('suppliers.show', id));
-                const supplier = data.data;
+              const {data} = await axios.get(route('suppliers.show', id));
+                const   supplier = data.data;
                 if (data.status) {
                     $('#showSupplier .block-title').text(supplier.name);
                     for (let key in supplier) {
@@ -137,7 +137,7 @@
                 }
             },
             btnDelete: function (id) {
-                   if (confirm('¿Estás seguro de que deseas eliminar este cliente?')) {
+                   if (confirm('¿Estás seguro de que deseas eliminar este provedor?')) {
                     $.ajax({
             url: '/suppliers/' + id,
             type: 'DELETE',
@@ -145,7 +145,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(response) {
-                alert('Cliente eliminado correctamente');
+                alert('provedor eliminado correctamente');
                 // Actualizar la tabla si es necesario
             },
            

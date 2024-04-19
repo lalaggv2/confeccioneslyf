@@ -50,7 +50,7 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::get('/', [CustomerController::class, 'index'])->name('customers');
         Route::get('/{customer}', [CustomerController::class, 'show'])->name('customers.show');
         Route::post('/store', [CustomerController::class, 'store'])->name('customers.store');
-        Route::delete('/employees/{id}', [CustomerController::class, 'destroy'])->name('customers.destroy');
+        Route::delete('/{id}', [CustomerController::class, 'destroy'])->name('customers.destroy');
 
         
 
@@ -66,7 +66,7 @@ Route::middleware(['web', 'auth'])->group(function () {
 
     Route::prefix('product_details')->group(function () {
         Route::get('/', [ProductDetailController::class, 'index'])->name('product_details');
-        Route::get('/{product_details}', [ProductDetailController::class, 'show'])->name('product_details.show');
+        Route::get('/{product_detail}', [ProductDetailController::class, 'show'])->name('product_details.show');
         Route::post('/store', [ProductDetailController::class, 'store'])->name('product_details.store');
     });
 
@@ -81,18 +81,21 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::get('/', [DetailOrderController::class, 'index'])->name('detail_orders');
         Route::get('/{detail_order}', [DetailOrderController::class, 'show'])->name('detail_orders.show');
         Route::post('/store', [DetailOrderController::class, 'store'])->name('detail_orders.store');
+        Route::delete('/{id}', [DetailOrderController::class, 'destroy'])->name('detail_orders.destroy');
     });
 
     Route::prefix('sale_orders')->group(function () {
         Route::get('/', [SaleOrderController::class, 'index'])->name('sale_orders');
-        Route::get('/{sale_orders}', [SaleOrderController::class, 'show'])->name('sale_orders.show');
+        Route::get('/{sale_order}', [SaleOrderController::class, 'show'])->name('sale_orders.show');
         Route::post('/store', [SaleOrderController::class, 'store'])->name('sale_orders.store');
+        Route::delete('/{id}', [SaleOrderController::class, 'destroy'])->name('sale_orders.destroy');
     });
 
     Route::prefix('purchase_orders')->group(function () {
         Route::get('/', [PurchaseOrderController::class, 'index'])->name('purchase_orders');
         Route::get('/{purchase_order}', [PurchaseOrderController::class, 'show'])->name('purchase_orders.show');
         Route::post('/store', [PurchaseOrderController::class, 'store'])->name('purchase_orders.store');
+        Route::delete('/{id}', [PurchaseOrderController::class, 'destroy'])->name('purchase_orders.destroy');
     });
 
 

@@ -124,8 +124,21 @@
                 alert('Editar detalle de orden con id: ' + id);
             },
             btnDelete: function (id) {
-                alert('Eliminar detalle de orden con id: ' + id);
-            }
+                   if (confirm('¿Estás seguro de que deseas eliminar el detalle de la orden ?')) {
+                    $.ajax({
+            url: '/detail_orders/' + id,
+            type: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                alert('detalle de orden eliminado correctamente');
+                
+            },
+           
+        });
+    }
+}
         };
     </script>
 @endsection

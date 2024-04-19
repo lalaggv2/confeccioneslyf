@@ -64,6 +64,7 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'id'=> 'required',
             'type_document' => 'required',
             'document' => 'required',
             'name' => 'required',
@@ -73,6 +74,7 @@ class CustomerController extends Controller
         DB::beginTransaction();
         try {
             $customer = Customer::create([
+                
                 'type_document' => $request->type_document,
                 'document' => $request->document,
                 'name' => $request->name,
