@@ -48,7 +48,8 @@
                     </div>
                     <div class="block-content fs-sm mb-4">
                         <ul class="list-group">
-                            <li class="list-group-item"><b>Cliente:</b> <label id="customers_id"></label></li>
+                    
+                            <li class="list-group-item"><b>Cliente:</b> <label id="customer_id"></label></li>
                             <li class="list-group-item"><b>Código:</b> <label id="code"></label></li>
                             <li class="list-group-item"><b>Cantidad:</b> <label id="quantity"></label></li>
                             <li class="list-group-item"><b>Total:</b> <label id="total"></label></li>
@@ -118,7 +119,7 @@
                 const saleOrder = data.data;
                 if (data.status) {
                     $('#showsaleorder .block-title').text('Orden de compra #' + saleOrder.id);
-                    $('#customer_name').text(saleOrder.customer_name);
+                    $('#customer_id').text(saleOrder.customer_id);
                     $('#code').text(saleOrder.code);
                     $('#quantity').text(saleOrder.quantity);
                     $('#total').text(new Intl.NumberFormat('es-CO', {

@@ -101,9 +101,52 @@ class SupplierController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
-        
+{
+    $request->validate([
+        'document_type' => 'required',
+        'document' => 'required',
+        'name' => 'required',
+        'address' => 'required',
+        'phone' => 'required',
+        'email' => 'required|email',
+    ]);
+
+    try {
+        // Buscar el proveedor por su ID
+        $supplier = Supplier::find($id);
+
+        // Verificar si el proveedor existe
+        if (!$supplier) {
+            return response()->json([
+                'status' => false,
+                'message' => 'que esta pasando ps '
+            ], 404);
+        }
+
+        // Actualizar los campos del proveedor
+        $supplier->update([
+            'document_type' => $request->document_type,
+            'document' => $request->document,
+            'name' => $request->name,
+            'address' => $request->address,
+            'phone' => $request->phone,
+            'email' => $request->email,
+        ]);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Proveedor actualizado correctamente',
+            'data' => $supplier
+        ], 200);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => false,
+            'message' => 'Hubo un error al intentar actualizar el proveedor',
+            'error' => $e->getMessage()
+        ], 500);
     }
+}
+
 
     public function destroy($id)
     {

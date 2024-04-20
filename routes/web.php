@@ -51,6 +51,7 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::get('/{customer}', [CustomerController::class, 'show'])->name('customers.show');
         Route::post('/store', [CustomerController::class, 'store'])->name('customers.store');
         Route::delete('/{id}', [CustomerController::class, 'destroy'])->name('customers.destroy');
+        Route::put('/{id}', [CustomerController::class, 'update'])->name('customers.update');
 
         
 
@@ -75,6 +76,7 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::get('/{supplier}', [SupplierController::class, 'show'])->name('suppliers.show');
         Route::post('/store', [SupplierController::class, 'store'])->name('suppliers.store');
         Route::delete('/{id}', [SupplierController::class, 'destroy'])->name('suppliers.destroy');
+        Route::put('/{id}', [SupplierController::class, 'update'])->name('suppliers.update');
     });
 
     Route::prefix('detail_orders')->group(function () {
