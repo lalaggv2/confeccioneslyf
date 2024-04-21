@@ -107,35 +107,51 @@ class DetailOrderController extends Controller
             ], 500);
         }
     }
-
     public function update(Request $request, $id)
     {
         $request->validate([
-            'quantity' => 'required|integer',
-            'price' => 'required|numeric',
-            'total' => 'required|numeric',
+        
+            'orderable_id' => 'required',
+            'orderable_type' => 'required',
+            'product_id' => 'required',
+            'quantity' => 'required',
+            'price' => 'required',
+            'total' => 'required',
+            
         ]);
-        DB::beginTransaction();
+    
         try {
-            $detailOrder = $this->model()->findOrFail($id);
+            // Buscar el proveedor por su ID
+            $detailOrder = DetailOrder::find($id);
+    
+            // Verificar si el proveedor existe
+            if (!$detailOrder) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'que esta pasando ps '
+                ], 404);
+            }
+    
+            // Actualizar los campos del proveedor
             $detailOrder->update([
+                'orderable_id' => $request->orderable_id,
+                'orderable_type' => $request->orderable_type,
+                'product_id' => $request->product_id,
                 'quantity' => $request->quantity,
                 'price' => $request->price,
                 'total' => $request->total,
+                
             ]);
-
-            DB::commit();
+    
             return response()->json([
                 'status' => true,
-                'message' => 'Detalle de orden actualizado correctamente',
+                'message' => 'Proveedor actualizado correctamente',
                 'data' => $detailOrder
             ], 200);
-
         } catch (\Exception $e) {
-            DB::rollBack();
             return response()->json([
                 'status' => false,
-                'message' => 'Hubo un error al intentar actualizar el detalle de la orden',
+                'message' => 'Hubo un error al intentar actualizar el proveedor',
                 'error' => $e->getMessage()
             ], 500);
         }

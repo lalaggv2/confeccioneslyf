@@ -16,6 +16,16 @@ return new class extends Migration {
             $table->string('description');
             $table->integer('stock');
             $table->enum('type', ['producto_terminado', 'materia_prima']);
+            $table->string('sku');
+            $table->string('barcode');
+            $table->string('size');
+            $table->string('color');
+            $table->string('material');
+            $table->string('location');
+            $table->decimal('price', 12, 2);
+            
+            $table->date('date_manufactured');
+            $table->text('notes');
             $table->timestamps();
             $table->softDeletes();
         });

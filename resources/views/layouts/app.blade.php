@@ -106,11 +106,7 @@
                                         <span class="nav-main-link-name">Productos</span>
                                     </a>
                                 </li>
-                                <li class="nav-main-item">
-                                    <a class="nav-main-link" href="{{route('product_details')}}">
-                                        <span class="nav-main-link-name">Detalles de productos</span>
-                                    </a>
-                                </li>
+                               
                             </ul>
                         </li>
                         

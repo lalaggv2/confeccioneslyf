@@ -106,6 +106,48 @@ class SaleOrderController extends Controller
             ], 500);
         }
     }
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'customer_id' => 'required',
+            'code' => 'required',
+            'quantity' => 'required',
+            'total' => 'required',
+            'payment_method' => 'required',
+            'reference' => 'required',
+            // Otros campos necesarios aquí
+        ]);
+    
+        try {
+            // Buscar la orden de venta por su ID
+            $saleOrder = SaleOrder::find($id);
+    
+            // Verificar si la orden de venta existe
+            if (!$saleOrder) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Orden de venta no encontrada'
+                ], 404);
+            }
+    
+            // Actualizar los campos de la orden de venta
+            $saleOrder->update($request->all());
+    
+            return response()->json([
+                'status' => true,
+                'message' => 'Orden de venta actualizada correctamente',
+                'data' => $saleOrder
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Hubo un error al intentar actualizar la orden de venta',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+    
+
 
     // Implementa la función update si es necesario
 

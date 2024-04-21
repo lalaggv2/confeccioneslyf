@@ -30,10 +30,18 @@ class ProductController extends Controller
                     'description' => $product->description,
                     'stock'=> $product->stock,
                     'type' => $product->type,
+                    'sku' => $product->sku,
+                    'barcode' => $product->barcode,
+                    'size' => $product->size,
+                    'color' => $product->color,
+                    'material' => $product->material,
+                    'location' => $product->location,
+                    'price' => '$' . number_format($product->price, 2),
+                    'stock' => $product->stock,
+                    'notes' => $product->notes,
                     'created_at' => $product->created_at->format('Y-m-d H:i:s'),
                     'updated_at' => $product->updated_at->format('Y-m-d H:i:s'),
                     'btns' => view('helpers.buttons', ['obj' => 'app', 'id' => $product->id, 'show' => 1, 'edit' => 1, 'delete' => 1])->render(),
-                   
                 ];
             }
             $response = [
@@ -52,7 +60,7 @@ class ProductController extends Controller
         try {
             return response()->json([
                 'status' => true,
-                'data' => $product,
+                'data' => $product->toArray(), // Convertir el modelo a un array asociativo para incluir todos los datos
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
@@ -69,6 +77,15 @@ class ProductController extends Controller
             'name' => 'required',
             'description' => 'required',
             'type' => 'required',
+            'sku' => 'required',
+            'barcode' => 'required',
+            'size' => 'required',
+            'color' => 'required',
+            'material' => 'required',
+            'location' => 'required',
+            'price' => 'required',
+            'stock' => 'required',
+            'notes' => 'required',
         ]);
 
         DB::beginTransaction();
@@ -94,27 +111,64 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
+            'id' => 'required',
             'name' => 'required',
             'description' => 'required',
             'type' => 'required',
+            'sku' => 'required',
+            'barcode' => 'required',
+            'size' => 'required',
+            'color' => 'required',
+            'material' => 'required',
+            'location' => 'required',
+            'price' => 'required',
+            'stock' => 'required',
+            'notes' => 'required',
+            'created_at' => 'required',
+            'updated_at' => 'required',
         ]);
-
-        DB::beginTransaction();
+    
         try {
-            $product = Product::findOrFail($id);
-            $product->update($request->all());
-            DB::commit();
+            // Buscar el proveedor por su ID
+            $product = Product::find($id);
+    
+            // Verificar si el proveedor existe
+            if (!$product) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'que esta pasando ps '
+                ], 404);
+            }
+    
+            // Actualizar los campos del proveedor
+            $product->update([
+                
+            'id' => $request->id,
+            'name' => $request->name,
+            'description' => $request->description,
+            'type' => $request->type,
+            'sku' => $request->sku,
+            'barcode' => $request->barcode,
+            'size' => $request->size,
+            'color' => $request->color,
+            'material' => $request->material,
+            'location' => $request->location,
+            'price' => $request->price,
+            'stock' => $request->stock,
+            'notes' => $request->notes,
+            'created_at' => $request->created_at,
+            'updated_at' => $request->update_at,
+            ]);
+    
             return response()->json([
                 'status' => true,
-                'message' => 'Producto actualizado correctamente',
+                'message' => 'Proveedor actualizado correctamente',
                 'data' => $product
             ], 200);
-
         } catch (\Exception $e) {
-            DB::rollBack();
             return response()->json([
                 'status' => false,
-                'message' => 'Hubo un error al intentar actualizar el producto',
+                'message' => 'Hubo un error al intentar actualizar el proveedor',
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -136,4 +190,4 @@ class ProductController extends Controller
             ], 404);
         }
     }
-};
+}

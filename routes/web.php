@@ -63,7 +63,7 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::get('/{product}', [ProductController::class, 'show'])->name('products.show');
         Route::post('/store', [ProductController::class, 'store'])->name('products.store');
         Route::delete('/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
-        Route::put('/{id}', [ProductController::class, 'update'])->name('products.update');
+        Route::put('/{id}', [ProductController::class, 'update'])->name('Product.update');
       
     });
 
@@ -86,6 +86,7 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::get('/{detail_order}', [DetailOrderController::class, 'show'])->name('detail_orders.show');
         Route::post('/store', [DetailOrderController::class, 'store'])->name('detail_orders.store');
         Route::delete('/{id}', [DetailOrderController::class, 'destroy'])->name('detail_orders.destroy');
+        Route::put('/{id}', [DetailOrderController::class, 'update'])->name('detail_orders.update');
     });
 
     Route::prefix('sale_orders')->group(function () {
@@ -93,6 +94,7 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::get('/{sale_order}', [SaleOrderController::class, 'show'])->name('sale_orders.show');
         Route::post('/store', [SaleOrderController::class, 'store'])->name('sale_orders.store');
         Route::delete('/{id}', [SaleOrderController::class, 'destroy'])->name('sale_orders.destroy');
+        Route::put('/{id}', [SaleOrderController::class, 'update'])->name('sale_orders.update');
     });
 
     Route::prefix('purchase_orders')->group(function () {

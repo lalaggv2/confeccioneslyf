@@ -56,10 +56,86 @@
             </div>
         </div>
     </div>
+    <div class="modal" id="updateDetailOrder" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="block block-rounded shadow-none mb-0">
+                <div class="block-header block-header-default">
+                    <h3 class="block-title text-uppercase">Editar Cliente</h3>
+                    <div class="block-options">
+                        <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="block-content fs-sm mb-4">
+                    <form id="editForm">
+                        @csrf
+                        <input type="hidden" id="editId" name="id">
+                        <div class="form-group">
+                            <label for="editName">Nombre</label>
+                            <input type="text" class="form-control" id="editName" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="editDocumentType">Tipo de Documento</label>
+                            <input type="text" class="form-control" id="editDocumentType" name="document_type">
+                        </div>
+                        <div class="form-group">
+                            <label for="editDocument">Documento</label>
+                            <input type="text" class="form-control" id="editDocument" name="document">
+                        </div>
+                        <div class="form-group">
+                            <label for="editPhone">Teléfono</label>
+                            <input type="text" class="form-control" id="editPhone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="editAddress">Dirección</label>
+                            <input type="text" class="form-control" id="editAddress" name="address">
+                        </div>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('js')
     <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
+    <script>
+    $(document).ready(function () {
+        
+        $('#editForm').submit(function (event) {
+            event.preventDefault(); 
+
+            
+            const formData = $(this).serialize();
+
+            
+            $.ajax({
+                url: '/detail_orders/' + $('#editId').val(), 
+                type: 'PUT', 
+                data: formData, 
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    
+                    alert('Cliente actualizado correctamente');
+                    $('#updateDetailOrders').modal('hide'); 
+                    
+                },
+                error: function(err) {
+                    
+                    console.error('Error al actualizar el cliente:', err);
+                    alert('Hubo un error al actualizar el cliente');
+                }
+            });
+        });
+    });
+</script>
     <script>
         $(document).ready(function () {
             let dataTabla = null;
@@ -138,7 +214,37 @@
            
         });
     }
-}
+},
+btnEdit: async function (id) {
+        try {
+            
+            const response = await axios.get(`/detail_orders/${id}`);
+
+            
+            if (response.status === 200 && response.data.status) {
+                const detailOrder = response.data.data;
+
+            
+                $('#updateDetail_Order #editId').val(detailOrder.id);
+                $('#updateDetail_Order #editOrderable_id').val(detailOrder.Orderable_id);
+                $('#updateDetail_Order #editOrderable_type').val(detailOrder.Orderable_type);
+                $('#updateDetail_Order #editProduct_id').val(detailOrder.Product_id);
+                $('#updateDetail_Order #editquantity').val(detailOrder.quantity);
+                $('#updateDetail_Order #editPrice').val(detailOrder.Price);
+                $('#updateDetail_Order #editTotal').val(detailOrder.Total);
+                
+                
+                $('#updateDetailOrders').modal('show');
+            } else {
+                
+                alert('No se pudo obtener la información del cliente');
+            }
+        } catch (error) {
+            console.error('Error al obtener la información del cliente:', error);
+            alert('Hubo un error al obtener la información del cliente');
+        }
+        
+    }
         };
     </script>
 @endsection
