@@ -69,10 +69,129 @@
         </div>
     </div>
 
+    <div class="modal" id="updateEmployee" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="block block-rounded shadow-none mb-0">
+                <div class="block-header block-header-default">
+                    <h3 class="block-title text-uppercase">Editar Empleado</h3>
+                    <div class="block-options">
+                        <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="block-content fs-sm mb-4">
+                    <form id="editForm">
+                    <form id="editForm">
+                    @csrf
+
+                    <input type="hidden" id="editId" name="id">
+                    
+                        <div class="form-group">
+                            <label for="editName">Nombre</label>
+                            <input type="text" class="form-control" id="editName" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="editDocumentType">Tipo de Documento</label>
+                            <input type="text" class="form-control" id="editDocumentType" name="document_type">
+                            </div>
+
+                        <div class="form-group">
+                            <label for="editDocument">Documento</label>
+                            <input type="text" class="form-control" id="editDocument" name="document">
+                        </div>
+                        <div class="form-group">
+                            <label for="editPhone">Teléfono</label>
+                            <input type="text" class="form-control" id="editPhone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="editAddress">Dirección</label>
+                            <input type="text" class="form-control" id="editAddress" name="address">
+                        </div>
+                        <div class="form-group">
+                            <label for="editEmail">Email</label>
+                            <input type="email" class="form-control" id="editEmail" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="editGender">Genero</label>
+                            <input type="text" class="form-control" id="editGender" name="gender">
+                        </div>
+                        <div class="form-group">
+                            <label for="editRh">Rh</label>
+                            <input type="text" class="form-control" id="editRh" name="rh">
+                        </div>
+                        <div class="form-group">
+                            <label for="editEps">Eps</label>
+                            <input type="text" class="form-control" id="editEps" name="eps">
+                        </div>
+                        <div class="form-group">
+                            <label for="editPosition">position</label>
+                            <input type="text" class="form-control" id="editPosition" name="position">
+                        </div>
+                        <div class="form-group">
+                            <label for="editSalary">Salario</label>
+                            <input type="text" class="form-control" id="editSalary" name="salary">
+                        </div>
+                        <div class="form-group">
+    <label for="editStartDate">Fecha de Inicio</label>
+    <input type="date" class="form-control" id="editStartDate" name="start_date" required>
+</div>
+<div class="form-group">
+    <label for="editStatus">Estado</label>
+    <select class="form-control" id="editStatus" name="status" required>
+        <option value="1">Activo</option>
+        <option value="0">Inactivo</option>
+    </select>
+</div>
+
+                        <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
     
 @endsection
 @section('js')
     <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
+    <script>
+    $(document).ready(function () {
+        // ... Otras funciones y configuraciones aquí ...
+
+        // Manejar el envío del formulario de edición
+        $('#editForm').submit(function (event) {
+            event.preventDefault(); // Evitar el envío del formulario por defecto
+
+            // Obtener los datos del formulario
+            const formData = $(this).serialize();
+
+            // Enviar los datos actualizados al servidor a través de una solicitud AJAX
+            $.ajax({
+                url: '/employees/' + $('#editId').val(), // URL para la actualización del proveedor
+                type: 'PUT', // Método HTTP para la actualización
+                data: formData, // Datos del formulario serializados
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    // Manejar la respuesta exitosa del servidor
+                    alert('Empleado actualizado correctamente');
+                    $('#updateEmployee').modal('hide'); // Cerrar el modal de edición después de la actualización
+                    // Actualizar la tabla si es necesario
+                },
+                error: function(err) {
+                    // Manejar errores de la solicitud AJAX
+                    console.error('Error al actualizar el empleado:', err);
+                    alert('Hubo un error al actualizar el empleado');
+                }
+            });
+        });
+    });
+</script>
     <script>
         $(document).ready(function () {
             let dataTabla = null;
@@ -187,7 +306,44 @@
             }
         });
     }
+},
+btnEdit: async function (id) {
+    try {
+        // Hacer una solicitud AJAX GET para obtener los datos del empleado
+        const response = await axios.get(`/employees/${id}`);
+
+        // Verificar si la solicitud fue exitosa
+        if (response.status === 200 && response.data.status) {
+            const employee = response.data.data;
+
+            // Rellenar un formulario modal con los datos del empleado
+            $('#updateEmployee #editId').val(employee.id);
+            $('#updateEmployee #editDocumentType').val(employee.document_type);
+            $('#updateEmployee #editDocument').val(employee.document);
+            $('#updateEmployee #editName').val(employee.name);
+            $('#updateEmployee #editAddress').val(employee.address);
+            $('#updateEmployee #editPhone').val(employee.phone);
+            $('#updateEmployee #editEmail').val(employee.email);
+            $('#updateEmployee #editGender').val(employee.gender);
+            $('#updateEmployee #editRh').val(employee.rh);
+            $('#updateEmployee #editEps').val(employee.eps);
+            $('#updateEmployee #editPosition').val(employee.position);
+            $('#updateEmployee #editSalary').val(employee.salary);
+            $('#updateEmployee #editStatus').val(employee.status);
+
+
+            // Mostrar el formulario modal para permitir la edición
+            $('#updateEmployee').modal('show');
+        } else {
+            // Manejar el caso en el que no se encuentre el empleado o haya un error
+            alert('No se pudo obtener la información del empleado');
+        }
+    } catch (error) {
+        console.error('Error al obtener la información del empleado:', error);
+        alert('Hubo un error al obtener la información del empleado');
+    }
 }
+
 
         };
     </script>

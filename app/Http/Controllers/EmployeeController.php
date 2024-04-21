@@ -103,7 +103,7 @@ class EmployeeController extends Controller
             'document_type' => 'required',
             'document' => 'required',
             'address' => 'required',
-            'start_date' => 'required',
+        
             'phone' => 'required',
             'eps' => 'required',
             'rh' => 'required',
@@ -163,8 +163,66 @@ class EmployeeController extends Controller
 
 
     public function update(Request $request, $id)
-    {
+{
+    $request->validate([
+        'document_type' => 'required',
+        'document' => 'required',
+        'name' => 'required',
+        'address' => 'required',
+
+        'phone' => 'required',
+        'eps' => 'required',
+        'rh' => 'required',
+        'position' => 'required',
+        'salary' => 'required',
+        'status' => 'required',
+        'gender' => 'required',
+    ]);
+
+    try {
+        // Buscar el empleado por su ID
+        $employee = Employee::find($id);
+
+        // Verificar si el empleado existe
+        if (!$employee) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Empleado no encontrado',
+            ], 404);
+        }
+
+        // Actualizar los campos del empleado
+        $employee->update([
+            'document_type' => $request->document_type,
+            'document' => $request->document,
+            'address' => $request->address,
+            'start_date' => $request->start_date,
+            'phone' => $request->phone,
+            'eps' => $request->eps,
+            'rh' => $request->rh,
+            'position' => $request->position,
+            'salary' => $request->salary,
+            'status' => $request->status,
+            'gender' => $request->gender,
+        ]);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Empleado actualizado correctamente',
+            'data' => $employee,
+        ], 200);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => false,
+            'message' => 'Hubo un error al intentar actualizar el empleado',
+            'error' => $e->getMessage(),
+        ], 500);
     }
+}
+
+    
+
+
 
     public function destroy($id)
     {

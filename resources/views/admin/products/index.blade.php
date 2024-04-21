@@ -56,22 +56,94 @@
             </div>
         </div>
     </div>
-    <div class="modal" id="destroyProduct" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="block block-rounded shadow-none mb-0">
-                    <div class="block-header block-header-default">
-                        <h3 class="block-title text-uppercase"></h3>
-                        <div class="block-options">
-                            <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
-                                <i class="fa fa-times"></i>
-                            </button>
-                        </div>
+    
+    <div class="modal" id="updateProduct" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="block block-rounded shadow-none mb-0">
+                <div class="block-header block-header-default">
+                    <h3 class="block-title text-uppercase">Editar Producto</h3>
+                    <div class="block-options">
+                        <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-times"></i>
+                        </button>
                     </div>
+                </div>
+                <div class="block-content fs-sm mb-4">
+                    <form id="editProductForm">
+                        @csrf
+                        <input type="hidden" id="editProductId" name="id">
+                        <div class="form-group">
+                            <label for="editProductName">Nombre</label>
+                            <input type="text" class="form-control" id="editProductName" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="editProductDescription">Descripción</label>
+                            <textarea class="form-control" id="editProductDescription" name="description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="editProductStock">Stock</label>
+                            <input type="text" class="form-control" id="editProductStock" name="stock">
+                        </div>
+                        <div class="form-group">
+                            <label for="editProductType">Tipo</label>
+                            <input type="text" class="form-control" id="editProductType" name="type">
+                        </div>
+                        <div class="form-group">
+                            <label for="editProductCreatedAt">Fecha de Creación</label>
+                            <input type="text" class="form-control" id="editProductCreatedAt" name="created_at">
+                        </div>
+                        <div class="form-group">
+                            <label for="editProductUpdatedAt">Fecha de Actualización</label>
+                            <input type="text" class="form-control" id="editProductUpdatedAt" name="updated_at">
+                        </div>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @endsection
 
 @section('js')
     <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
+    <script>
+    $(document).ready(function () {
+        // Manejar el envío del formulario de edición de producto
+        $('#editProductForm').submit(function (event) {
+            event.preventDefault(); // Evitar el envío del formulario por defecto
+
+            // Obtener los datos del formulario
+            const formData = $(this).serialize();
+
+            // Enviar los datos actualizados al servidor a través de una solicitud AJAX
+            $.ajax({
+                url: '/products/' + $('#editProductId').val(), // URL para la actualización del producto
+                type: 'PUT', // Método HTTP para la actualización
+                data: formData, // Datos del formulario serializados
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    // Manejar la respuesta exitosa del servidor
+                    alert('Producto actualizado correctamente');
+                    $('#updateProduct').modal('hide'); // Cerrar el modal de edición después de la actualización
+                    // Actualizar la tabla si es necesario
+                },
+                error: function(err) {
+                    // Manejar errores de la solicitud AJAX
+                    console.error('Error al actualizar el producto:', err);
+                    alert('Hubo un error al actualizar el producto');
+                }
+            });
+        });
+    });
+</script>
+
     <script>
         $(document).ready(function () {
             let dataTabla = null;
@@ -151,7 +223,37 @@
            
         });
     }
+},
+btnEdit: async function (id) {
+    try {
+        // Hacer una solicitud AJAX GET para obtener los datos del producto
+        const response = await axios.get(`/products/${id}`);
+
+        // Verificar si la solicitud fue exitosa
+        if (response.status === 200 && response.data.status) {
+            const product = response.data.data;
+
+            // Rellenar un formulario modal con los datos del producto
+            $('#updateProduct #editProductId').val(product.id);
+            $('#updateProduct #editProductName').val(product.name);
+            $('#updateProduct #editProductDescription').val(product.description);
+            $('#updateProduct #editProductStock').val(product.stock);
+            $('#updateProduct #editProductType').val(product.type);
+            $('#updateProduct #editProductCreatedAt').val(product.created_at);
+            $('#updateProduct #editProductUpdatedAt').val(product.updated_at);
+
+            // Mostrar el formulario modal para permitir la edición
+            $('#updateProduct').modal('show');
+        } else {
+            // Manejar el caso en el que no se encuentre el producto o haya un error
+            alert('No se pudo obtener la información del producto');
+        }
+    } catch (error) {
+        console.error('Error al obtener la información del producto:', error);
+        alert('Hubo un error al obtener la información del producto');
+    }
 }
+
         };
     </script>
 @endsection

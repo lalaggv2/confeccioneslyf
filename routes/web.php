@@ -45,6 +45,7 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::get('/{employee}', [EmployeeController::class, 'show'])->name('employees.show');
         Route::post('/store', [EmployeeController::class, 'store'])->name('employees.store');
         Route::delete('/{id}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
+        Route::put('/{id}', [EmployeeController::class, 'update'])->name('employees.update');
     });
     Route::prefix('customers')->group(function () {
         Route::get('/', [CustomerController::class, 'index'])->name('customers');
@@ -62,6 +63,7 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::get('/{product}', [ProductController::class, 'show'])->name('products.show');
         Route::post('/store', [ProductController::class, 'store'])->name('products.store');
         Route::delete('/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+        Route::put('/{id}', [ProductController::class, 'update'])->name('products.update');
       
     });
 

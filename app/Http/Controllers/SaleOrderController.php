@@ -51,7 +51,7 @@ class SaleOrderController extends Controller
     public function show(SaleOrder $saleOrder)
 {
     try {
-        $saleOrder->load('customer'); // Cargar la relación 'customer'
+        $saleOrder->load('customer'); 
         return response()->json([
             'status' => true,
             'data' => $saleOrder,
