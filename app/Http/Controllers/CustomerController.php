@@ -169,4 +169,30 @@ class CustomerController extends Controller
         }
         
     }
-};    
+
+    public function create(Request $request)
+    {
+        // Validar los datos del formulario
+        $request->validate([
+            'type_document' => 'required',
+            'document' => 'required',
+            'name' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
+        ]);
+    
+        // Crear un nuevo cliente en la base de datos
+        $customer = new Customer();
+        $customer->document_type = $request->type_document;
+        $customer->document = $request->document;
+        $customer->name = $request->name;
+        $customer->phone = $request->phone;
+        $customer->address = $request->address;
+        $customer->save();
+    
+        // Devolver una respuesta
+        return response()->json(['message' => 'Cliente creado correctamente'], 201);
+ 
+    }
+
+} 

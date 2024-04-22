@@ -110,33 +110,7 @@
                             </ul>
                         </li>
                         
-                        <li class="nav-main-item">
-                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
-                                <i class="nav-main-link-icon fa fa-grip-vertical"></i>
-                                <span class="nav-main-link-name">Ordenes</span>
-                            </a>
-                            <ul class="nav-main-submenu">
-                                <li class="nav-main-item">
-                                    <a class="nav-main-link" href="{{route('detail_orders')}}">
-                                        <span class="nav-main-link-name">Detalles de ordenes</span>
-                                    </a>
-                                </li>
-                                <li class="nav-main-item">
-                                    <a class="nav-main-link" href="{{route('sale_orders')}}">
-                                        <span class="nav-main-link-name">Ordenes de ventas</span>
-                                    </a>
-                                </li>
-                                <li class="nav-main-item">
-                                    <a class="nav-main-link" href="{{route('purchase_orders')}}">
-                                        <span class="nav-main-link-name">Ordenes de Compra</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+                        
     </nav>
     <header id="page-header">
         <div class="content-header">

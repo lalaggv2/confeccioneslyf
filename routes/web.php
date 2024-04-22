@@ -53,6 +53,8 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::post('/store', [CustomerController::class, 'store'])->name('customers.store');
         Route::delete('/{id}', [CustomerController::class, 'destroy'])->name('customers.destroy');
         Route::put('/{id}', [CustomerController::class, 'update'])->name('customers.update');
+        Route::post('/customers', [CustomerController::class, 'create'])->name('customers.create');
+
 
         
 
@@ -81,29 +83,7 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::put('/{id}', [SupplierController::class, 'update'])->name('suppliers.update');
     });
 
-    Route::prefix('detail_orders')->group(function () {
-        Route::get('/', [DetailOrderController::class, 'index'])->name('detail_orders');
-        Route::get('/{detail_order}', [DetailOrderController::class, 'show'])->name('detail_orders.show');
-        Route::post('/store', [DetailOrderController::class, 'store'])->name('detail_orders.store');
-        Route::delete('/{id}', [DetailOrderController::class, 'destroy'])->name('detail_orders.destroy');
-        Route::put('/{id}', [DetailOrderController::class, 'update'])->name('detail_orders.update');
-    });
-
-    Route::prefix('sale_orders')->group(function () {
-        Route::get('/', [SaleOrderController::class, 'index'])->name('sale_orders');
-        Route::get('/{sale_order}', [SaleOrderController::class, 'show'])->name('sale_orders.show');
-        Route::post('/store', [SaleOrderController::class, 'store'])->name('sale_orders.store');
-        Route::delete('/{id}', [SaleOrderController::class, 'destroy'])->name('sale_orders.destroy');
-        Route::put('/{id}', [SaleOrderController::class, 'update'])->name('sale_orders.update');
-    });
-
-    Route::prefix('purchase_orders')->group(function () {
-        Route::get('/', [PurchaseOrderController::class, 'index'])->name('purchase_orders');
-        Route::get('/{purchase_order}', [PurchaseOrderController::class, 'show'])->name('purchase_orders.show');
-        Route::post('/store', [PurchaseOrderController::class, 'store'])->name('purchase_orders.store');
-        Route::delete('/{id}', [PurchaseOrderController::class, 'destroy'])->name('purchase_orders.destroy');
-    });
-
+    
 
 
 

@@ -11,7 +11,8 @@
 @section('content')
     <div class="card p-3 position-relative">
         <h2 class="content-heading"><i class="fa fa-users me-2"></i>CLIENTES</h2>
-        <button type="button" class="btn btn-secondary w-25 btn-add" data-target="#create"><i class="fa fa-plus"></i> Agregar cliente</button>
+        <button type="button" class="btn btn-secondary w-25 btn-add" data-toggle="modal" data-target="#createCustomerModal"><i class="fa fa-plus"></i> Agregar cliente</button>
+
         <div class="card-body">
             <div class="table-responsive">
                 <table id="tableCustomers" class="table table-bordered table-hover table-striped table-sm">
@@ -25,6 +26,49 @@
                         <th class="text-center">ACCIONES</th>
                     </thead>
                 </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="createCustomer" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="block block-rounded shadow-none mb-0">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title text-uppercase">Agregar Cliente</h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-content fs-sm mb-4">
+                        <form id="createCustomerForm">
+                            @csrf
+                            <div class="form-group">
+                                <label for="createDocumentType">Tipo de Documento</label>
+                                <input type="text" class="form-control" id="createDocumentType" name="document_type">
+                            </div>
+                            <div class="form-group">
+                                <label for="createDocument">Documento</label>
+                                <input type="text" class="form-control" id="createDocument" name="document">
+                            </div>
+                            <div class="form-group">
+                                <label for="createName">Nombre</label>
+                                <input type="text" class="form-control" id="createName" name="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="createPhone">Teléfono</label>
+                                <input type="text" class="form-control" id="createPhone" name="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="createAddress">Dirección</label>
+                                <input type="text" class="form-control" id="createAddress" name="address">
+                            </div>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -105,6 +149,37 @@
 
 @section('js')
     <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#createCustomerForm').submit(function (event) {
+                event.preventDefault(); 
+
+                // Obtener los datos del formulario
+                const formData = $(this).serialize();
+
+                // Enviar los datos del formulario al servidor
+                $.ajax({
+                    url: '/customers', // Ruta para la creación de clientes
+                    type: 'POST', // Método HTTP para la creación
+                    data: formData, // Datos del formulario serializados
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        // Manejar la respuesta exitosa del servidor
+                        alert('Cliente creado correctamente');
+                        $('#createCustomerModal').modal('hide'); // Cerrar el modal de creación después de la creación
+                        // Actualizar la tabla si es necesario
+                    },
+                    error: function(err) {
+                        // Manejar errores de la solicitud AJAX
+                        console.error('Error al crear el cliente:', err);
+                        alert('Hubo un error al crear el cliente');
+                    }
+                });
+            });
+        });
+    </script>
     <script>
     $(document).ready(function () {
         
