@@ -67,7 +67,7 @@
         </div>
     </div>
     
-    <!-- Modal de edición -->
+   
 <div class="modal" id="updateProduct" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -75,7 +75,7 @@
                 <div class="block-header block-header-default">
                     <h3 class="block-title text-uppercase">Editar Producto</h3>
                     <div class="block-options">
-                        <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
                             <i class="fa fa-times"></i>
                         </button>
                     </div>
@@ -140,8 +140,8 @@
                             <label for="editProductUpdatedAt">Fecha de Actualización</label>
                             <input type="text" class="form-control" id="editProductUpdatedAt" name="updated_at">
                         </div>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="close">Cancelar</button>
+                        <button type="summit" class="btn btn-primary">Guardar cambios</button>
                     </form>
                 </div>
             </div>
@@ -175,7 +175,7 @@
                     // Manejar la respuesta exitosa del servidor
                     alert('Producto actualizado correctamente');
                     $('#updateProduct').modal('hide'); // Cerrar el modal de edición después de la actualización
-                    // Actualizar la tabla si es necesario
+                    location.reload();
                 },
                 error: function(err) {
                     // Manejar errores de la solicitud AJAX
@@ -264,6 +264,7 @@
             },
             success: function(response) {
                 alert('producto eliminado correctamente');
+                location.reload();
                 
             },
            

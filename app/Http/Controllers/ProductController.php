@@ -171,7 +171,9 @@ class ProductController extends Controller
                 'message' => 'Hubo un error al intentar actualizar el proveedor',
                 'error' => $e->getMessage()
             ], 500);
+            refreshTable();
         }
+        
     }
 
     public function destroy($id)

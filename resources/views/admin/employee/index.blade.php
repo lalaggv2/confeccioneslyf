@@ -76,7 +76,7 @@
                 <div class="block-header block-header-default">
                     <h3 class="block-title text-uppercase">Editar Empleado</h3>
                     <div class="block-options">
-                        <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
                             <i class="fa fa-times"></i>
                         </button>
                     </div>
@@ -145,7 +145,7 @@
     </select>
 </div>
 
-                        <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="close">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Guardar cambios</button>
                     </form>
                 </div>
@@ -178,10 +178,12 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(response) {
-                    // Manejar la respuesta exitosa del servidor
-                    alert('Empleado actualizado correctamente');
-                    $('#updateEmployee').modal('hide'); // Cerrar el modal de edición después de la actualización
-                    // Actualizar la tabla si es necesario
+        // Mostrar la respuesta en la consola del navegador
+        console.log(response);
+        alert('Empleado actualizado correctamente');
+
+        // Recargar la página después de editar el empleado
+        location.reload();
                 },
                 error: function(err) {
                     // Manejar errores de la solicitud AJAX
@@ -295,9 +297,12 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(response) {
-                // Mostrar la respuesta en la consola del navegador
-                console.log(response);
-                alert('Empleado eliminado correctamente');
+        // Mostrar la respuesta en la consola del navegador
+        console.log(response);
+        alert('Empleado eliminado correctamente');
+
+        // Recargar la página después de eliminar el empleado
+        location.reload();
             },
             error: function(xhr, textStatus, errorThrown) {
                 // Mostrar el error en la consola del navegador
@@ -334,6 +339,7 @@ btnEdit: async function (id) {
 
             // Mostrar el formulario modal para permitir la edición
             $('#updateEmployee').modal('show');
+            
         } else {
             // Manejar el caso en el que no se encuentre el empleado o haya un error
             alert('No se pudo obtener la información del empleado');

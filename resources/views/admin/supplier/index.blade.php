@@ -64,7 +64,7 @@
                 <div class="block-header block-header-default">
                     <h3 class="block-title text-uppercase">Editar Proveedor</h3>
                     <div class="block-options">
-                        <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
                             <i class="fa fa-times"></i>
                         </button>
                     </div>
@@ -101,7 +101,7 @@
                             <label for="editEmail">Email</label>
                             <input type="email" class="form-control" id="editEmail" name="email">
                         </div>
-                        <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="close">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Guardar cambios</button>
                     </form>
                 </div>
@@ -140,7 +140,7 @@
                     // Manejar la respuesta exitosa del servidor
                     alert('Proveedor actualizado correctamente');
                     $('#updateSupplier').modal('hide'); // Cerrar el modal de edición después de la actualización
-                    // Actualizar la tabla si es necesario
+                    location.reload();
                 },
                 error: function(err) {
                     // Manejar errores de la solicitud AJAX
@@ -225,7 +225,7 @@
                 },
                 success: function(response) {
                     alert('Proveedor eliminado correctamente');
-                    // Actualizar la tabla si es necesario
+                    location.reload();
                 },
                 error: function(err) {
                     console.error('Error al eliminar el proveedor:', err);

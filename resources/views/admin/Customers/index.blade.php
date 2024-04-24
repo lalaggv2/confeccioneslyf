@@ -36,7 +36,7 @@
                     <div class="block-header block-header-default">
                         <h3 class="block-title text-uppercase">Agregar Cliente</h3>
                         <div class="block-options">
-                            <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
                                 <i class="fa fa-times"></i>
                             </button>
                         </div>
@@ -106,7 +106,7 @@
                 <div class="block-header block-header-default">
                     <h3 class="block-title text-uppercase">Editar Cliente</h3>
                     <div class="block-options">
-                        <button type="button" class="btn-block-option" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
                             <i class="fa fa-times"></i>
                         </button>
                     </div>
@@ -135,7 +135,7 @@
                             <label for="editAddress">Dirección</label>
                             <input type="text" class="form-control" id="editAddress" name="address">
                         </div>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Guardar cambios</button>
                     </form>
                 </div>
@@ -170,6 +170,7 @@
                         alert('Cliente creado correctamente');
                         $('#createCustomerModal').modal('hide'); // Cerrar el modal de creación después de la creación
                         // Actualizar la tabla si es necesario
+                        location.reload();
                     },
                     error: function(err) {
                         // Manejar errores de la solicitud AJAX
@@ -201,7 +202,7 @@
                     
                     alert('Cliente actualizado correctamente');
                     $('#updateCustomers').modal('hide'); 
-                    
+                    location.reload();
                 },
                 error: function(err) {
                     
@@ -284,6 +285,7 @@
                         },
                         success: function(response) {
                             alert('Cliente eliminado correctamente');
+                            location.reload();
                             
                         },
                     });
