@@ -11,7 +11,7 @@
 @section('content')
     <div class="card p-3 position-relative">
         <h2 class="content-heading"><i class="fa fa-users me-2"></i>PROVEEDORES</h2>
-        <button type="button" class="btn btn-secondary w-25 btn-add" data-target="#create"><i class="fa fa-plus"></i> Agregar proveedor</button>
+        <button type="modal" class="btn btn-secondary w-25 btn-add" data-target="#create" id><i class="fa fa-plus"></i> Agregar proveedor</button>
         <div class="card-body">
             <div class="table-responsive">
                 <table id="tableSuppliers" class="table table-bordered table-hover table-striped table-sm">
@@ -29,6 +29,8 @@
             </div>
         </div>
     </div>
+
+    
     
     <div class="modal" id="showSupplier" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -110,6 +112,52 @@
     </div>
 </div>
 
+<!-- Modal de agregar proveedores -->
+<div class="modal" id="createSupplier" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Agregar Proveedor</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="createForm">
+                    @csrf
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="document_type">Tipo de Documento</label>
+                        <input type="text" class="form-control" id="document_type" name="document_type" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="document">Documento</label>
+                        <input type="text" class="form-control" id="document" name="document" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Teléfono</label>
+                        <input type="text" class="form-control" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Dirección</label>
+                        <input type="text" class="form-control" id="address" name="address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Agregar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
     
     
@@ -117,6 +165,39 @@
 
 @section('js')
     <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
+    <script>
+    $(document).ready(function () {
+        // Manejar el envío del formulario de creación
+        $('#createForm').submit(function (event) {
+            event.preventDefault(); // Evitar el envío del formulario por defecto
+
+            // Obtener los datos del formulario
+            const formData = $(this).serialize();
+
+            // Enviar los datos al servidor a través de una solicitud AJAX
+            $.ajax({
+                url: '/suppliers', // URL para la creación del proveedor
+                type: 'POST', // Método HTTP para la creación
+                data: formData, // Datos del formulario serializados
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    // Manejar la respuesta exitosa del servidor
+                    alert('Proveedor agregado correctamente');
+                    $('#createSupplier').modal('hide'); // Cerrar el modal de creación después de la agregación
+                    location.reload();
+                },
+                error: function(err) {
+                    // Manejar errores de la solicitud AJAX
+                    console.error('Error al agregar el proveedor:', err);
+                    alert('Hubo un error al agregar el proveedor');
+                }
+            });
+        });
+    });
+</script>
+
     <script>
     $(document).ready(function () {
         // ... Otras funciones y configuraciones aquí ...
@@ -128,22 +209,21 @@
             // Obtener los datos del formulario
             const formData = $(this).serialize();
 
-            // Enviar los datos actualizados al servidor a través de una solicitud AJAX
             $.ajax({
-                url: '/suppliers/' + $('#editId').val(), // URL para la actualización del proveedor
-                type: 'PUT', // Método HTTP para la actualización
-                data: formData, // Datos del formulario serializados
+                url: '/suppliers/' + $('#editId').val(), 
+                type: 'PUT', 
+                data: formData, 
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(response) {
-                    // Manejar la respuesta exitosa del servidor
+                    
                     alert('Proveedor actualizado correctamente');
-                    $('#updateSupplier').modal('hide'); // Cerrar el modal de edición después de la actualización
+                    $('#updateSupplier').modal('hide'); 
                     location.reload();
                 },
                 error: function(err) {
-                    // Manejar errores de la solicitud AJAX
+                    
                     console.error('Error al actualizar el proveedor:', err);
                     alert('Hubo un error al actualizar el proveedor');
                 }

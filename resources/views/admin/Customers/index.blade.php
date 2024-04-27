@@ -11,7 +11,7 @@
 @section('content')
     <div class="card p-3 position-relative">
         <h2 class="content-heading"><i class="fa fa-users me-2"></i>CLIENTES</h2>
-        <button type="button" class="btn btn-secondary w-25 btn-add" data-toggle="modal" data-target="#createCustomerModal"><i class="fa fa-plus"></i> Agregar cliente</button>
+        <button type="button" class="btn btn-secondary w-25 btn-add" data-toggle="modal" data-target="createCustomer"><i class="fa fa-plus"></i> Agregar cliente</button>
 
         <div class="card-body">
             <div class="table-responsive">
@@ -151,7 +151,7 @@
     <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
     <script>
         $(document).ready(function () {
-            $('#createCustomerForm').submit(function (event) {
+            $('#createForm').submit(function (event) {
                 event.preventDefault(); 
 
                 // Obtener los datos del formulario
@@ -311,6 +311,39 @@
 
                 
                 $('#updateCustomer').modal('show');
+            } else {
+                
+                alert('No se pudo obtener la información del cliente');
+            }
+        } catch (error) {
+            console.error('Error al obtener la información del cliente:', error);
+            alert('Hubo un error al obtener la información del cliente');
+        }
+        
+  
+    },
+
+
+    btnCrete: async function (id) {
+        try {
+            
+            const response = await axios.get(`/customers/${id}`);
+
+            
+            if (response.status === 200 && response.data.status) {
+                const customer = response.data.data;
+
+            
+                $('#storeCustomer #createId').val(customer.id);
+                $('#storeCustomer #createDocumentType').val(customer.document_type);
+                $('#storeCustomer #createDocument').val(customer.document);
+                $('#storeCustomer #createName').val(customer.name);
+                $('#storeCustomer #createddress').val(customer.address);
+                $('#storCustomer #createPhone').val(customer.phone);
+                $('#storeCustomer #createEmail').val(customer.email);
+
+                
+                $('#createCustomer').modal('show');
             } else {
                 
                 alert('No se pudo obtener la información del cliente');

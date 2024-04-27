@@ -9,51 +9,68 @@ use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
     public function index(Request $request)
-    {
-        if ($request->ajax()) {
-            $page = $request->input('start') / $request->input('length') + 1;
-            $perPage = $request->input('length', 100);
+{
+    if ($request->ajax()) {
+        $page = $request->input('start') / $request->input('length') + 1;
+        $perPage = $request->input('length', 100);
 
-            $modelQuery = Product::query();
-            $modelQuery->orderBy('id', 'desc');
+        $modelQuery = Product::query();
 
-            $totalRecords = $modelQuery->count();
-            $results = $modelQuery
-                ->skip(($page - 1) * $perPage)
-                ->take($perPage)
-                ->get();
-            $data = [];
-            foreach ($results as $product) {
-                $data[] = [
-                    'id' => $product->id,
-                    'name' => $product->name,
-                    'description' => $product->description,
-                    'stock'=> $product->stock,
-                    'type' => $product->type,
-                    'sku' => $product->sku,
-                    'barcode' => $product->barcode,
-                    'size' => $product->size,
-                    'color' => $product->color,
-                    'material' => $product->material,
-                    'location' => $product->location,
-                    'price' => '$' . number_format($product->price, 2),
-                    'stock' => $product->stock,
-                    'notes' => $product->notes,
-                    'created_at' => $product->created_at->format('Y-m-d H:i:s'),
-                    'updated_at' => $product->updated_at->format('Y-m-d H:i:s'),
-                    'btns' => view('helpers.buttons', ['obj' => 'app', 'id' => $product->id, 'show' => 1, 'edit' => 1, 'delete' => 1])->render(),
-                ];
-            }
-            $response = [
-                'draw' => $request->input('draw'),
-                'recordsTotal' => $totalRecords,
-                'recordsFiltered' => $totalRecords,
-                'data' => $data,
-            ];
-            return response()->json($response);
+        // Aplicar filtros
+        if ($request->has('search') && !empty($request->input('search.value'))) {
+            $searchValue = $request->input('search.value');
+            $modelQuery->where('name', 'like', "%$searchValue%")
+                       ->orWhere('description', 'like', "%$searchValue%")
+                       ->orWhere('type', 'like', "%$searchValue%")
+                       ->orWhere('sku', 'like', "%$searchValue%")
+                       ->orWhere('barcode', 'like', "%$searchValue%")
+                       ->orWhere('size', 'like', "%$searchValue%")
+                       ->orWhere('color', 'like', "%$searchValue%")
+                       ->orWhere('material', 'like', "%$searchValue%")
+                       ->orWhere('location', 'like', "%$searchValue%")
+                       ->orWhere('notes', 'like', "%$searchValue%");
         }
-        return view('admin.products.index');
+
+        $modelQuery->orderBy('id', 'desc');
+
+        $totalRecords = $modelQuery->count();
+        $results = $modelQuery
+            ->skip(($page - 1) * $perPage)
+            ->take($perPage)
+            ->get();
+        $data = [];
+        foreach ($results as $product) {
+            $data[] = [
+                'id' => $product->id,
+                'name' => $product->name,
+                'description' => $product->description,
+                'stock'=> $product->stock,
+                'type' => $product->type,
+                'sku' => $product->sku,
+                'barcode' => $product->barcode,
+                'size' => $product->size,
+                'color' => $product->color,
+                'material' => $product->material,
+                'location' => $product->location,
+                'price' => '$' . number_format($product->price, 2),
+                'stock' => $product->stock,
+                'notes' => $product->notes,
+                'created_at' => $product->created_at->format('Y-m-d H:i:s'),
+                'updated_at' => $product->updated_at->format('Y-m-d H:i:s'),
+                'btns' => view('helpers.buttons', ['obj' => 'app', 'id' => $product->id, 'show' => 1, 'edit' => 1, 'delete' => 1])->render(),
+            ];
+        }
+        $response = [
+            'draw' => $request->input('draw'),
+            'recordsTotal' => $totalRecords,
+            'recordsFiltered' => $totalRecords, // Esto se ajustará más adelante para reflejar el número de registros después del filtrado
+            'data' => $data,
+        ];
+        return response()->json($response);
     }
+    return view('admin.products.index');
+}
+
 
     public function show(Product $product)
     {

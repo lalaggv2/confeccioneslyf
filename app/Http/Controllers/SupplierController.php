@@ -9,42 +9,57 @@ use Illuminate\Support\Facades\DB;
 class SupplierController extends Controller
 {
     public function index(Request $request)
-    {
-        if ($request->ajax()) {
-            $page = $request->input('start') / $request->input('length') + 1;
-            $perPage = $request->input('length', 100);
+{
+    if ($request->ajax()) {
+        $page = $request->input('start') / $request->input('length') + 1;
+        $perPage = $request->input('length', 100);
 
-            $modelQuery = Supplier::query();
-            $modelQuery->orderBy('id', 'desc');
+        $modelQuery = Supplier::query();
 
-            $totalRecords = $modelQuery->count();
-            $results = $modelQuery
-                ->skip(($page - 1) * $perPage)
-                ->take($perPage)
-                ->get();
-            $data = [];
-            foreach ($results as $model) {
-                $data[] = [
-                    'id' => $model->id,
-                    'document_type' => $model->document_type,
-                    'document' => $model->document,
-                    'name' => $model->name,
-                    'address' => $model->address,
-                    'phone' => $model->phone,
-                    'email' => $model->email,
-                    'btns' => view('helpers.buttons', ['obj' => 'app', 'id' => $model->id, 'show' => 1, 'edit' => 1, 'delete' => 1])->render(),
-                ];
-            }
-            $response = [
-                'draw' => $request->input('draw'),
-                'recordsTotal' => $totalRecords,
-                'recordsFiltered' => $totalRecords,
-                'data' => $data,
-            ];
-            return response()->json($response);
+        // Aplicar filtros
+        if ($request->has('search') && !empty($request->input('search.value'))) {
+            $searchValue = $request->input('search.value');
+            $modelQuery->where(function($query) use ($searchValue) {
+                $query->where('name', 'like', "%$searchValue%")
+                      ->orWhere('document_type', 'like', "%$searchValue%")
+                      ->orWhere('document', 'like', "%$searchValue%")
+                      ->orWhere('address', 'like', "%$searchValue%")
+                      ->orWhere('phone', 'like', "%$searchValue%")
+                      ->orWhere('email', 'like', "%$searchValue%");
+            });
         }
-        return view('admin.supplier.index');
+
+        $modelQuery->orderBy('id', 'desc');
+
+        $totalRecords = $modelQuery->count();
+        $results = $modelQuery
+            ->skip(($page - 1) * $perPage)
+            ->take($perPage)
+            ->get();
+        $data = [];
+        foreach ($results as $model) {
+            $data[] = [
+                'id' => $model->id,
+                'document_type' => $model->document_type,
+                'document' => $model->document,
+                'name' => $model->name,
+                'address' => $model->address,
+                'phone' => $model->phone,
+                'email' => $model->email,
+                'btns' => view('helpers.buttons', ['obj' => 'app', 'id' => $model->id, 'show' => 1, 'edit' => 1, 'delete' => 1])->render(),
+            ];
+        }
+        $response = [
+            'draw' => $request->input('draw'),
+            'recordsTotal' => $totalRecords,
+            'recordsFiltered' => $totalRecords, // Esto se ajustará más adelante para reflejar el número de registros después del filtrado
+            'data' => $data,
+        ];
+        return response()->json($response);
     }
+    return view('admin.supplier.index');
+}
+
 
     public function show(Supplier $supplier)
     {
@@ -64,39 +79,33 @@ class SupplierController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'document_type' => 'required',
-            'document' => 'required',
-            'name' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
-            'email' => 'required|email',
+        // Validar los datos del formulario
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'document_type' => 'required|string|max:255',
+            'document' => 'required|string|max:255',
+            'phone' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
         ]);
-        DB::beginTransaction();
-        try {
-            $supplier = Supplier::create([
-                'document_type' => $request->document_type,
-                'document' => $request->document,
-                'name' => $request->name,
-                'address' => $request->address,
-                'phone' => $request->phone,
-                'email' => $request->email,
-            ]);
 
-            DB::commit();
+        try {
+            // Crear un nuevo proveedor con los datos proporcionados
+            $supplier = Supplier::create($validatedData);
+
+            // Retornar una respuesta de éxito con el proveedor creado
             return response()->json([
                 'status' => true,
-                'message' => 'Proveedor guardado correctamente',
-                'data' => $supplier
-            ], 200);
-
+                'message' => 'Proveedor creado correctamente',
+                'data' => $supplier,
+            ], 201); // 201: Created
         } catch (\Exception $e) {
-            DB::rollBack();
+            // Retornar una respuesta de error si algo sale mal
             return response()->json([
                 'status' => false,
-                'message' => 'Hubo un error al intentar guardar el proveedor',
-                'error' => $e->getMessage()
-            ], 500);
+                'message' => 'Error al crear el proveedor',
+                'error' => $e->getMessage(),
+            ], 500); // 500: Internal Server Error
         }
     }
 

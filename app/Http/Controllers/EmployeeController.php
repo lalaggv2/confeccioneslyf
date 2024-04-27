@@ -25,44 +25,62 @@ class EmployeeController extends Controller
     }
 
     public function index(Request $request)
-    {
-        if ($request->ajax()) {
-            $page = $request->input('start') / $request->input('length') + 1;
-            $perPage = $request->input('length', 100);
+{
+    if ($request->ajax()) {
+        $page = $request->input('start') / $request->input('length') + 1;
+        $perPage = $request->input('length', 100);
 
-            $modelQuery = $this->model()->query();
-            $modelQuery->orderBy('id', 'desc');
+        $modelQuery = $this->model()->query();
 
-            $totalRecords = $modelQuery->count();
-            $results = $modelQuery
-                ->skip(($page - 1) * $perPage)
-                ->take($perPage)
-                ->get();
-            $data = [];
-            foreach ($results as $model) {
-                $user = $model->user;
-                $data[] = [
-                    'id' => $model->id,
-                    'name' => '<div><label class="text-capitalize">' . $user->name . '</label><br><label class="small">' . $user->email . '</label></div>',
-                    'document' => $model->document_type . ', ' . $model->document,
-                    'phone' => $model->phone,
-                    'eps' => $model->eps,
-                    'position' => $model->position,
-                    'salary' => '$' . number_format($model->salary, 0, ',', '.'),
-                    'status' => ((int)$model->status === 1) ? '<span class="badge text-bg-success" role="alert">Activo</span>' : '<span class="badge text-bg-danger" role="alert">Inactivo</span>',
-                    'btns' => view('helpers.buttons', ['obj' => 'app', 'id' => $model->id, 'show' => 1, 'edit' => 1, 'delete' => 1])->render(),
-                ];
-            }
-            $response = [
-                'draw' => $request->input('draw'),
-                'recordsTotal' => $totalRecords,
-                'recordsFiltered' => $totalRecords,
-                'data' => $data,
-            ];
-            return response()->json($response);
+        // Aplicar filtros
+        if ($request->has('search') && !empty($request->input('search.value'))) {
+            $searchValue = $request->input('search.value');
+            $modelQuery->where(function($query) use ($searchValue) {
+                $query->whereHas('user', function($query) use ($searchValue) {
+                    $query->where('name', 'like', "%$searchValue%")
+                          ->orWhere('email', 'like', "%$searchValue%");
+                })->orWhere('document_type', 'like', "%$searchValue%")
+                  ->orWhere('document', 'like', "%$searchValue%")
+                  ->orWhere('phone', 'like', "%$searchValue%")
+                  ->orWhere('eps', 'like', "%$searchValue%")
+                  ->orWhere('position', 'like', "%$searchValue%")
+                  ->orWhere('salary', 'like', "%$searchValue%");
+            });
         }
-        return view('admin.employee.index');
+
+        $modelQuery->orderBy('id', 'desc');
+
+        $totalRecords = $modelQuery->count();
+        $results = $modelQuery
+            ->skip(($page - 1) * $perPage)
+            ->take($perPage)
+            ->get();
+        $data = [];
+        foreach ($results as $model) {
+            $user = $model->user;
+            $data[] = [
+                'id' => $model->id,
+                'name' => '<div><label class="text-capitalize">' . $user->name . '</label><br><label class="small">' . $user->email . '</label></div>',
+                'document' => $model->document_type . ', ' . $model->document,
+                'phone' => $model->phone,
+                'eps' => $model->eps,
+                'position' => $model->position,
+                'salary' => '$' . number_format($model->salary, 0, ',', '.'),
+                'status' => ((int)$model->status === 1) ? '<span class="badge text-bg-success" role="alert">Activo</span>' : '<span class="badge text-bg-danger" role="alert">Inactivo</span>',
+                'btns' => view('helpers.buttons', ['obj' => 'app', 'id' => $model->id, 'show' => 1, 'edit' => 1, 'delete' => 1])->render(),
+            ];
+        }
+        $response = [
+            'draw' => $request->input('draw'),
+            'recordsTotal' => $totalRecords,
+            'recordsFiltered' => $totalRecords, // Esto se ajustará más adelante para reflejar el número de registros después del filtrado
+            'data' => $data,
+        ];
+        return response()->json($response);
     }
+    return view('admin.employee.index');
+}
+
 
    
     public function show(Employee $employee)

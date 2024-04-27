@@ -53,7 +53,7 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::post('/store', [CustomerController::class, 'store'])->name('customers.store');
         Route::delete('/{id}', [CustomerController::class, 'destroy'])->name('customers.destroy');
         Route::put('/{id}', [CustomerController::class, 'update'])->name('customers.update');
-        Route::post('/customers', [CustomerController::class, 'create'])->name('customers.create');
+        
 
 
         
@@ -81,6 +81,8 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::post('/store', [SupplierController::class, 'store'])->name('suppliers.store');
         Route::delete('/{id}', [SupplierController::class, 'destroy'])->name('suppliers.destroy');
         Route::put('/{id}', [SupplierController::class, 'update'])->name('suppliers.update');
+        Route::post('/store', [SupplierController::class, 'store'])->name('suppliers.store');
+
     });
 
     
