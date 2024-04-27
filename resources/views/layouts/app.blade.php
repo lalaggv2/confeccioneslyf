@@ -35,11 +35,13 @@
             <div class="js-sidebar-scroll">
                 <div class="content-side content-side-user px-0 py-0">
                     <div class="smini-visible-block animated fadeIn px-3">
-                        <img class="img-avatar img-avatar32" src="assets/media/avatars/avatar15.jpg" alt="">
+                        <img id="avatarImage" class="img-avatar img-avatar32" src="{{ asset('assets/media/avatars/avatar15.jpg') }}" alt="">
+                        <input type="file" id="avatarInput" style="display: none;">
+                        <button id="changeAvatarBtn" class="btn btn-sm btn-alt-secondary">Cambiar Avatar</button>
                     </div>
                     <div class="smini-hidden text-center mx-auto">
                         <a class="img-link" href="javascript:void(0)">
-                            <img class="img-avatar" src="assets/media/avatars/avatar15.jpg" alt="">
+                            <img class="img-avatar" src="{{ asset('assets/media/avatars/avatar15.jpg') }}" alt="">
                         </a>
                         <ul class="list-inline mt-3 mb-0">
                             <li class="list-inline-item">
@@ -180,5 +182,22 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 @yield('js')
+
+<script>
+    $(document).ready(function() {
+        $('#changeAvatarBtn').on('click', function() {
+            $('#avatarInput').click();
+        });
+
+        $('#avatarInput').on('change', function(e) {
+            var file = e.target.files[0];
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#avatarImage').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(file);
+        });
+    });
+</script>
 </body>
 </html>
