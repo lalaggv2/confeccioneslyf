@@ -98,7 +98,7 @@ class CustomerController extends Controller
         // Devolver una respuesta
         return response()->json([
             'status' => true,
-            'message' => 'Cliente creado correctamente',
+            'message' => 'Cliente no correctamente',
             'data' => $customer
         ], 200);
 

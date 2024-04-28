@@ -11,7 +11,9 @@
 @section('content')
     <div class="card p-3 position-relative">
         <h2 class="content-heading"><i class="fa fa-box me-2"></i>PRODUCTOS</h2>
-        <button type="button" class="btn btn-secondary w-25 btn-add" data-target="#create"><i class="fa fa-plus"></i> Agregar producto</button>
+        <button type="button" class="btn btn-secondary w-25 btn-add" onclick="app.openModalCreate()"><i
+                    class="fa fa-plus"></i> Agregar producto
+        </button>
         <div class="card-body">
             <div class="table-responsive">
                 <table id="tableProducts" class="table table-bordered table-hover table-striped table-sm">
@@ -29,6 +31,76 @@
             </div>
         </div>
     </div>
+
+    
+    <div class="modal" id="createProduct" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="block block-rounded shadow-none mb-0">
+                <div class="modal-header block-header-default">
+                    <h3 class="modal-title block-title text-uppercase">Crear Producto</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body block-content fs-sm mb-4">
+                    <form id="createProductForm">
+                        <div class="form-group mb-3">
+                            <label for="name">Nombre</label>
+                            <input type="text" class="form-control" id="name" name="name" >
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="description">Descripción</label>
+                            <textarea class="form-control" id="description" name="description" rows="3" ></textarea>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="type">Tipo</label>
+                            <input type="text" class="form-control" id="type" name="type" >
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="sku">SKU</label>
+                            <input type="text" class="form-control" id="sku" name="sku" >
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="barcode">Código de barras</label>
+                            <input type="text" class="form-control" id="barcode" name="barcode" >
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="size">Tamaño</label>
+                            <input type="text" class="form-control" id="size" name="size" >
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="color">Color</label>
+                            <input type="text" class="form-control" id="color" name="color" >
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="material">Material</label>
+                            <input type="text" class="form-control" id="material" name="material" >
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="location">Ubicación</label>
+                            <input type="text" class="form-control" id="location" name="location" >
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="price">Precio</label>
+                            <input type="number" step="0.01" class="form-control" id="price" name="price" >
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="stock">Stock</label>
+                            <input type="number" class="form-control" id="stock" name="stock" >
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="notes">Notas</label>
+                            <textarea class="form-control" id="notes" name="notes" rows="3" ></textarea>
+                        </div>
+                        <div class="mt-3">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" onclick="app.saveProduct()">Guardar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
     <div class="modal" id="showProduct" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -234,6 +306,9 @@
         });
 
         const app = {
+            openModalCreate() {
+          $('#createProduct').modal('show');
+        },
             btnShow: async function (id) {
                 const {data} = await axios.get(route('products.show', id));
                 const product = data.data;
@@ -309,7 +384,45 @@ btnEdit: async function (id) {
         console.error('Error al obtener la información del producto:', error);
         alert('Hubo un error al obtener la información del producto');
     }
-}
+}, 
+saveProduct: function () {
+          const form = $('#createProductForm').serializeArray();
+          const data = form.reduce((obj, item) => {
+            obj[item.name] = item.value;
+            return obj;
+          }, {});
+          axios({
+            method: 'post',
+            url: route('products.store'),
+            data: data,
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+            }
+          }).then(response => {
+            if (response.status === 200) {
+             
+              $('#createProductForm')[0].reset();
+              $('#createProduct').modal('hide');
+              $.toast({
+                text: 'Cliente creado exitosamente',
+                position: 'top-right',
+                stack: false,
+                icon: 'success'
+              });
+              location.reload();
+            } else {
+              $.toast({
+                text: 'Error al crear el cliente',
+                position: 'top-right',
+                stack: false,
+                icon: 'error'
+              })
+            }
+          }).catch(error => {
+            console.error(error);
+          });
+        }
 
         };
     </script>

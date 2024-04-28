@@ -11,7 +11,9 @@
 @section('content')
     <div class="card p-3 position-relative">
         <h2 class="content-heading"><i class="fa fa-users me-2"></i>PROVEEDORES</h2>
-        <button type="modal" class="btn btn-secondary w-25 btn-add" data-target="#create" id><i class="fa fa-plus"></i> Agregar proveedor</button>
+        <button type="button" class="btn btn-secondary w-25 btn-add" onclick="app.openModalCreate()"><i
+                    class="fa fa-plus"></i> Agregar provedor
+        </button>
         <div class="card-body">
             <div class="table-responsive">
                 <table id="tableSuppliers" class="table table-bordered table-hover table-striped table-sm">
@@ -30,7 +32,57 @@
         </div>
     </div>
 
-    
+    <div class="modal" id="createSupplier" tabindex="-1" role="dialog" aria-labelledby="modal-normal"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="block block-rounded shadow-none mb-0">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title text-uppercase">Agregar Cliente</h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-content fs-sm mb-4">
+                        <form id="createSupplierForm" method="post">
+                            @csrf
+                            <div class="form-group">
+                                <label for="createDocumentType">Tipo de Documento</label>
+                                <input type="text" class="form-control" id="createDocumentType" name="document_type">
+                            </div>
+                            <div class="form-group">
+                                <label for="createDocument">Documento</label>
+                                <input type="text" class="form-control" id="createDocument" name="document">
+                            </div>
+                            <div class="form-group">
+                                <label for="createName">Nombre</label>
+                                <input type="text" class="form-control" id="createName" name="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="createPhone">Teléfono</label>
+                                <input type="text" class="form-control" id="createPhone" name="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="createAddress">Dirección</label>
+                                <input type="text" class="form-control" id="createAddress" name="address">
+                            </div>
+                            <div class="form-group">
+                                <label for="createEmail">Email</label>
+                                <input type="text" class="form-control" id="createEmail" name="email">
+                            </div>
+                            <div class="mt-3">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary" onclick="app.saveSupplier()">Guardar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <div class="modal" id="showSupplier" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -112,50 +164,6 @@
     </div>
 </div>
 
-<!-- Modal de agregar proveedores -->
-<div class="modal" id="createSupplier" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Agregar Proveedor</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="createForm">
-                    @csrf
-                    <div class="form-group">
-                        <label for="name">Nombre</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="document_type">Tipo de Documento</label>
-                        <input type="text" class="form-control" id="document_type" name="document_type" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="document">Documento</label>
-                        <input type="text" class="form-control" id="document" name="document" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Teléfono</label>
-                        <input type="text" class="form-control" id="phone" name="phone" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="address">Dirección</label>
-                        <input type="text" class="form-control" id="address" name="address" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Agregar</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 
@@ -166,37 +174,37 @@
 @section('js')
     <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
     <script>
-    $(document).ready(function () {
-        // Manejar el envío del formulario de creación
+      $(document).ready(function () {
         $('#createForm').submit(function (event) {
-            event.preventDefault(); // Evitar el envío del formulario por defecto
+          event.preventDefault();
 
-            // Obtener los datos del formulario
-            const formData = $(this).serialize();
+          // Obtener los datos del formulario
+          const formData = $(this).serialize();
 
-            // Enviar los datos al servidor a través de una solicitud AJAX
-            $.ajax({
-                url: '/suppliers', // URL para la creación del proveedor
-                type: 'POST', // Método HTTP para la creación
-                data: formData, // Datos del formulario serializados
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(response) {
-                    // Manejar la respuesta exitosa del servidor
-                    alert('Proveedor agregado correctamente');
-                    $('#createSupplier').modal('hide'); // Cerrar el modal de creación después de la agregación
-                    location.reload();
-                },
-                error: function(err) {
-                    // Manejar errores de la solicitud AJAX
-                    console.error('Error al agregar el proveedor:', err);
-                    alert('Hubo un error al agregar el proveedor');
-                }
-            });
+          // Enviar los datos del formulario al servidor
+          $.ajax({
+            url: '/suppliers', // Ruta para la creación de clientes
+            type: 'POST', // Método HTTP para la creación
+            data: formData, // Datos del formulario serializados
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (response) {
+              // Manejar la respuesta exitosa del servidor
+              alert('Provedor creado correctamente');
+              $('#createSupplierModal').modal('hide'); // Cerrar el modal de creación después de la creación
+              // Actualizar la tabla si es necesario
+              location.reload();
+            },
+            error: function (err) {
+              // Manejar errores de la solicitud AJAX
+              console.error('Error al crear el cliente:', err);
+              alert('Hubo un error al crear el cliente');
+            }
+          });
         });
-    });
-</script>
+      });
+    </script>
 
     <script>
     $(document).ready(function () {
@@ -281,6 +289,9 @@
         });
 
         const app = {
+            openModalCreate() {
+          $('#createSupplier').modal('show');
+        },
     btnShow: async function (id) {
         const {data} = await axios.get(route('suppliers.show', id));
         const supplier = data.data;
@@ -344,7 +355,46 @@
             alert('Hubo un error al obtener la información del proveedor');
         }
         
-    }
+    },
+    saveSupplier: function () {
+          const form = $('#createSupplierForm').serializeArray();
+          const data = form.reduce((obj, item) => {
+            obj[item.name] = item.value;
+            return obj;
+          }, {});
+          axios({
+            method: 'post',
+            url: route('suppliers.store'),
+            data: data,
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+            }
+          }).then(response => {
+            if (response.status === 200) {
+              
+              $('#createSupplierForm')[0].reset();
+              $('#createSupplier').modal('hide');
+              $.toast({
+                text: 'Provedor creado exitosamente',
+                position: 'top-right',
+                stack: false,
+                icon: 'success'
+              });
+              location.reload();
+
+            } else {
+              $.toast({
+                text: 'Error al crear el Provedor',
+                position: 'top-right',
+                stack: false,
+                icon: 'error'
+              })
+            }
+          }).catch(error => {
+            console.error(error);
+          });
+        }
 };
 
     </script>
