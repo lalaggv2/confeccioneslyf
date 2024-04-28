@@ -15,6 +15,7 @@
     <meta name="robots" content="index, follow">
 
     <link rel="stylesheet" id="css-main" href="{{asset('assets/admin/css/codebase.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/packages/toast/jquery.toast.min.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/admin.css')}}">
     @yield('css')
 </head>
@@ -35,7 +36,8 @@
             <div class="js-sidebar-scroll">
                 <div class="content-side content-side-user px-0 py-0">
                     <div class="smini-visible-block animated fadeIn px-3">
-                        <img id="avatarImage" class="img-avatar img-avatar32" src="{{ asset('assets/media/avatars/avatar15.jpg') }}" alt="">
+                        <img id="avatarImage" class="img-avatar img-avatar32"
+                             src="{{ asset('assets/media/avatars/avatar15.jpg') }}" alt="">
                         <input type="file" id="avatarInput" style="display: none;">
                         <button id="changeAvatarBtn" class="btn btn-sm btn-alt-secondary">Cambiar Avatar</button>
                     </div>
@@ -86,19 +88,19 @@
                                 <span class="nav-main-link-name">Clientes</span>
                             </a>
                         </li>
-                        
+
                         <li class="nav-main-item">
                             <a class="nav-main-link" href="{{route('suppliers')}}">
                                 <i class="nav-main-link-icon fa fa-users"></i>
                                 <span class="nav-main-link-name">Provedores</span>
                             </a>
                         </li>
-                       
-                         
-                        
+
+
                         </li>
                         <li class="nav-main-item">
-                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="false" href="#">
+                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true"
+                               aria-expanded="false" href="#">
                                 <i class="nav-main-link-icon fa fa-grip-vertical"></i>
                                 <span class="nav-main-link-name">Inventario</span>
                             </a>
@@ -108,11 +110,11 @@
                                         <span class="nav-main-link-name">Productos</span>
                                     </a>
                                 </li>
-                               
+
                             </ul>
                         </li>
-                        
-                        
+
+
     </nav>
     <header id="page-header">
         <div class="content-header">
@@ -128,7 +130,7 @@
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-user d-sm-none"></i>
                         <span
-                            class="d-none d-sm-inline-block fw-semibold text-capitalize">{{ Auth::user()->name }}</span>
+                                class="d-none d-sm-inline-block fw-semibold text-capitalize">{{ Auth::user()->name }}</span>
                         <i class="fa fa-angle-down opacity-50 ms-1"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-md dropdown-menu-end p-0"
@@ -180,24 +182,25 @@
 <script src="{{asset('assets/admin/js/codebase.app.min.js')}}"></script>
 <script src="{{ asset('assets/js/jquery-3.7.1.min.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="{{ asset('assets/packages/toast/jquery.toast.min.js')}}"></script>
 
 @yield('js')
 
 <script>
-    $(document).ready(function() {
-        $('#changeAvatarBtn').on('click', function() {
-            $('#avatarInput').click();
-        });
-
-        $('#avatarInput').on('change', function(e) {
-            var file = e.target.files[0];
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $('#avatarImage').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(file);
-        });
+  $(document).ready(function () {
+    $('#changeAvatarBtn').on('click', function () {
+      $('#avatarInput').click();
     });
+
+    $('#avatarInput').on('change', function (e) {
+      var file = e.target.files[0];
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $('#avatarImage').attr('src', e.target.result);
+      }
+      reader.readAsDataURL(file);
+    });
+  });
 </script>
 </body>
 </html>

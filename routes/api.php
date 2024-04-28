@@ -12,7 +12,7 @@ Route::post("new-user", [LoginController::class, "register"])->name("new-user");
 
 
 Route::prefix('v1')->group(function () {
-    Route::post("register", [LoginController::class, "register"])->name("register");
+    Route::post("register", [LoginController::class, "register"])->name("register-api");
     Route::group(['middleware' => 'auth'], function () {
         Route::get("me", [LoginController::class, "me"])->name("me");
     });

@@ -68,7 +68,6 @@
             </div>
         </div>
     </div>
-
     <div class="modal" id="updateEmployee" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
