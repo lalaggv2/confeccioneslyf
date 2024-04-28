@@ -80,33 +80,32 @@ class SupplierController extends Controller
     public function store(Request $request)
     {
         // Validar los datos del formulario
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'document_type' => 'required|string|max:255',
-            'document' => 'required|string|max:255',
-            'phone' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
+        $request->validate([
+            'document_type' => 'required',
+            'document' => 'required',
+            'name' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+            'email' => 'required|email'
         ]);
 
-        try {
-            // Crear un nuevo proveedor con los datos proporcionados
-            $supplier = Supplier::create($validatedData);
+        // Crear un nuevo cliente en la base de datos
+        $supplier = new Supplier();
+        $supplier->document_type = $request->document_type;
+        $supplier->document = $request->document;
+        $supplier->name = $request->name;
+        $supplier->phone = $request->phone;
+        $supplier->address = $request->address;
+        $supplier->email = $request->email;
+        $supplier->save();
 
-            // Retornar una respuesta de éxito con el proveedor creado
-            return response()->json([
-                'status' => true,
-                'message' => 'Proveedor creado correctamente',
-                'data' => $supplier,
-            ], 201); // 201: Created
-        } catch (\Exception $e) {
-            // Retornar una respuesta de error si algo sale mal
-            return response()->json([
-                'status' => false,
-                'message' => 'Error al crear el proveedor',
-                'error' => $e->getMessage(),
-            ], 500); // 500: Internal Server Error
-        }
+        // Devolver una respuesta
+        return response()->json([
+            'status' => true,
+            'message' => 'Cliente creado correctamente',
+            'data' => $supplier
+        ], 200);
+
     }
 
     public function update(Request $request, $id)

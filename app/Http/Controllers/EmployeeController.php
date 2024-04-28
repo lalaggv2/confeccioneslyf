@@ -111,74 +111,67 @@ class EmployeeController extends Controller
         ], 500);
     }
 }
+public function store(Request $request)
+{
+    // Validar los datos del formulario
+    $request->validate([
+        'document_type' => 'required',
+        'document' => 'required',
+        'name' => 'required',
+        'phone' => 'required',
+        'address' => 'required',
+        'eps' => 'required',
+        'rh' => 'required',
+        'position' => 'required',
+        'salary' => 'required',
+        'status' => 'required',
+        'gender' => 'required',
+        'user_id' => 'required', // Agregar validación para el campo user_id
+    ]);
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'user_id' => 'required',
-            'document_type' => 'required',
-            'document' => 'required',
-            'address' => 'required',
-        
-            'phone' => 'required',
-            'eps' => 'required',
-            'rh' => 'required',
-            'position' => 'required',
-            'salary' => 'required',
-            'status' => 'required',
-            'gender' => 'required',
-        ]);
-        DB::beginTransaction();
-        try {
-            $user = $this->userModel()->create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => bcrypt($request->document),
-            ]);
-            $employee = $this->model()->create([
-                'user_id' => $user->id,
-                'document_type' => $request->document_type,
-                'document' => $request->document,
-                'address' => $request->address,
-                'start_date' => $request->start_date,
-                'phone' => $request->phone,
-                'eps' => $request->eps,
-                'rh' => $request->rh,
-                'position' => $request->position,
-                'dob' => $request->dob,
-                'salary' => $request->salary,
-                'status' => $request->status
-            ]);
-            if ($request->contacts) {
-                foreach ($request->contacts as $contact) {
-                    $this->contactModel()->create([
-                        'employee_id' => $employee->id,
-                        'name' => $contact['name'],
-                        'phone' => $contact['phone'],
-                        'relationship' => $contact['relationship'],
-                    ]);
-                }
-            }
-            $data  = $employee->load('user', 'contacts');
-            DB::commit();
-            return response()->json([
-                'status' => true,
-                'message' => 'Empleado guardado correctamente',
-                'data' => $data
-            ], 200);
+    try {
+        // Buscar el usuario correspondiente en la tabla 'users' usando el user_id
+        $user = User::find($request->user_id);
 
-        } catch (\Exception $e) {
-            DB::rollBack();
+        // Verificar si el usuario existe
+        if (!$user) {
             return response()->json([
                 'status' => false,
-                'message' => 'Hubo un error al intentar guardar el empleado',
-                'error' => $e->getMessage()
-            ], 500);
+                'message' => 'No se pudo encontrar el usuario asociado al empleado.',
+            ], 404);
         }
-    }
 
+        // Crear un nuevo empleado en la base de datos
+        $employee = new Employee();
+        $employee->document_type = $request->document_type;
+        $employee->document = $request->document;
+        $employee->name = $user->name; // Usar el nombre del usuario encontrado
+        $employee->phone = $request->phone;
+        $employee->address = $request->address;
+        $employee->eps = $request->eps;
+        $employee->rh = $request->rh;
+        $employee->position = $request->position;
+        $employee->salary = $request->salary;
+        $employee->status = $request->status;
+        $employee->gender = $request->gender;
+        
+        $employee->save();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Empleado creado correctamente',
+            'data' => $employee
+        ], 200);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => false,
+            'message' => 'Hubo un error al intentar crear el empleado',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+}
+
+   
 
     public function update(Request $request, $id)
 {

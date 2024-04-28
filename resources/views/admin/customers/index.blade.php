@@ -175,7 +175,7 @@
             },
             success: function (response) {
               // Manejar la respuesta exitosa del servidor
-              alert('Cliente creado correctamente');
+              alert('Cliente no correctamente');
               $('#createCustomerModal').modal('hide'); // Cerrar el modal de creación después de la creación
               // Actualizar la tabla si es necesario
               location.reload();
@@ -348,7 +348,7 @@
             }
           }).then(response => {
             if (response.status === 200) {
-              dataTabla.ajax.reload();
+              
               $('#createCustomerForm')[0].reset();
               $('#createCustomer').modal('hide');
               $.toast({
@@ -356,7 +356,8 @@
                 position: 'top-right',
                 stack: false,
                 icon: 'success'
-              })
+              });
+              location.reload();
             } else {
               $.toast({
                 text: 'Error al crear el cliente',

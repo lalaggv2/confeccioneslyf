@@ -90,6 +90,7 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        // Validar los datos del formulario
         $request->validate([
             'name' => 'required',
             'description' => 'required',
@@ -104,26 +105,31 @@ class ProductController extends Controller
             'stock' => 'required',
             'notes' => 'required',
         ]);
-
-        DB::beginTransaction();
-        try {
-            $product = Product::create($request->all());
-            DB::commit();
-            return response()->json([
-                'status' => true,
-                'message' => 'Producto guardado correctamente',
-                'data' => $product
-            ], 200);
-
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return response()->json([
-                'status' => false,
-                'message' => 'Hubo un error al intentar guardar el producto',
-                'error' => $e->getMessage()
-            ], 500);
-        }
+    
+        // Crear un nuevo producto en la base de datos
+        $product = new Product();
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->type = $request->type;
+        $product->sku = $request->sku;
+        $product->barcode = $request->barcode;
+        $product->size = $request->size;
+        $product->color = $request->color;
+        $product->material = $request->material;
+        $product->location = $request->location;
+        $product->price = $request->price;
+        $product->stock = $request->stock;
+        $product->notes = $request->notes;
+        $product->save();
+    
+        // Devolver una respuesta
+        return response()->json([
+            'status' => true,
+            'message' => 'Producto creado correctamente',
+            'data' => $product
+        ], 200);
     }
+    
 
     public function update(Request $request, $id)
     {

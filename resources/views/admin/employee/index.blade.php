@@ -31,83 +31,81 @@
     </div>
 
     <div class="modal" id="createEmployee" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="block block-rounded shadow-none mb-0">
-                    <div class="block-header block-header-default">
-                        <h3 class="block-title text-uppercase">Agregar Empleado</h3>
-                        <div class="block-options">
-                            <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
-                                <i class="fa fa-times"></i>
-                            </button>
-                        </div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Agregar Empleado</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="createEmployeeForm">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="name" name="name">
                     </div>
-                    <div class="block-content fs-sm mb-4">
-                        <form id="addEmployeeForm">
-                            @csrf
-                            <div class="form-group">
-                                <label for="employeeName">Nombre</label>
-                                <input type="text" class="form-control" id="employeeName" name="name">
-                            </div>
-                            <div class="form-group">
-                                <label for="employeeDocumentType">Tipo de Documento</label>
-                                <input type="text" class="form-control" id="employeeDocumentType" name="document_type">
-                            </div>
-                            <div class="form-group">
-                                <label for="employeeDocument">Documento</label>
-                                <input type="text" class="form-control" id="employeeDocument" name="document">
-                            </div>
-                            <div class="form-group">
-                                <label for="employeePhone">Teléfono</label>
-                                <input type="text" class="form-control" id="employeePhone" name="phone">
-                            </div>
-                            <div class="form-group">
-                                <label for="employeeAddress">Dirección</label>
-                                <input type="text" class="form-control" id="employeeAddress" name="address">
-                            </div>
-                            <div class="form-group">
-                                <label for="employeeEmail">Email</label>
-                                <input type="email" class="form-control" id="employeeEmail" name="email">
-                            </div>
-                            <div class="form-group">
-                                <label for="employeeGender">Género</label>
-                                <input type="text" class="form-control" id="employeeGender" name="gender">
-                            </div>
-                            <div class="form-group">
-                                <label for="employeeRh">Rh</label>
-                                <input type="text" class="form-control" id="employeeRh" name="rh">
-                            </div>
-                            <div class="form-group">
-                                <label for="employeeEps">Eps</label>
-                                <input type="text" class="form-control" id="employeeEps" name="eps">
-                            </div>
-                            <div class="form-group">
-                                <label for="employeePosition">Posición</label>
-                                <input type="text" class="form-control" id="employeePosition" name="position">
-                            </div>
-                            <div class="form-group">
-                                <label for="employeeSalary">Salario</label>
-                                <input type="text" class="form-control" id="employeeSalary" name="salary">
-                            </div>
-                            <div class="form-group">
-                                <label for="employeeStartDate">Fecha de Inicio</label>
-                                <input type="date" class="form-control" id="employeeStartDate" name="start_date" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="employeeStatus">Estado</label>
-                                <select class="form-control" id="employeeStatus" name="status" required>
-                                    <option value="1">Activo</option>
-                                    <option value="0">Inactivo</option>
-                                </select>
-                            </div>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="close">Cancelar</button>
-                            <button type="button" class="btn btn-primary" onclick="app.saveEmployee()">Guardar
-                        </form>
+                    <div class="mb-3">
+                        <label for="document_type" class="form-label">Tipo de Documento</label>
+                        <input type="text" class="form-control" id="document_type" name="document_type">
                     </div>
-                </div>
+                    <div class="mb-3">
+                        <label for="document" class="form-label">Documento</label>
+                        <input type="text" class="form-control" id="document" name="document">
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Teléfono</label>
+                        <input type="text" class="form-control" id="phone" name="phone">
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Dirección</label>
+                        <input type="text" class="form-control" id="address" name="address">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="gender" class="form-label">Género</label>
+                        <input type="text" class="form-control" id="gender" name="gender">
+                    </div>
+                    <div class="mb-3">
+                        <label for="rh" class="form-label">Rh</label>
+                        <input type="text" class="form-control" id="rh" name="rh">
+                    </div>
+                    <div class="mb-3">
+                        <label for="eps" class="form-label">Eps</label>
+                        <input type="text" class="form-control" id="eps" name="eps">
+                    </div>
+                    <div class="mb-3">
+                        <label for="position" class="form-label">Posición</label>
+                        <input type="text" class="form-control" id="position" name="position">
+                    </div>
+                    <div class="mb-3">
+                        <label for="salary" class="form-label">Salario</label>
+                        <input type="text" class="form-control" id="salary" name="salary">
+                    </div>
+                    <div class="mb-3">
+                        <label for="start_date" class="form-label">Fecha de Inicio</label>
+                        <input type="date" class="form-control" id="start_date" name="start_date" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Estado</label>
+                        <select class="form-select" id="status" name="status" required>
+                            <option value="1">Activo</option>
+                            <option value="0">Inactivo</option>
+                        </select>
+                    </div>
+                    <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="saveEmployee()">Guardar</button>
             </div>
         </div>
     </div>
+</div>
+
     
 
 
@@ -440,43 +438,38 @@ btnEdit: async function (id) {
     }
 },
 saveEmployee: function () {
-          const form = $('#createEmployeeForm').serializeArray();
-          const data = form.reduce((obj, item) => {
-            obj[item.name] = item.value;
-            return obj;
-          }, {});
-          axios({
-            method: 'post',
-            url: route('employees.store'),
-            data: data,
-            headers: {
-              'Content-Type': 'application/json',
-              'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
-            }
-          }).then(response => {
-            if (response.status === 200) {
-              dataTabla.ajax.reload();
-              $('#createEmployeeForm')[0].reset();
-              $('#createEmployee').modal('hide');
-              $.toast({
-                text: 'Cliente creado exitosamente',
-                position: 'top-right',
-                stack: false,
-                icon: 'success'
-              })
-            } else {
-              $.toast({
-                text: 'Error al crear el cliente',
-                position: 'top-right',
-                stack: false,
-                icon: 'error'
-              })
-            }
-          }).catch(error => {
-            console.error(error);
-          });
-        }
+    const data = $('#createEmployeeForm').serialize();
 
-        };
+    axios({
+      method: 'post',
+      url: route('employees.store'),
+      data: data,
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+      }
+    }).then(response => {
+      if (response.status === 200) {
+        $('#createEmployeeForm')[0].reset();
+        $('#createEmployee').modal('hide');
+        $.toast({
+          text: 'Empleado creado exitosamente',
+          position: 'top-right',
+          stack: false,
+          icon: 'success'
+        });
+      } else {
+        $.toast({
+          text: 'Error al crear el empleado',
+          position: 'top-right',
+          stack: false,
+          icon: 'error'
+        });
+      }
+    }).catch(error => {
+      console.error(error);
+    });
+  }
+};
     </script>
 @endsection

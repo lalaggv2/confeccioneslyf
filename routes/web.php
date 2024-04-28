@@ -92,19 +92,14 @@ Route::middleware(['web', 'auth'])->group(function () {
       
     });
 
-    Route::prefix('product_details')->group(function () {
-        Route::get('/', [ProductDetailController::class, 'index'])->name('product_details');
-        Route::get('/{product_detail}', [ProductDetailController::class, 'show'])->name('product_details.show');
-        Route::post('/store', [ProductDetailController::class, 'store'])->name('product_details.store');
-    });
-
+   
     Route::prefix('suppliers')->group(function () {
         Route::get('/', [SupplierController::class, 'index'])->name('suppliers');
         Route::get('/{supplier}', [SupplierController::class, 'show'])->name('suppliers.show');
         Route::post('/store', [SupplierController::class, 'store'])->name('suppliers.store');
         Route::delete('/{id}', [SupplierController::class, 'destroy'])->name('suppliers.destroy');
         Route::put('/{id}', [SupplierController::class, 'update'])->name('suppliers.update');
-        Route::post('/store', [SupplierController::class, 'store'])->name('suppliers.store');
+       
 
     });
 
