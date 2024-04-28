@@ -8,7 +8,9 @@
 @section('content')
     <div class="card p-3 position-relative">
         <h2 class="content-heading"><i class="fa fa-users me-2"></i>EMPLEADOS</h2>
-        <button type="button" class="btn btn-secondary w-25 btn-add" data-target="#create"><i class="fa fa-plus"></i> Agregar empleado</button>
+        <button type="button" class="btn btn-secondary w-25 btn-add" onclick="app.openModalCreate()"><i
+            class="fa fa-plus"></i> Agregar cliente
+</button>
         <div class="card-body">
             <div class="table-responsive">
                 <table id="tableEmployees" class="table table-bordered table-hover table-striped table-sm">
@@ -27,6 +29,89 @@
             </div>
         </div>
     </div>
+
+    <div class="modal" id="createEmployee" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="block block-rounded shadow-none mb-0">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title text-uppercase">Agregar Empleado</h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-content fs-sm mb-4">
+                        <form id="addEmployeeForm">
+                            @csrf
+                            <div class="form-group">
+                                <label for="employeeName">Nombre</label>
+                                <input type="text" class="form-control" id="employeeName" name="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="employeeDocumentType">Tipo de Documento</label>
+                                <input type="text" class="form-control" id="employeeDocumentType" name="document_type">
+                            </div>
+                            <div class="form-group">
+                                <label for="employeeDocument">Documento</label>
+                                <input type="text" class="form-control" id="employeeDocument" name="document">
+                            </div>
+                            <div class="form-group">
+                                <label for="employeePhone">Teléfono</label>
+                                <input type="text" class="form-control" id="employeePhone" name="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="employeeAddress">Dirección</label>
+                                <input type="text" class="form-control" id="employeeAddress" name="address">
+                            </div>
+                            <div class="form-group">
+                                <label for="employeeEmail">Email</label>
+                                <input type="email" class="form-control" id="employeeEmail" name="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="employeeGender">Género</label>
+                                <input type="text" class="form-control" id="employeeGender" name="gender">
+                            </div>
+                            <div class="form-group">
+                                <label for="employeeRh">Rh</label>
+                                <input type="text" class="form-control" id="employeeRh" name="rh">
+                            </div>
+                            <div class="form-group">
+                                <label for="employeeEps">Eps</label>
+                                <input type="text" class="form-control" id="employeeEps" name="eps">
+                            </div>
+                            <div class="form-group">
+                                <label for="employeePosition">Posición</label>
+                                <input type="text" class="form-control" id="employeePosition" name="position">
+                            </div>
+                            <div class="form-group">
+                                <label for="employeeSalary">Salario</label>
+                                <input type="text" class="form-control" id="employeeSalary" name="salary">
+                            </div>
+                            <div class="form-group">
+                                <label for="employeeStartDate">Fecha de Inicio</label>
+                                <input type="date" class="form-control" id="employeeStartDate" name="start_date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="employeeStatus">Estado</label>
+                                <select class="form-control" id="employeeStatus" name="status" required>
+                                    <option value="1">Activo</option>
+                                    <option value="0">Inactivo</option>
+                                </select>
+                            </div>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="close">Cancelar</button>
+                            <button type="button" class="btn btn-primary" onclick="app.saveEmployee()">Guardar
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+
     <div class="modal" id="showEmployee" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -68,6 +153,8 @@
             </div>
         </div>
     </div>
+
+
     <div class="modal" id="updateEmployee" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -240,6 +327,10 @@
             dataTabla.columns([0]).visible(false);
         });
         const app = {
+            openModalCreate() {
+          $('#createEmployee').modal('show');
+        },
+
             btnShow: async function (id) {
                 const {data} = await axios.get(route('employees.show', id));
                 const employee = data.data;
@@ -347,8 +438,44 @@ btnEdit: async function (id) {
         console.error('Error al obtener la información del empleado:', error);
         alert('Hubo un error al obtener la información del empleado');
     }
-}
-
+},
+saveEmployee: function () {
+          const form = $('#createEmployeeForm').serializeArray();
+          const data = form.reduce((obj, item) => {
+            obj[item.name] = item.value;
+            return obj;
+          }, {});
+          axios({
+            method: 'post',
+            url: route('employees.store'),
+            data: data,
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+            }
+          }).then(response => {
+            if (response.status === 200) {
+              dataTabla.ajax.reload();
+              $('#createEmployeeForm')[0].reset();
+              $('#createEmployee').modal('hide');
+              $.toast({
+                text: 'Cliente creado exitosamente',
+                position: 'top-right',
+                stack: false,
+                icon: 'success'
+              })
+            } else {
+              $.toast({
+                text: 'Error al crear el cliente',
+                position: 'top-right',
+                stack: false,
+                icon: 'error'
+              })
+            }
+          }).catch(error => {
+            console.error(error);
+          });
+        }
 
         };
     </script>

@@ -20,12 +20,14 @@
     @yield('css')
 </head>
 <body>
+    
 <div id="page-container" class="sidebar-o enable-page-overlay side-scroll page-header-modern main-content-boxed">
     <nav id="sidebar">
         <div class="sidebar-content">
             <div class="content-header justify-content-lg-center">
                 <div>
                 </div>
+                
                 <div>
                     <button type="button" class="btn btn-sm btn-alt-danger d-lg-none" data-toggle="layout"
                             data-action="sidebar_close">
@@ -33,6 +35,9 @@
                     </button>
                 </div>
             </div>
+           
+                
+            
             <div class="js-sidebar-scroll">
                 <div class="content-side content-side-user px-0 py-0">
                     <div class="smini-visible-block animated fadeIn px-3">
@@ -68,6 +73,7 @@
                         </ul>
                     </div>
                 </div>
+                
                 <div class="content-side content-side-full">
                     <ul class="nav-main">
                         <li class="nav-main-item">
@@ -178,7 +184,32 @@
             </div>
         </div>
     </main>
+    <main id="main-container" class="d-flex justify-content-center align-items-center vh-100 mt-3">
+        <div class="content">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="present text-center">
+                        <a href="/"><img class="logolyf" src="{{ asset('/assets/images/lyflogo5v2SM.png')}}" alt="" width="100%" height="auto"></a>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        
+
+
+                        <h1 class="h1 mb-3 fw-normal">¡Bienvenido!</h1> <!-- Cambiado de 'h3' a 'h1' para hacer el texto más grande -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    
+    
+    
+    
 </div>
+
 <script src="{{asset('assets/admin/js/codebase.app.min.js')}}"></script>
 <script src="{{ asset('assets/js/jquery-3.7.1.min.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
