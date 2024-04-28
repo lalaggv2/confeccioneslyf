@@ -42,13 +42,13 @@
                 <div class="content-side content-side-user px-0 py-0">
                     <div class="smini-visible-block animated fadeIn px-3">
                         <img id="avatarImage" class="img-avatar img-avatar32"
-                             src="{{ asset('assets/media/avatars/avatar15.jpg') }}" alt="">
+                             src="{{ asset('assets/images/lyflogo2.jpg') }}" alt="">
                         <input type="file" id="avatarInput" style="display: none;">
                         <button id="changeAvatarBtn" class="btn btn-sm btn-alt-secondary">Cambiar Avatar</button>
                     </div>
                     <div class="smini-hidden text-center mx-auto">
                         <a class="img-link" href="javascript:void(0)">
-                            <img class="img-avatar" src="{{ asset('assets/media/avatars/avatar15.jpg') }}" alt="">
+                            <img class="img-avatar" src="{{ asset('assets/images/lyflogo2.jpg') }}" alt="">
                         </a>
                         <ul class="list-inline mt-3 mb-0">
                             <li class="list-inline-item">
@@ -189,7 +189,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="present text-center">
-                        <a href="/"><img class="logolyf" src="{{ asset('/assets/images/lyflogo5v2SM.png')}}" alt="" width="100%" height="auto"></a>
+                        <a href="/"><img class="logolyf" src="{{ asset('/assets/images/lyflogo5v2.png')}}" alt="" width="100%" height="auto"></a>
                         <br>
                         <br>
                         <br>
@@ -197,7 +197,7 @@
                         
 
 
-                        <h1 class="h1 mb-3 fw-normal">¡Bienvenido!</h1> <!-- Cambiado de 'h3' a 'h1' para hacer el texto más grande -->
+                        <h1 class="h1 mb-3 fw-normal">¡Bienvenido! Escoje la base de datos del menu</h1> <!-- Cambiado de 'h3' a 'h1' para hacer el texto más grande -->
                     </div>
                 </div>
             </div>

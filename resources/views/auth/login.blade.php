@@ -65,7 +65,7 @@
         <div class="content">
             <div class="d-flex flex-column align-items-center">    
               <img class="mb-4" id="logo" src="{{ asset('assets/images/lyflogo5v2.png')}}" alt="" width="500" height="50">
-    <h1 class="h3 mb-3 fw-normal">Bienvenido, por favor</h1>
+    <h1 class="h3 mb-3 fw-normal">Bienvenido! Por favor</h1>
     <h1 class="h3 mb-3 fw-normal">ingrese sus datos</h1>
             </div>
             <div class="form">
