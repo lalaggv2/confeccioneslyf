@@ -109,7 +109,8 @@
 
     
     <!-- Custom styles for this template -->
-    <link link rel="stylesheet" href="{{ asset('assets/css/carousel.css') }}">
+    {{-- <link link rel="stylesheet" href="{{ asset('assets/css\bootstrap/carousel.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('asset/style.css')}}">
     {{-- <link href="{{ asset('carousel.css') }}" rel="stylesheet"> --}}
   </head>
   <body>

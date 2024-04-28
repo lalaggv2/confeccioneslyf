@@ -14,21 +14,44 @@ use App\Http\Controllers\SaleOrderController;
 use App\Http\Controllers\PurchaseOrderController;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
 Route::get('nosotros', function () {
     return view('nosotros');
 });
+
+Route::get('/', function () {    
+    return view('cover');
+});
+
+Route::get('contacto', function () {
+    return view('contacto');
+});
+
+Route::get('/carousel', function () {
+    return view('carousel');
+});
+
+Route::get('/login', function () {
+    return view('login');
+});
+
+Route::get('/nosotros', function () {
+    return view('nosotros');
+});
+
+Route::get('/catalogo', function () {
+    return view('catalogo');
+});
+
 // Ruta para mostrar el formulario de registro
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 
 // Ruta para procesar el registro de usuarios
 Route::post('/register', [RegisterController::class, 'register']);
-
-
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post("access", [LoginController::class, "login"])->name("access.web");
