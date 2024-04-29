@@ -141,18 +141,14 @@
     
    
 <div class="modal" id="updateProduct" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="block block-rounded shadow-none mb-0">
-                <div class="block-header block-header-default">
-                    <h3 class="block-title text-uppercase">Editar Producto</h3>
-                    <div class="block-options">
-                        <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
-                            <i class="fa fa-times"></i>
-                        </button>
+<div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="block block-rounded shadow-none mb-0">
+                    <div class="modal-header block-header-default">
+                        <h3 class="modal-title block-title text-uppercase">Crear Producto</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                </div>
-                <div class="block-content fs-sm mb-4">
+                    <div class="modal-body block-content fs-sm mb-4">
                     <form id="editProductForm">
                         @csrf
                         <input type="hidden" id="editProductId" name="id">
@@ -215,10 +211,10 @@
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="close">Cancelar</button>
                         <button type="summit" class="btn btn-primary">Guardar cambios</button>
                     </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 </div>
 
 
