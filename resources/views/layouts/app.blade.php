@@ -44,8 +44,9 @@
 @php
     $name = Auth::user()->name;
     $initials = '';
-    foreach (explode(' ', $name) as $word) {
-        $initials .= $word[0];
+    $words = explode(' ', $name);
+    for ($i = 0; $i < min(2, count($words)); $i++) {
+        $initials .= $words[$i][0];
     }
 @endphp
 <div id="page-container" class="sidebar-o enable-page-overlay side-scroll page-header-modern main-content-boxed">
