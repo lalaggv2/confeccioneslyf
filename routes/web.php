@@ -14,37 +14,12 @@ use App\Http\Controllers\SaleOrderController;
 use App\Http\Controllers\PurchaseOrderController;
 
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-
-Route::get('nosotros', function () {
-    return view('nosotros');
-});
-
-Route::get('/', function () {    
-    return view('cover');
-});
-
-Route::get('contacto', function () {
-    return view('contacto');
-});
-
-Route::get('/carousel', function () {
-    return view('carousel');
+Route::get('/', function () {
+    return view('welcome');
 });
 
 Route::get('/login', function () {
     return view('login');
-});
-
-Route::get('/nosotros', function () {
-    return view('nosotros');
-});
-
-Route::get('/catalogo', function () {
-    return view('catalogo');
 });
 
 // Ruta para mostrar el formulario de registro
@@ -56,9 +31,6 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post("access", [LoginController::class, "login"])->name("access.web");
 Route::post("logout", [LoginController::class, "logout"])->name("logout");
-
-
-
 
 
 Route::middleware(['web', 'auth'])->group(function () {
@@ -76,43 +48,32 @@ Route::middleware(['web', 'auth'])->group(function () {
         Route::post('/store', [CustomerController::class, 'store'])->name('customers.store');
         Route::delete('/{id}', [CustomerController::class, 'destroy'])->name('customers.destroy');
         Route::put('/{id}', [CustomerController::class, 'update'])->name('customers.update');
-        
 
-
-        
 
     });
-    
+
     Route::prefix('products')->group(function () {
         Route::get('/', [ProductController::class, 'index'])->name('products');
         Route::get('/{product}', [ProductController::class, 'show'])->name('products.show');
         Route::post('/store', [ProductController::class, 'store'])->name('products.store');
         Route::delete('/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
         Route::put('/{id}', [ProductController::class, 'update'])->name('Product.update');
-      
+
     });
 
-   
+
     Route::prefix('suppliers')->group(function () {
         Route::get('/', [SupplierController::class, 'index'])->name('suppliers');
         Route::get('/{supplier}', [SupplierController::class, 'show'])->name('suppliers.show');
         Route::post('/store', [SupplierController::class, 'store'])->name('suppliers.store');
         Route::delete('/{id}', [SupplierController::class, 'destroy'])->name('suppliers.destroy');
         Route::put('/{id}', [SupplierController::class, 'update'])->name('suppliers.update');
-       
+
 
     });
 
-    
 
-
-
-
-    
-    
-   
-
-    });
+});
 
    
    
