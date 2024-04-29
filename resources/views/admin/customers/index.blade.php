@@ -357,7 +357,7 @@
                 stack: false,
                 icon: 'success'
               });
-              location.reload();
+              dataTabla.ajax.reload();
             } else {
               $.toast({
                 text: 'Error al crear el cliente',

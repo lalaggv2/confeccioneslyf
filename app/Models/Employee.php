@@ -34,6 +34,7 @@ class Employee extends Model
         'deleted_at',
     ];
     protected $guarded = [];
+    protected $dates = ['start_date'];
 
     public function user()
     {
