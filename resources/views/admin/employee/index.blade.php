@@ -9,8 +9,7 @@
     <div class="card p-3 position-relative">
         <h2 class="content-heading"><i class="fa fa-users me-2"></i>EMPLEADOS</h2>
         <button type="button" class="btn btn-secondary w-25 btn-add" onclick="app.openModalCreate()"><i
-                    class="fa fa-plus"></i> Agregar cliente
-        </button>
+                    class="fa fa-plus"></i> Agregar empleado </button>
         <div class="card-body">
             <div class="table-responsive">
                 <table id="tableEmployees" class="table table-bordered table-hover table-striped table-sm">
