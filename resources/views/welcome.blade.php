@@ -5,296 +5,218 @@
         exit;
     @endphp
 @endguest
-<html lang="en">
+<html dir="ltr" lang="en-US">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-
-    <title>Confecciones L&F</title>
-    <link rel="stylesheet" href="{{ asset('asset/style.css')}}">
-    
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <title>CONFECCIONES L&F</title>
+    <link href="assets/images/favicon/favicon.png" rel="icon"/>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i%7CSource+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i"
+          rel="stylesheet"/>
+    <link href="{{asset('assets-landing/css/vendor.min.css')}}" rel="stylesheet"/>
+    <link href="{{asset('assets-landing/css/style.css')}}" rel="stylesheet"/>
 </head>
 <body>
-    <header>
-        <nav>
-
-
-            <a href="">Quienes somos</a>
-            <a href="nosotros">Trabaje con nosotros</a>
-            <a href="">Contactenos</a>
-            <a href="">Catalogo</a>
-            <a href="login">Login</a>
-        </nav>
-
-        <section class="textos-header">
-            <h1> Confecciones L&F</h1>
-
-
-        </section>
-
-    </header>
-    <main>
-
-        <section class="portafolio">
-            <div class="contenedor">
-                <h2 class="titulo2">Portafolio</h2>
-            </div>
-        </header>
-        <br>
-
-
-        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-        <!------ Include the above in your HEAD tag ---------->
-        
-        <div class="container">
-                <div id="main_area">
-                        <!-- Slider -->
-                        <div class="row">
-                            <div class="span12" id="slider">
-                                <!-- Top part of the slider -->
-                                <div class="row">
-                                    <div class="span8" id="carousel-bounding-box">
-                                        <div class="carousel slide" id="myCarousel">
-                                            <!-- Carousel items -->
-                                            <div class="carousel-inner">
-                                                <div class="active item" data-slide-number="0">
-                                                <img src="http://placehold.it/770x300&text=one"></div>
-        
-                                                <div class="item" data-slide-number="1">
-                                                <img src="http://placehold.it/770x300&text=two"></div>
-        
-                                                <div class="item" data-slide-number="2">
-                                                <img src="http://placehold.it/770x300&text=three"></div>
-        
-                                                <div class="item" data-slide-number="3">
-                                                <img src="http://placehold.it/770x300&text=four"></div>
-        
-                                                <div class="item" data-slide-number="4">
-                                                <img src="http://placehold.it/770x300&text=five"></div>
-        
-                                                <div class="item" data-slide-number="5">
-                                                <img src="http://placehold.it/770x300&text=six"></div>
-                                            </div><!-- Carousel nav -->
-                                            <a class="carousel-control left" data-slide="prev" href="#myCarousel">‹</a> <a class="carousel-control right" data-slide="next" href="#myCarousel">›</a>
-                                        </div>
-                                    </div>
-        
-                                    <div class="span4" id="carousel-text"></div>
-        
-                                    <div id="slide-content" style="display: none;">
-                                        <div id="slide-content-0">
-                                            <h2>Slider One</h2>
-                                            <p>Lorem Ipsum Dolor</p>
-                                            <p class="sub-text">October 24 2012 - <a href="#">Read more</a></p>
-                                        </div>
-        
-                                        <div id="slide-content-1">
-                                            <h2>Slider Two</h2>
-                                            <p>Lorem Ipsum Dolor</p>
-                                            <p class="sub-text">October 24 2012 - <a href="#">Read more</a></p>
-                                        </div>
-        
-                                        <div id="slide-content-2">
-                                            <h2>Slider Three</h2>
-                                            <p>Lorem Ipsum Dolor</p>
-                                            <p class="sub-text">October 24 2012 - <a href="#">Read more</a></p>
-                                        </div>
-        
-                                        <div id="slide-content-3">
-                                            <h2>Slider Four</h2>
-                                            <p>Lorem Ipsum Dolor</p>
-                                            <p class="sub-text">October 24 2012 - <a href="#">Read more</a></p>
-                                        </div>
-        
-                                        <div id="slide-content-4">
-                                            <h2>Slider Five</h2>
-                                            <p>Lorem Ipsum Dolor</p>
-                                            <p class="sub-text">October 24 2012 - <a href="#">Read more</a></p>
-                                        </div>
-        
-                                        <div id="slide-content-5">
-                                            <h2>Slider Six</h2>
-                                            <p>Lorem Ipsum Dolor</p>
-                                            <p class="sub-text">October 24 2012 - <a href="#">Read more</a></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div><!--/Slider-->
-        
-                        <div class="row hidden-phone" id="slider-thumbs">
-                            <div class="span12">
-                                <!-- Bottom switcher of slider -->
-        
-                                <ul class="thumbnails">
-                                    <li class="span2">
-                                        <a class="thumbnail" id="carousel-selector-0"><img src="http://placehold.it/170x100&text=one"></a>
-                                    </li>
-        
-                                    <li class="span2">
-                                        <a class="thumbnail" id="carousel-selector-1"><img src="http://placehold.it/170x100&text=two"></a>
-                                    </li>
-        
-                                    <li class="span2">
-                                        <a class="thumbnail" id="carousel-selector-2"><img src="http://placehold.it/170x100&text=three"></a>
-                                    </li>
-        
-                                    <li class="span2">
-                                        <a class="thumbnail" id="carousel-selector-3"><img src="http://placehold.it/170x100&text=four"></a>
-                                    </li>
-        
-                                    <li class="span2">
-                                        <a class="thumbnail" id="carousel-selector-4"><img src="http://placehold.it/170x100&text=five"></a>
-                                    </li>
-        
-                                    <li class="span2">
-                                        <a class="thumbnail" id="carousel-selector-5"><img src="http://placehold.it/170x100&text=six"></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                </div>
-        </div>
-
-        </div>
-                
-            </div>
-        </section>
-        <section class="contenedor sobre-nosotros">
-
-            <h2 class="titulo1">Quienes somos</h2>
-
-             <h5>En Confecciones L&F, nos dedicamos a la fabricación y diseño de Pantalones de alta calidad para hombres, mujeres y niños. Fundada en 2007, nos enorgullece ofrecer prendas que combinan estilo, comodidad y durabilidad.</h5>
-
-            <div class="somos">
-
-              <h4>Nuestros Valores
-                 <p>Calidad: Nos comprometemos a utilizar materiales de primera calidad y procesos de fabricación meticulosos para garantizar la excelencia en cada prenda que sale de nuestra fábrica.</p>
-                 <p>Innovación: Nos mantenemos al tanto de las últimas tendencias y tecnologías en la industria para ofrecer diseños vanguardistas que satisfagan las demandas cambiantes de nuestros clientes.</p>
-                 <p>Integridad: Operamos con honestidad, transparencia y ética en todas nuestras interacciones, desde la producción hasta el servicio al cliente.</p>
-                 <p></p>
-             </h4>
-             <div class="video">
-             <video width="600" height="400" autoplay muted loop>
-                 <source src="VIDEO F&L.mp4" type="video/mp4">
-             </video>
-         </div>
-
-         </div>
-
-
-     </section>
-
-
-
-        <section class="Contacto">
-            <h2 class="titulo3">Contactenos</h2>
-            <div class="row" id="contatti">
-                <div class="container mt-5" >
-
-                    <div class="row1" style="height:550px;">
-                        <div class="maps" >
-                           
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11880.492291371422!2d12.4922309!3d41.8902102!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x28f1c82e908503c4!2sColosseo!5e0!3m2!1sit!2sit!4v1524815927977" frameborder="0" style="border:0" allowfullscreen></iframe>
-                         </div>
-
-                      <div class="formulario">
-
-                        <form action="https://formsubmit.co/confeccioneslyf2@gmail.com" method="POST">
-                          <div class="row2">
-                            <h1>Envianos un mensaje</h1>
-                            <div class="col-lg-6">
-                              <div class="form-group">
-                                <input type="text" class="form-control mt-2" placeholder="Nombre y apellidos" required>
-                              </div>
-                            </div>
-                            <div class="col-lg-6">
-                              <div class="form-group">
-                                <input type="text" class="form-control mt-2" placeholder="Ciudad" required>
-                              </div>
-                            </div>
-                            <div class="col-lg-6">
-                              <div class="form-group">
-                                <input type="email" class="form-control mt-2" placeholder="Email" required>
-                              </div>
-                            </div>
-                            <div class="col-lg-6">
-                              <div class="form-group">
-                                <input type="number" class="form-control mt-2" placeholder="Telefono" required>
-                              </div>
-                            </div>
-                            <div class="col-12">
-                              <div class="form-group">
-                                <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="escriba su mensaje" rows="3" required></textarea>
-                              </div>
-                            </div>
-
-                            <div class="col-12">
-                              <button class="btn" type="submit">ENVIAR</button>
-                            </div>
-                          </div>
-                        </form>
-                        <div class="text-white">
-                        <h6 class="text-uppercase mt-4 font-weight-bold">Donde estamos </h6>
-
-                        <i class="fas fa-phone mt-3"></i> <a href="tel:+">(+57) 123456</a><br>
-                        <i class="fas fa-phone mt-3"></i> <a href="tel:+">(+39) 123456</a><br>
-                        <i class="fa fa-envelope mt-3"></i> <a href="">confeccionesl&f.com</a><br>
-                        <i class="fa fa-envelope mt-3"></i> <a href="">confeccionesl&f@gmail.com</a><br>
-                        <i class="fas fa-globe mt-3"></i> Colombia Antioquia<br>
-                        <i class="fas fa-globe mt-3"></i> Colombia,Antioquia<br>
-                        <div class="my-4">
-                        <a href=""><i class="fab fa-facebook fa-3x pr-4"></i></a>
-                        <a href=""><i class="fab fa-linkedin fa-3x"></i></a>
-                        </div>
-                        </div>
-                      </div>
-
+<div class="wrapper clearfix" id="wrapperParallax">
+    <header class="header header-1 header-light header-topbar" id="navbar-spy">
+        <div class="top-bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-lg-6">
+                        <ul class="list-unstyled top--contact text-center text-lg-start">
+                            <li><span>Avenida del Libertador No. 23-87</span></li>
+                            <li><a href="tel:1602 987 654 3210">602 987 654 3210</a></li>
+                            <li><a href="mailto:confecciioneslyf@gmail.com"> confecciioneslyf@gmail.com </a></li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-lg-6 text-center text-lg-end">
+                        <div class="module module-social"><a href="javascript:void(0)"><i class="fab fa-facebook-f"></i><i
+                                        class="fab fa-facebook-f"></i></a><a href="javascript:void(0)"><i
+                                        class="fab fa-instagram"></i><i class="fab fa-instagram"></i></a></div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-bordered navbar-sticky" id="primary-menu">
+            <div class="container"><a class="navbar-brand" href="index.html">
+                    <img class="logo logo-dark" src="{{ asset('/assets/images/lyflogo5v2SM.png')}}"
+                         alt="Confecciones L&F"/></a>
+                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+                        aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item  item-home  active"><a href="javascript:void(0)" onclick="internalClick('home')"><span>Inicio</span></a>
+                        </li>
+                        <li class="nav-item item-about"><a href="javascript:void(0)" onclick="internalClick('about')"><span>Nosotros</span></a>
+                        </li>
+                        <li class="nav-item item-catalog"><a href="javascript:void(0)" onclick="internalClick('catalog')"><span>Catalogo</span></a>
+                        </li>
+                        <li class="nav-item item-contacts"><a href="javascript:void(0)" onclick="internalClick('contacts')"><span>Contactos</span></a>
+                        </li>
+                        <li class="nav-item"><a href="{{route('login')}}"><span>Login</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <section class="slider slider-2 slider-4" id="home">
+        <div class="container-fluid pr-0 pl-0">
+            <div class="carousel owl-carousel carousel-navs carousel-dots" data-slide="1" data-slide-rs="1"
+                 data-autoplay="true" data-nav="true" data-dots="true" data-space="0" data-loop="true" data-speed="800">
+                <!-- Slide #1-->
+                <div class="slide bg-overlay bg-overlay-dark">
+                    <div class="bg-section"><img src="{{asset('assets/images/bg2.webp')}}" alt="CONFECCIONES L&F"/>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-10">
+                                <div class="slider-content">
+                                    <h1 class="slider-headline">CONFECCIONES L&F</h1>
+                                    <p class="slider-desc">
+                                        Nuestra experiencia de 2 decadas<br>
+                                        Nos permite garantizar un producto de excelente calidad a un precio justo
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide bg-overlay bg-overlay-dark">
+                    <div class="bg-section"><img src="{{asset('assets/images/pexels-neosiam-603022.jpg')}}"
+                                                 alt="CONFECCIONES L&F"/></div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-10">
+                                <div class="slider-content">
+                                    <h1 class="slider-headline">CONFECCIONES L&F</h1>
+                                    <p class="slider-desc">
+                                        Queremos convertirnos en su proveedor de confianza para vestir a sus empleados y
+                                        estudiantes.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="about about-1" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-6"><img class="img-fluid mx-auto d-block pe-lg-5"
+                                                           src="{{asset('assets/images/outfits-4926399_640.jpg')}}"
+                                                           alt="CONFECCIONES L&F"/></div>
+                <div class="col-12 col-md-6 col-lg-6">
+                    <div class="heading heading-1 mb-0">
+                        <p class="heading-subtitle">Único, creativo y sin limites.</p>
+                        <h2 class="heading-title">SOMOS<br>CONFECCIONES L&F</h2>
+                        <p class="heading-desc mb-40 pe-lg-5">Nuestra experiencia de 2 decadas nos permite garantizar
+                            un producto de excelente calidad a un precio justo y queremos convertirnos en su proveedor
+                            de confianza para vestir a sus empleados y estudiantes.</p>
+                        <a class="btn btn--primary" href="javascript:void(0)" onclick="internalClick('contacts')">
+                            Contactenos</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="work work-grid work-gallery pb-90" id="catalog">
+        <div class="container-fluid pr-0 pl-0">
+            <div class="row">
+            </div>
+            <div class="row row-no-padding" id="work-all">
+                <div class="col-12">
+                    <div class="heading heading-3 text--center">
+                        <p class="heading-subtitle">Catalogo </p>
+                        <h2 class="heading-title">Estos son los estilos que producimos, estilos tanto femeninos<br>como
+                            masculinos e infantiles</h2>
+                    </div>
+                </div>
+                @include('catalogo')
+            </div>
+        </div>
+    </section>
+    <section class="contact contact-1 bg-gray pt-0 pb-0" id="contacts">
+        <div class="contact-container">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-6">
+                    <div class="contact-card bg-gray">
+                        <div class="heading heading-1 mb-40">
+                            <h2 class="heading-title"> Escribanos</h2>
+                        </div>
+                        <div class="contact-body">
+                            <form class="contactForm mb-0" method="post" action="">
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <input class="form-control" type="text" name="contact-name"
+                                               placeholder="Nombre:"
+                                               required=""/>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6">
+                                        <input class="form-control" type="text" name="contact-email"
+                                               placeholder="Correo:" required=""/>
+                                    </div>
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <input class="form-control" type="text" name="contact-phone"
+                                               placeholder="Télefono:" required=""/>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <textarea class="form-control" name="contact-message" cols="30" rows="10"
+                                                  placeholder="mensaje:" required=""></textarea>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <input class="btn btn--primary" type="button" value="ENVIAR MENSAJE"/>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="contact-result"></div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-6 position-relative">
+                    <iframe class="map-gray map-gray"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31804.905931648518!2d-75.70055105045365!3d4.836284401949117!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3880df4d6b2487%3A0x9b7ff86649390b78!2sDosquebradas%2C%20Risaralda!5e0!3m2!1ses-419!2sco!4v1714364390842!5m2!1ses-419!2sco"
+                            width="600" height="450" style="border:0" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer footer-1">
+        <div class="footer-bottom">
+            <div class="row">
+                <div class="col-md-12 col-md-12 text--center footer-copyright">
+                    <div class="copyright"><span>@php  echo date('Y') @endphp &copy; CONFECCIONES L&F</span></div>
+                    <div class="module module-social"><a class="share-facebook" href="javascript:void(0)"><i
+                                    class="fab fa-facebook-f"> </i><i class="fab fa-facebook-f"> </i></a><a
+                                class="share-instagram" href="javascript:void(0)"><i class="fab fa-instagram"></i><i
+                                    class="fab fa-instagram"></i></a></div>
                 </div>
 
-        </section>
-
-    </div>
-
-
-
-    </main>
-
-
-
-
+            </div>
+        </div>
+    </footer>
+    <div class="backtop" id="back-to-top"><i class="fas fa-long-arrow-alt-up"></i></div>
+</div>
+<script src="{{asset('assets-landing/js/vendor/jquery-3.6.0.min.js')}}"></script>
+<script src="{{asset('assets-landing/js/vendor.min.js')}}"></script>
+<script src="{{asset('assets-landing/js/functions.js')}}"></script>
+<script>
+  function internalClick(id) {
+    let element = document.getElementById(id);
+    if (element) {
+      $('.nav-item').removeClass('active');
+      element.scrollIntoView({behavior: "smooth"});
+      $(`.item-${id}`).addClass('active');
+    } else {
+      console.error('Element with id ' + id + ' not found.');
+    }
+  }
+</script>
 </body>
-
-
 </html>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        // Aquí va el script jQuery que proporcionaste
-        jQuery(document).ready(function($) {
-            $('#myCarousel').carousel({
-                interval: 5000
-            });
-
-            $('#carousel-text').html($('#slide-content-0').html());
-
-            //Handles the carousel thumbnails
-            $('[id^=carousel-selector-]').click( function(){
-                var id_selector = $(this).attr("id");
-                var id = id_selector.substr(id_selector.length -1);
-                var id = parseInt(id);
-                $('#myCarousel').carousel(id);
-            });
-
-            // When the carousel slides, auto update the text
-            $('#myCarousel').on('slid', function (e) {
-                var id = $('.item.active').data('slide-number');
-                $('#carousel-text').html($('#slide-content-'+id).html());
-            });
-        });
-    </script>

@@ -21,9 +21,10 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-    <!-- Favicons -->    
+    <!-- Favicons -->
     <link rel="apple-touch-icon" href="{{ asset('/favicons/apple-touch-icon.png') }}" sizes="180x180">
     <link rel="icon" href="{{ asset('/favicons/favicon-32x32.png')}}" sizes="32x32" type="image/png">
     <link rel="icon" href="{{ asset('favicon-16x16.png') }}" sizes="16x16" type="image/png">
@@ -33,40 +34,16 @@
 
 </head>
 <body>
-
-       <header data-bs-theme="dark">
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-          <div class="container-fluid">
-            <a href="/"><img class="logolyf" src="{{ asset('/assets/images/lyflogo5v2SM.png')}}" alt=""></a>
-            <a class="navbar-brand" href="/catalogo">  Catalogo</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-              <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="/carousel">Nosotros</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="/contacto">Contacto</a>
-                </li>
-              </ul>
-              <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-              </form>
-            </div>
-          </div>
-        </nav>
-      </header>
-
 <div class="container">
     <div class="auth">
         <div class="content">
-            <div class="d-flex flex-column align-items-center">    
-              <img class="mb-4" id="logo" src="{{ asset('assets/images/lyflogo5v2.png')}}" alt="" width="500" height="50">
-    <h1 class="h3 mb-3 fw-normal">Bienvenido! Por favor</h1>
-    <h1 class="h3 mb-3 fw-normal">ingrese sus datos</h1>
+            <div class="d-flex flex-column align-items-center">
+                <a href="/">
+                    <img class="mb-4" id="logo" src="{{ asset('assets/images/lyflogo5v2.png')}}" alt="" width="500"
+                         height="50">
+                </a>
+                <h1 class="h3 mb-3 fw-normal">Bienvenido! Por favor</h1>
+                <h1 class="h3 mb-3 fw-normal">ingrese sus datos</h1>
             </div>
             <div class="form">
                 <form id="formAuth" method="POST">
@@ -100,6 +77,9 @@
                     </div>
                 </form>
             </div>
+            <div class="home">
+              <a href="/"><i class="fa fa-arrow-left pr-2"></i>  INICIO</a>
+            </div>
         </div>
     </div>
 </div>
@@ -109,47 +89,47 @@
 <script src="{{ asset('assets/packages/toast/jquery.toast.min.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-    const app = {
-        handleLogin: function () {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            if ($('#formAuth').smkValidate()) {
-                const data = {
-                    email: email,
-                    password: password
-                };
-                axios({
-                    method: 'post',
-                    url: route('access.web'),
-                    data: data,
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
-                    }
-                }).then(response => {
-                    if (response.status === 200) {
-                        window.location.href = '/home';
-                    } else {
-                        $.toast({
-                            text: 'Usuario o contraseña incorrectos',
-                            position: 'top-right',
-                            stack: false,
-                            icon: 'error'
-                        })
-                    }
-                }).catch(error => {
-                    console.error(error);
-                });
-            } else {
-                $.toast({
-                    text: 'Ingrese el usuario y la contraseña',
-                    position: 'top-right',
-                    stack: false,
-                    icon: 'warning'
-                })
-            }
-        }
+  const app = {
+    handleLogin: function () {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      if ($('#formAuth').smkValidate()) {
+        const data = {
+          email: email,
+          password: password
+        };
+        axios({
+          method: 'post',
+          url: route('access.web'),
+          data: data,
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+          }
+        }).then(response => {
+          if (response.status === 200) {
+            window.location.href = '/home';
+          } else {
+            $.toast({
+              text: 'Usuario o contraseña incorrectos',
+              position: 'top-right',
+              stack: false,
+              icon: 'error'
+            })
+          }
+        }).catch(error => {
+          console.error(error);
+        });
+      } else {
+        $.toast({
+          text: 'Ingrese el usuario y la contraseña',
+          position: 'top-right',
+          stack: false,
+          icon: 'warning'
+        })
+      }
     }
+  }
 </script>
 </body>
 
