@@ -18,14 +18,14 @@
             <div class="table-responsive">
                 <table id="tableSuppliers" class="table table-bordered table-hover table-striped table-sm">
                     <thead>
-                        <th>ID</th>
-                        <th>Tipo de documento</th>
-                        <th>Documento</th>
-                        <th>Nombre</th>
-                        <th>Teléfono</th>
-                        <th>Dirección</th>
-                        <th>email</th>
-                        <th class="text-center">Acciones</th>
+                    <th>ID</th>
+                    <th>Tipo de documento</th>
+                    <th>Documento</th>
+                    <th>Nombre</th>
+                    <th>Teléfono</th>
+                    <th>Dirección</th>
+                    <th>email</th>
+                    <th class="text-center">Acciones</th>
                     </thead>
                 </table>
             </div>
@@ -83,7 +83,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="modal" id="showSupplier" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -98,7 +98,8 @@
                     </div>
                     <div class="block-content fs-sm mb-4">
                         <ul class="list-group">
-                            <li class="list-group-item"><b>Nombre:</b> <label class="text-capitalize" id="name"></label></li> 
+                            <li class="list-group-item"><b>Nombre:</b> <label class="text-capitalize" id="name"></label>
+                            </li>
                             <li class="list-group-item"><b>Tipo documento:</b> <label id="document_type"></label></li>
                             <li class="list-group-item"><b>Documento:</b> <label id="document"></label></li>
                             <li class="list-group-item"><b>Teléfono:</b> <label id="phone"></label></li>
@@ -111,69 +112,68 @@
         </div>
     </div>
 
-    <div class="modal" id="updateSupplier" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="block block-rounded shadow-none mb-0">
-                <div class="block-header block-header-default">
-                    <h3 class="block-title text-uppercase">Editar Proveedor</h3>
-                    <div class="block-options">
-                    <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
-                            <i class="fa fa-times"></i>
-                        </button>
+    <div class="modal" id="updateSupplier" tabindex="-1" role="dialog" aria-labelledby="modal-normal"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="block block-rounded shadow-none mb-0">
+                    <div class="block-header block-header-default">
+                        <h3 class="block-title text-uppercase">Editar Proveedor</h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="block-content fs-sm mb-4">
-                    <form id="editForm">
-                    <form id="editForm">
-                    @csrf
+                    <div class="block-content fs-sm mb-4">
+                        <form id="editForm">
+                            <form id="editForm">
+                                @csrf
 
-                    <input type="hidden" id="editId" name="id">
-                    
-                        <div class="form-group">
-                            <label for="editName">Nombre</label>
-                            <input type="text" class="form-control" id="editName" name="name">
-                        </div>
-                        <div class="form-group">
-                            <label for="editDocumentType">Tipo de Documento</label>
-                            <input type="text" class="form-control" id="editDocumentType" name="document_type">
-                            </div>
+                                <input type="hidden" id="editId" name="id">
 
-                        <div class="form-group">
-                            <label for="editDocument">Documento</label>
-                            <input type="text" class="form-control" id="editDocument" name="document">
-                        </div>
-                        <div class="form-group">
-                            <label for="editPhone">Teléfono</label>
-                            <input type="text" class="form-control" id="editPhone" name="phone">
-                        </div>
-                        <div class="form-group">
-                            <label for="editAddress">Dirección</label>
-                            <input type="text" class="form-control" id="editAddress" name="address">
-                        </div>
-                        <div class="form-group">
-                            <label for="editEmail">Email</label>
-                            <input type="email" class="form-control" id="editEmail" name="email">
-                        </div>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="close">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                    </form>
+                                <div class="form-group">
+                                    <label for="editName">Nombre</label>
+                                    <input type="text" class="form-control" id="editName" name="name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="editDocumentType">Tipo de Documento</label>
+                                    <input type="text" class="form-control" id="editDocumentType" name="document_type">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="editDocument">Documento</label>
+                                    <input type="text" class="form-control" id="editDocument" name="document">
+                                </div>
+                                <div class="form-group">
+                                    <label for="editPhone">Teléfono</label>
+                                    <input type="text" class="form-control" id="editPhone" name="phone">
+                                </div>
+                                <div class="form-group">
+                                    <label for="editAddress">Dirección</label>
+                                    <input type="text" class="form-control" id="editAddress" name="address">
+                                </div>
+                                <div class="form-group">
+                                    <label for="editEmail">Email</label>
+                                    <input type="email" class="form-control" id="editEmail" name="email">
+                                </div>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                        aria-label="close">Cancelar
+                                </button>
+                                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                            </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-
-
-
-    
-    
 @endsection
 
 @section('js')
     <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
     <script>
+      var dataTabla = null;
       $(document).ready(function () {
         $('#createForm').submit(function (event) {
           event.preventDefault();
@@ -204,159 +204,152 @@
           });
         });
       });
-    </script>
 
-    <script>
-    $(document).ready(function () {
+      $(document).ready(function () {
         // ... Otras funciones y configuraciones aquí ...
 
         // Manejar el envío del formulario de edición
         $('#editForm').submit(function (event) {
-            event.preventDefault(); // Evitar el envío del formulario por defecto
+          event.preventDefault(); // Evitar el envío del formulario por defecto
 
-            // Obtener los datos del formulario
-            const formData = $(this).serialize();
+          // Obtener los datos del formulario
+          const formData = $(this).serialize();
 
-            $.ajax({
-                url: '/suppliers/' + $('#editId').val(), 
-                type: 'PUT', 
-                data: formData, 
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(response) {
-                    
-                    alert('Proveedor actualizado correctamente');
-                    $('#updateSupplier').modal('hide'); 
-                    location.reload();
-                },
-                error: function(err) {
-                    
-                    console.error('Error al actualizar el proveedor:', err);
-                    alert('Hubo un error al actualizar el proveedor');
-                }
-            });
+          $.ajax({
+            url: '/suppliers/' + $('#editId').val(),
+            type: 'PUT',
+            data: formData,
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (response) {
+
+              alert('Proveedor actualizado correctamente');
+              $('#updateSupplier').modal('hide');
+              dataTabla.ajax.reload();
+            },
+            error: function (err) {
+
+              console.error('Error al actualizar el proveedor:', err);
+              alert('Hubo un error al actualizar el proveedor');
+            }
+          });
         });
-    });
-</script>
+      });
+      $(document).ready(function () {
+        dataTabla = $('#tableSuppliers').DataTable({
+          ajax: route('suppliers'),
+          filter: true,
+          columns: [
+            {data: 'id'},
 
-    <script>
-        
-        $(document).ready(function () {
-            let dataTabla = null;
-            dataTabla = $('#tableSuppliers').DataTable({
-                ajax: route('suppliers'),
-                filter: true,
-                columns: [
-                    {data: 'id'},
-                    
-                    {data: 'document_type', orderable: false},
-                    {data: 'document', orderable: false},
-                    {data: 'name', orderable: false},
-                    {data: 'phone', orderable: false},
-                    {data: 'address', orderable: false},
-                    {data: 'email', orderable: false},
-                    {data: 'btns', orderable: false}
-                ],
-                bLengthChange: false,
-                info: false,
-                pageLength: 100,
-                processing: false,
-                serverSide: true,
-                language: {
-                    decimal: "",
-                    emptyTable: "No hay información",
-                    info: "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-                    infoEmpty: "Mostrando 0 to 0 of 0 Entradas",
-                    infoFiltered: "(Filtrado de _MAX_ total entradas)",
-                    infoPostFix: "",
-                    thousands: ",",
-                    lengthMenu: "Mostrar _MENU_ Entradas",
-                    loadingRecords: "Cargando lista de proveedores...",
-                    processing: "Procesando...",
-                    search: "Buscar:",
-                    zeroRecords: "Sin resultados encontrados",
-                    paginate: {
-                        first: "Primero",
-                        last: "Ultimo",
-                        next: "Siguiente",
-                        previous: "Anterior"
-                    }
-                },
-                order: [[0, "desc"]]
-            });
-            dataTabla.columns([0]).visible(false);
+            {data: 'document_type', orderable: false},
+            {data: 'document', orderable: false},
+            {data: 'name', orderable: false},
+            {data: 'phone', orderable: false},
+            {data: 'address', orderable: false},
+            {data: 'email', orderable: false},
+            {data: 'btns', orderable: false}
+          ],
+          bLengthChange: false,
+          info: false,
+          pageLength: 100,
+          processing: false,
+          serverSide: true,
+          language: {
+            decimal: "",
+            emptyTable: "No hay información",
+            info: "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+            infoEmpty: "Mostrando 0 to 0 of 0 Entradas",
+            infoFiltered: "(Filtrado de _MAX_ total entradas)",
+            infoPostFix: "",
+            thousands: ",",
+            lengthMenu: "Mostrar _MENU_ Entradas",
+            loadingRecords: "Cargando lista de proveedores...",
+            processing: "Procesando...",
+            search: "Buscar:",
+            zeroRecords: "Sin resultados encontrados",
+            paginate: {
+              first: "Primero",
+              last: "Ultimo",
+              next: "Siguiente",
+              previous: "Anterior"
+            }
+          },
+          order: [[0, "desc"]]
         });
+        dataTabla.columns([0]).visible(false);
+      });
 
-        const app = {
-            openModalCreate() {
+      const app = {
+        openModalCreate() {
           $('#createSupplier').modal('show');
         },
-    btnShow: async function (id) {
-        const {data} = await axios.get(route('suppliers.show', id));
-        const supplier = data.data;
-        if (data.status) {
+        btnShow: async function (id) {
+          const {data} = await axios.get(route('suppliers.show', id));
+          const supplier = data.data;
+          if (data.status) {
             $('#showSupplier .block-title').text(supplier.name);
             for (let key in supplier) {
-                if (supplier.hasOwnProperty(key)) {
-                    $(`#${key}`).text(supplier[key]);
-                }
+              if (supplier.hasOwnProperty(key)) {
+                $(`#${key}`).text(supplier[key]);
+              }
             }
             $('#showSupplier').modal('show');
-        }
-    },
+          }
+        },
 
-    btnDelete: function (id) {
-        if (confirm('¿Estás seguro de que deseas eliminar este proveedor?')) {
+        btnDelete: function (id) {
+          if (confirm('¿Estás seguro de que deseas eliminar este proveedor?')) {
             $.ajax({
-                url: '/suppliers/' + id,
-                type: 'DELETE',
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(response) {
-                    alert('Proveedor eliminado correctamente');
-                    location.reload();
-                },
-                error: function(err) {
-                    console.error('Error al eliminar el proveedor:', err);
-                    alert('Hubo un error al eliminar el proveedor');
-                }
+              url: '/suppliers/' + id,
+              type: 'DELETE',
+              headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              },
+              success: function (response) {
+                alert('Proveedor eliminado correctamente');
+                dataTabla.ajax.reload();
+              },
+              error: function (err) {
+                console.error('Error al eliminar el proveedor:', err);
+                alert('Hubo un error al eliminar el proveedor');
+              }
             });
-        }
-    },
+          }
+        },
 
-    btnEdit: async function (id) {
-        try {
+        btnEdit: async function (id) {
+          try {
             // Hacer una solicitud AJAX GET para obtener los datos del proveedor
             const response = await axios.get(`/suppliers/${id}`);
 
             // Verificar si la solicitud fue exitosa
             if (response.status === 200 && response.data.status) {
-                const supplier = response.data.data;
+              const supplier = response.data.data;
 
-                // Rellenar un formulario modal con los datos del proveedor
-                $('#updateSupplier #editId').val(supplier.id);
-                $('#updateSupplier #editDocumentType').val(supplier.document_type);
-                $('#updateSupplier #editDocument').val(supplier.document);
-                $('#updateSupplier #editName').val(supplier.name);
-                $('#updateSupplier #editAddress').val(supplier.address);
-                $('#updateSupplier #editPhone').val(supplier.phone);
-                $('#updateSupplier #editEmail').val(supplier.email);
+              // Rellenar un formulario modal con los datos del proveedor
+              $('#updateSupplier #editId').val(supplier.id);
+              $('#updateSupplier #editDocumentType').val(supplier.document_type);
+              $('#updateSupplier #editDocument').val(supplier.document);
+              $('#updateSupplier #editName').val(supplier.name);
+              $('#updateSupplier #editAddress').val(supplier.address);
+              $('#updateSupplier #editPhone').val(supplier.phone);
+              $('#updateSupplier #editEmail').val(supplier.email);
 
-                // Mostrar el formulario modal para permitir la edición
-                $('#updateSupplier').modal('show');
+              // Mostrar el formulario modal para permitir la edición
+              $('#updateSupplier').modal('show');
             } else {
-                // Manejar el caso en el que no se encuentre el proveedor o haya un error
-                alert('No se pudo obtener la información del proveedor');
+              // Manejar el caso en el que no se encuentre el proveedor o haya un error
+              alert('No se pudo obtener la información del proveedor');
             }
-        } catch (error) {
+          } catch (error) {
             console.error('Error al obtener la información del proveedor:', error);
             alert('Hubo un error al obtener la información del proveedor');
-        }
-        
-    },
-    saveSupplier: function () {
+          }
+
+        },
+        saveSupplier: function () {
           const form = $('#createSupplierForm').serializeArray();
           const data = form.reduce((obj, item) => {
             obj[item.name] = item.value;
@@ -372,7 +365,7 @@
             }
           }).then(response => {
             if (response.status === 200) {
-              
+
               $('#createSupplierForm')[0].reset();
               $('#createSupplier').modal('hide');
               $.toast({
@@ -381,7 +374,7 @@
                 stack: false,
                 icon: 'success'
               });
-              location.reload();
+              dataTabla.ajax.reload();
 
             } else {
               $.toast({
@@ -395,7 +388,7 @@
             console.error(error);
           });
         }
-};
+      };
 
     </script>
 @endsection
