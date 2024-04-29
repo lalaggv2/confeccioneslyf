@@ -1,63 +1,65 @@
-    body {
-        min-height: 100vh;
-        min-height: 100dvh;
-        background-image: url("../assets/images/Designer.jpeg");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    background-image: url("../assets/images/bg1.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
 
-    .logolyf{
-        padding-right: 1rem;      
-      }
+.logolyf {
+    padding-right: 1rem;
+}
 
-    #logo{
-        width: 300px;
-        height: 80px;
-    }
+#logo {
+    width: 300px;
+    height: 80px;
+}
 
-    .auth {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        min-height: 100dvh;
-    }
+.auth {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+}
 
-    .auth img {
-        width: 100px;
-        height: 100px;
-        margin-bottom: 20px;
-    }
+.auth img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+}
 
-    .auth .content {
-        padding: 40px;
-        border: 1px solid #535252;
-        border-radius: 10px;
-    }
+.auth .content {
+    padding: 40px;
+    border: 1px solid #535252;
+    border-radius: 10px;
+    background-color: #ffffffd1;
+}
 
-    .auth .recover-password {
-        display: flex;
-        justify-content: end;
-        margin-top: 20px;
-    }
+.auth .recover-password {
+    display: flex;
+    justify-content: end;
+    margin-top: 20px;
+}
 
-    .auth .recover-password > a {
-        text-decoration: none;
-        color: #000000;
-    }
+.auth .recover-password > a {
+    text-decoration: none;
+    color: #000000;
+}
 
-    .auth .recover-password > a:hover {
-        text-decoration: underline;
-    }
+.auth .recover-password > a:hover {
+    text-decoration: underline;
+}
 
-    .auth .button-access {
-        margin-top: 30px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .smk-error-msg {
+.auth .button-access {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.smk-error-msg {
     color: #a94442 !important;
-    }
+}
