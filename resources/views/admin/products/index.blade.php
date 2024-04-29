@@ -326,27 +326,7 @@
                 }
             }, 
         
-            btnEdit: function (id) {
-                alert('Editar producto con id: ' + id);
-            },
-            btnDelete: function (id) {
-                   if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
-                    $.ajax({
-            url: '/products/' + id,
-            type: 'DELETE',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function(response) {
-                alert('producto eliminado correctamente');
-                location.reload();
-                
-            },
-           
-        });
-    }
-},
-btnEdit: async function (id) {
+         btnEdit: async function (id) {
     try {
         // Hacer una solicitud AJAX GET para obtener los datos del producto
         const response = await axios.get(`/products/${id}`);
@@ -354,8 +334,6 @@ btnEdit: async function (id) {
         // Verificar si la solicitud fue exitosa
         if (response.status === 200 && response.data.status) {
             const product = response.data.data;
-
-            
 
             // Rellenar un formulario modal con los datos del producto
             $('#updateProduct #editProductId').val(product.id);
@@ -385,6 +363,23 @@ btnEdit: async function (id) {
         alert('Hubo un error al obtener la información del producto');
     }
 }, 
+            btnDelete: function (id) {
+                   if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
+                    $.ajax({
+            url: '/products/' + id,
+            type: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                alert('producto eliminado correctamente');
+                location.reload();
+                
+            },
+           
+        });
+    }
+},
 saveProduct: function () {
           const form = $('#createProductForm').serializeArray();
           const data = form.reduce((obj, item) => {
