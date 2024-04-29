@@ -303,14 +303,9 @@
         },
         btnEdit: async function (id) {
           try {
-
             const response = await axios.get(`/customers/${id}`);
-
-
             if (response.status === 200 && response.data.status) {
               const customer = response.data.data;
-
-
               $('#updateCustomer #editId').val(customer.id);
               $('#updateCustomer #editDocumentType').val(customer.document_type);
               $('#updateCustomer #editDocument').val(customer.document);
@@ -318,8 +313,6 @@
               $('#updateCustomer #editAddress').val(customer.address);
               $('#updateCustomer #editPhone').val(customer.phone);
               $('#updateCustomer #editEmail').val(customer.email);
-
-
               $('#updateCustomer').modal('show');
             } else {
 
