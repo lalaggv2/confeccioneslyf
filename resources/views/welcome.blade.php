@@ -47,12 +47,13 @@
                         aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarContent">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item  active"><a href="javascript:void(0)" onclick="internalClick('home')"><span>Inicio</span></a>
+                        <li class="nav-item  item-home  active"><a href="javascript:void(0)" onclick="internalClick('home')"><span>Inicio</span></a>
                         </li>
-                        <li class="nav-item"><a href="javascript:void(0)" onclick="internalClick('about')"><span>Nosotros</span></a></li>
-                        <li class="nav-item"><a href="javascript:void(0)" onclick="internalClick('catalog')"><span>Catalogo</span></a>
+                        <li class="nav-item item-about"><a href="javascript:void(0)" onclick="internalClick('about')"><span>Nosotros</span></a>
                         </li>
-                        <li class="nav-item"><a href="javascript:void(0)" onclick="internalClick('contacts')"><span>Contactos</span></a>
+                        <li class="nav-item item-catalog"><a href="javascript:void(0)" onclick="internalClick('catalog')"><span>Catalogo</span></a>
+                        </li>
+                        <li class="nav-item item-contacts"><a href="javascript:void(0)" onclick="internalClick('contacts')"><span>Contactos</span></a>
                         </li>
                         <li class="nav-item"><a href="{{route('login')}}"><span>Login</span></a></li>
                     </ul>
@@ -115,7 +116,8 @@
                         <p class="heading-desc mb-40 pe-lg-5">Nuestra experiencia de 2 decadas nos permite garantizar
                             un producto de excelente calidad a un precio justo y queremos convertirnos en su proveedor
                             de confianza para vestir a sus empleados y estudiantes.</p>
-                        <a class="btn btn--primary" href="#"> Contactenos</a>
+                        <a class="btn btn--primary" href="javascript:void(0)" onclick="internalClick('contacts')">
+                            Contactenos</a>
                     </div>
                 </div>
             </div>
@@ -129,7 +131,8 @@
                 <div class="col-12">
                     <div class="heading heading-3 text--center">
                         <p class="heading-subtitle">Catalogo </p>
-                        <h2 class="heading-title">Estos son los estilos que producimos, estilos tanto femeninos<br>como masculinos e infantiles</h2>
+                        <h2 class="heading-title">Estos son los estilos que producimos, estilos tanto femeninos<br>como
+                            masculinos e infantiles</h2>
                     </div>
                 </div>
                 @include('catalogo')
@@ -207,7 +210,9 @@
   function internalClick(id) {
     let element = document.getElementById(id);
     if (element) {
+      $('.nav-item').removeClass('active');
       element.scrollIntoView({behavior: "smooth"});
+      $(`.item-${id}`).addClass('active');
     } else {
       console.error('Element with id ' + id + ' not found.');
     }

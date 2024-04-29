@@ -4333,7 +4333,7 @@ li.has-dropdown > .dropdown-toggle::after {
     -webkit-transition: 600ms ease-in-out;
     -o-transition: 600ms ease-in-out;
     transition: 600ms ease-in-out;
-    background-color: rgba(249, 188, 1, 0.95);
+    background-color: rgb(179 145 78 / 79%);
     -webkit-clip-path: circle(10px at 90% -10%);
     clip-path: circle(10px at 90% -10%);
 }
@@ -8512,7 +8512,7 @@ li.has-dropdown > .dropdown-toggle::after {
 .work-item .work--hover .work--action {
     width: 100%;
     height: 100%;
-    background-color: rgba(249, 188, 1, 0.95);
+    background-color: rgb(179 145 78 / 79%);
     text-align: center;
     -webkit-transition: all 500ms;
     -o-transition: all 500ms;
