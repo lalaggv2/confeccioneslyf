@@ -17,10 +17,37 @@
     <link rel="stylesheet" id="css-main" href="{{asset('assets/admin/css/codebase.min.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/packages/toast/jquery.toast.min.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/admin/css/admin.css')}}">
+    <style>
+        .avatar {
+            background-color: #3a5c79;
+            border-radius: 50%;
+            height: 64px;
+            text-align: center;
+            width: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .initials {
+            font-size: 24px;
+            line-height: 1;
+            color: #a78240;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+    </style>
     @yield('css')
 </head>
 <body>
-
+@php
+    $name = Auth::user()->name;
+    $initials = '';
+    foreach (explode(' ', $name) as $word) {
+        $initials .= $word[0];
+    }
+@endphp
 <div id="page-container" class="sidebar-o enable-page-overlay side-scroll page-header-modern main-content-boxed">
     <nav id="sidebar">
         <div class="sidebar-content">
@@ -47,7 +74,9 @@
                     </div>
                     <div class="smini-hidden text-center mx-auto">
                         <a class="img-link" href="javascript:void(0)">
-                            <img class="img-avatar" src="{{ asset('assets/images/lyflogo2.jpg') }}" alt="">
+                            <div class="avatar">
+                                <span class="initials">{{$initials}}</span>
+                            </div>
                         </a>
                         <ul class="list-inline mt-3 mb-0">
                             <li class="list-inline-item">
