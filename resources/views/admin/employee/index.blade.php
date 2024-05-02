@@ -9,7 +9,8 @@
     <div class="card p-3 position-relative">
         <h2 class="content-heading"><i class="fa fa-users me-2"></i>EMPLEADOS</h2>
         <button type="button" class="btn btn-secondary w-25 btn-add" onclick="app.openModalCreate()"><i
-                    class="fa fa-plus"></i> Agregar empleado </button>
+                    class="fa fa-plus"></i> Agregar empleado
+        </button>
         <div class="card-body">
             <div class="table-responsive">
                 <table id="tableEmployees" class="table table-bordered table-hover table-striped table-sm">
@@ -129,30 +130,29 @@
                     </div>
                     <div class="block-content fs-sm mb-4">
                         <ul class="list-group">
-                            <li class="list-group-item"><b>Nombre:</b> <label class="text-capitalize" id="name"></label>
+                            <li class="list-group-item"><b>Nombre:</b> <label class="text-capitalize" id="show_name"></label>
                             </li>
-                            <li class="list-group-item"><b>Tipo documento:</b> <label id="document_type"></label></li>
-                            <li class="list-group-item"><b>Documento:</b> <label id="document"></label></li>
-                            <li class="list-group-item"><b>Teléfono:</b> <label id="phone"></label></li>
-                            <li class="list-group-item"><b>Dirección:</b> <label id="address"></label></li>
-                            <li class="list-group-item"><b>Correo:</b> <label id="email"></label></li>
-                            <li class="list-group-item"><b>Genero:</b> <label id="gender"></label></li>
-                            <li class="list-group-item"><b>RH:</b> <span class="badge text-bg-info pt-2" id="rh"></span>
+                            <li class="list-group-item"><b>Tipo documento:</b> <label id="show_document_type"></label></li>
+                            <li class="list-group-item"><b>Documento:</b> <label id="show_document"></label></li>
+                            <li class="list-group-item"><b>Teléfono:</b> <label id="show_phone"></label></li>
+                            <li class="list-group-item"><b>Dirección:</b> <label id="show_address"></label></li>
+                            <li class="list-group-item"><b>Correo:</b> <label id="show_email"></label></li>
+                            <li class="list-group-item"><b>Genero:</b> <label id="show_gender"></label></li>
+                            <li class="list-group-item"><b>RH:</b> <span class="badge text-bg-info pt-2" id="show_rh"></span>
                             </li>
-                            <li class="list-group-item"><b>EPS:</b> <label id="eps"></label></li>
+                            <li class="list-group-item"><b>EPS:</b> <label id="show_eps"></label></li>
                             <li class="list-group-item"><b>Cargo:</b> <span class="badge text-bg-primary pt-2"
-                                                                            id="position"></span></li>
-                            <li class="list-group-item"><b>Salario:</b> <label id="salary"></label></li>
+                                                                            id="show_position"></span></li>
+                            <li class="list-group-item"><b>Salario:</b> <label id="show_salary"></label></li>
                             <li class="list-group-item"><b>Fecha de ingreso a la empresa:</b> <label
-                                        id="start_date"></label>
+                                        id="show_start_date"></label>
                             </li>
-                            <li class="list-group-item d-none" id="contentContacts">
+                            <li class="list-group-item d-none" id="show_contentContacts">
                                 <h5 class="mb-0">CONTACTOS</h5>
-                                <div id="contacts">
-
+                                <div id="show_contacts">
                                 </div>
                             </li>
-                            <li class="list-group-item">Estado: <label id="status"></label></li>
+                            <li class="list-group-item"><b>Estado</b>: <label id="show_status"></label></li>
                         </ul>
                     </div>
                 </div>
@@ -360,7 +360,7 @@
             for (let key in employee) {
               if (employee.hasOwnProperty(key)) {
                 if (key === 'salary') {
-                  $(`#${key}`).text(new Intl.NumberFormat('es-CO', {
+                  $(`#show_${key}`).text(new Intl.NumberFormat('es-CO', {
                     style: 'currency',
                     currency: 'COP',
                     minimumFractionDigits: 0,
@@ -368,28 +368,28 @@
                   }).format(parseFloat(employee[key])));
                 } else {
                   if (key === 'status') {
-                    if (employee[key] === true) {
-                      $(`#${key}`).addClass('badge bg-success pt-1').text('Activo');
+                    if (employee[key] === 1) {
+                      $(`#show_${key}`).addClass('badge bg-success pt-1').text('Activo');
                     } else {
-                      $(`#${key}`).addClass('badge bg-danger pt-1').text('Inactivo');
+                      $(`#show_${key}`).addClass('badge bg-danger pt-1').text('Inactivo');
                     }
                   } else if (key === 'start_date') {
                     const date = new Date(employee[key]).toLocaleDateString();
-                    $(`#${key}`).text(date.replace(/\//g, '-'));
+                    $(`#show_${key}`).text(date.replace(/\//g, '-'));
                   } else if (key === 'contacts') {
                     if (employee[key].length > 0) {
-                      $('#contentContacts').removeClass('d-none');
-                      $('#contacts').html('');
+                      $('#show_contentContacts').removeClass('d-none');
+                      $('#show_contacts').html('');
                       let table = '<table class="table table-hover table-sm">';
                       table += '<thead class="text-capitalize"><tr><th>Nombre</th><th>Teléfono</th><th>Parentesco</th></tr></thead>';
                       for (let i = 0; i < employee[key].length; i++) {
                         table += `<tr><td>${employee[key][i].name}</td><td>${employee[key][i].phone}</td><td>${employee[key][i].relationship}</td></tr>`;
                       }
                       table += '</table>';
-                      $('#contacts').append(table);
+                      $('#show_contacts').append(table);
                     }
                   } else {
-                    $(`#${key}`).text(employee[key]);
+                    $(`#show_${key}`).text(employee[key]);
                   }
                 }
               }
