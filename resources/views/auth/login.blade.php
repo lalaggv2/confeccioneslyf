@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="{{ asset('assets/packages/toast/jquery.toast.min.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/packages/smoke/css/smoke.min.css')}}">
     <link rel="stylesheet" href="{{ asset('asset/login.css')}}">
-    <link href="{{ asset('assets/css/login.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('assets/css/login.css') }}" rel="stylesheet"> --}}
 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
@@ -34,6 +34,7 @@
 
 </head>
 <body>
+  <a href="/register">Registro</a> 
 <div class="container">
     <div class="auth">
         <div class="content">
@@ -64,9 +65,11 @@
                                     <input type="password" class="form-control" id="password" name="password" autofocus
                                            placeholder="Contraseña" required data-smk-msg="La contraseña es requerida">
                                 </div>
+                                
                                 <div class="recover-password">
-                                    <a href="#">Recuperar contraseña</a>
+                                  <a href="#">Recuperar contraseña</a>
                                 </div>
+                                
                             </div>
                         </div>
                         <div class="button-access">

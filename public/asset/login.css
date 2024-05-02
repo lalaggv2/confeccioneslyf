@@ -58,14 +58,16 @@ body {
 .home a:hover {
     text-decoration: underline;
 }
-
-.auth .recover-password {
+.auth .regirecup{
     display: flex;
-    justify-content: end;
+}
+.auth .recover-password {
     margin-top: 20px;
+    align-self: self-end;
 }
 
 .auth .recover-password > a {
+    justify-content: end;
     text-decoration: none;
     color: #000000;
 }
@@ -84,3 +86,12 @@ body {
 .smk-error-msg {
     color: #a94442 !important;
 }
+
+
+/* .recover-password{
+    justify-content: end;
+    align-content: flex-end;
+    margin: 0 0 0 100px;
+    padding: 1rem;
+} */
+
