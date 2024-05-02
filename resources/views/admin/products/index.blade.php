@@ -45,52 +45,52 @@
                     <div class="block-content fs-sm mb-4">
                         <form id="createProductForm">
                             <div class="form-group mb-3">
-                                <label for="name">Nombre</label>
-                                <input type="text" class="form-control" id="name" name="name">
+                                <label for="create_name">Nombre</label>
+                                <input type="text" class="form-control" id="create_name" name="name">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="description">Descripción</label>
-                                <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                                <label for="create_description">Descripción</label>
+                                <textarea class="form-control" id="create_description" name="description" rows="3"></textarea>
                             </div>
                             <div class="form-group mb-3">
-                                <label for="type">Tipo</label>
-                                <input type="text" class="form-control" id="type" name="type">
+                                <label for="create_type">Tipo</label>
+                                <input type="text" class="form-control" id="create_type" name="type">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="sku">SKU</label>
-                                <input type="text" class="form-control" id="sku" name="sku">
+                                <label for="create_sku">SKU</label>
+                                <input type="text" class="form-control" id="create_sku" name="sku">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="barcode">Código de barras</label>
-                                <input type="text" class="form-control" id="barcode" name="barcode">
+                                <label for="create_barcode">Código de barras</label>
+                                <input type="text" class="form-control" id="create_barcode" name="barcode">
                             </div>
                             <div class="form-group mb-3">
                                 <label for="size">Tamaño</label>
-                                <input type="text" class="form-control" id="size" name="size">
+                                <input type="text" class="form-control" id="create_size" name="size">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="color">Color</label>
-                                <input type="text" class="form-control" id="color" name="color">
+                                <label for="create_color">Color</label>
+                                <input type="text" class="form-control" id="create_color" name="color">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="material">Material</label>
-                                <input type="text" class="form-control" id="material" name="material">
+                                <label for="create_material">Material</label>
+                                <input type="text" class="form-control" id="create_material" name="material">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="location">Ubicación</label>
-                                <input type="text" class="form-control" id="location" name="location">
+                                <label for="create_location">Ubicación</label>
+                                <input type="text" class="form-control" id="create_location" name="location">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="price">Precio</label>
-                                <input type="number" step="0.01" class="form-control" id="price" name="price">
+                                <label for="create_price">Precio</label>
+                                <input type="number" step="0.01" class="form-control" id="create_price" name="price">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="stock">Stock</label>
-                                <input type="number" class="form-control" id="stock" name="stock">
+                                <label for="create_stock">Stock</label>
+                                <input type="number" class="form-control" id="create_stock" name="stock">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="notes">Notas</label>
-                                <textarea class="form-control" id="notes" name="notes" rows="3"></textarea>
+                                <label for="create_notes">Notas</label>
+                                <textarea class="form-control" id="create_notes" name="notes" rows="3"></textarea>
                             </div>
                             <div class="mt-3">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar
@@ -119,7 +119,7 @@
                     </div>
                     <div class="block-content fs-sm mb-4">
                         <ul class="list-group">
-                            <li class="list-group-item"><b>Nombre:</b> <label class="text-capitalize" id="name"></label></li>
+                            
                             <li class="list-group-item"><b>Descripción:</b> <label id="description"></label></li>
                             <li class="list-group-item"><b>Stock:</b> <label id="stock"></label></li>
                             <li class="list-group-item"><b>Tipo:</b> <label id="type"></label></li>
@@ -130,8 +130,6 @@
                             <li class="list-group-item"><b>Material:</b> <label id="material"></label></li>
                             <li class="list-group-item"><b>Ubicación:</b> <label id="location"></label></li>
                             <li class="list-group-item"><b>Precio:</b> <label id="price"></label></li>
-
-
                             <li class="list-group-item"><b>Notas:</b> <label id="notes"></label></li>
                             <li class="list-group-item"><b>Fecha de Creación:</b> <label id="created_at"></label></li>
                             <li class="list-group-item"><b>Fecha de Actualización:</b> <label id="updated_at"></label></li>
@@ -316,7 +314,7 @@
           const {data} = await axios.get(route('products.show', id));
           const product = data.data;
           if (data.status) {
-            $('#showProduct.block-title').text(product.name);
+            $('#showProduct .block-title').text(product.name);
             for (let key in product) {
               if (product.hasOwnProperty(key)) {
                 if (document.getElementById(key)) {
